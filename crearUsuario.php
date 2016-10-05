@@ -39,7 +39,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <hr />
 
 <div id="tablaUsuarios" class="table-responsive">
-    <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover">
         <thead>
         <tr>
             <th>Usuario</th>
@@ -82,7 +82,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="row">
     <div class="col-md-3 col-lg-3 col-sm-3 col-xs-1"></div>
     <div class="col-md-6 col-lg-6 col-sm-6 col-xs-10" >
-        <form method="post" id="registrar-usuario" class="form-horizontal" enctype="multipart/form-data">
+        <form method="POST" id="registrar-usuario" class="form-horizontal" enctype="multipart/form-data" >
 
             <div id="error2">
                 <!-- error will be shown here ! -->
@@ -130,7 +130,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <hr />
 
             <div class="form-group">
-                <button type="submit" class="btn btn-default" name="btn-loginUsuario" id="btn-loginUsuario"  >
+                <button type="submit" class="btn btn-default" name="btn-loginUsuario" id="btn-loginUsuario" value="Submit" >
                     <span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar
                 </button>
 

@@ -103,7 +103,7 @@ $('document').ready(function()
     /* Mostrar Pantalla para crear usuario */
     $("#menuAdmin").on("click","#usuario", function(){
 
-        //$("#registrar-usuario").preventDefault();
+
         console.log('entro');
         $.ajax({
             url:'crearUsuario.php',
