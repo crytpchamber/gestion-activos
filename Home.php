@@ -78,6 +78,11 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
                                 Responsables </a>
                         </li>
                         <li>
+                            <a id="Sucursal" href="javascript:void(0);" >
+                                <i class="glyphicon glyphicon-tent"></i>
+                                Sucursal </a>
+                        </li>
+                        <li>
                             <a id="Ubicacion" href="javascript:void(0);" >
                                 <i class="glyphicon glyphicon-road"></i>
                                 Ubicación </a>
@@ -90,7 +95,7 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
                         <li>
                             <a id="Asignacion" href="javascript:void(0);">
                                 <i class="glyphicon glyphicon-check"></i>
-                                Asignacion de Activos </a>
+                                Gestion de Activos </a>
                         </li>
                         <li>
                             <a id="Reportes" href="javascript:void(0);">

@@ -9,8 +9,8 @@ if(!isset($_SESSION['user_session']))
 include_once 'conf/dbconn.php';
 
 
-$stmt = $dbh->prepare("SELECT t.idResposable, t.Nombre, t.Apellido, t.Cedula 
-                           FROM resposable t  ");
+$stmt = $dbh->prepare("SELECT t.idsucursal, t.Descripcion 
+                           FROM sucursal t  ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -20,12 +20,12 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <hr />
 
-<div id="tablaResponsable" class="table-responsive">
+<div id="tablaSucursal" class="table-responsive">
     <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
         <thead>
         <tr>
-            <th>Responsable</th>
-            <th>Cedula</th>
+            <th>Codigo</th>
+            <th>Sucursal</th>
             <th>Eliminar</th>
         </tr>
         </thead>
@@ -34,9 +34,9 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $row ) {
             echo "<tr>";
-            echo "<td>" . $row['Nombre']." ".$row['Apellido'] . "</td><td>" . $row['Cedula'] . "</td><td>" .
+            echo "<td>" . $row['idsucursal']."</td><td>".$row['Descripcion'] . "</td><td>" .
                 //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
-                "<button id='" .$row['idResposable']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrar2'></button></td>";
+                "<button id='" .$row['idsucursal']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrar2'></button></td>";
             echo "</tr>";
         }
 
@@ -48,23 +48,22 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <hr />
 
+
+
 <div class="row">
     <div class="col-md-3 col-lg-3 col-sm-3 col-xs-1"></div>
     <div class="col-md-6 col-lg-6 col-sm-6 col-xs-10" >
-        <form method="post" id="registrar-responsable" class="form-horizontal">
+        <form method="post" id="registrar-sucursal" class="form-horizontal">
 
             <div id="error2">
                 <!-- error will be shown here ! -->
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
+                <input type="text" class="form-control" name="idsucu" id="idsucu" placeholder="Codigo" required>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" required>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Cedula" required>
+                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" required>
             </div>
 
             <input type="hidden" class="form-control" name="register" id="register">

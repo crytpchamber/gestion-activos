@@ -443,6 +443,34 @@ $('document').ready(function()
         });
     });
 
+    $(".profile-usermenu #Sucursal").click(function() {
+        $.ajax({
+            url:'sucursal.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+                $('#menuAdmin').hide().html("<H1>Sucursales</H1>").fadeIn('slow');
+                $('#opciones').hide().html(data).fadeIn('slow');;
 
+            }
+        });
+    });
+
+    $(".profile-usermenu #Ubicacion").click(function() {
+        $.ajax({
+            url:'ubicacion.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+                $('#menuAdmin').hide().html("<H1>Ubicacion</H1>").fadeIn('slow');
+                $('#opciones').hide().html(data).fadeIn('slow');;
+
+            }
+        });
+    });
 
 });

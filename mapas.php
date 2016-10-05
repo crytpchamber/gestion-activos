@@ -20,7 +20,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <hr />
 
-<div id="tablaModulos" class="table-responsive">
+<div id="tablaMapas" class="table-responsive">
     <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
         <thead>
         <tr>
