@@ -473,4 +473,20 @@ $('document').ready(function()
         });
     });
 
+
+    $(".profile-usermenu #Activos").click(function() {
+        $.ajax({
+            url:'activos.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+                $('#menuAdmin').hide().html("<H1>Registro de Activos</H1>").fadeIn('slow');
+                $('#opciones').hide().html(data).fadeIn('slow');;
+
+            }
+        });
+    });
+
 });

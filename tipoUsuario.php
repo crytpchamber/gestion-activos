@@ -63,7 +63,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="row">
     <div class="col-md-3 col-lg-3 col-sm-3 col-xs-1"></div>
     <div class="col-md-6 col-lg-6 col-sm-6 col-xs-10" >
-        <form method="post" id="registrar-usuario" class="form-horizontal">
+        <form method="post" id="registrar-tipoUsuario" class="form-horizontal">
 
             <div id="error2">
                 <!-- error will be shown here ! -->
