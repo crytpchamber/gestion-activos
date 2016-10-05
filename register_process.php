@@ -1,13 +1,14 @@
 <?php
 session_start();
 require_once './conf/dbconn.php';
+header('Content-Type:multipart/form-data');
 
 //echo $_POST['register'];
 
-if(isset($_POST['btn-loginUsuario']))
+if(isset($_POST['register']))
 {
     $registrar = 1;
-
+/*
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["filename"]["name"]);
     $nombreImg = basename($_FILES["filename"]["name"]);
@@ -49,7 +50,7 @@ if(isset($_POST['btn-loginUsuario']))
             echo "Disculpe, hubo un error cargando su imagen.";
         }
     }
-
+*/
     $user = trim($_POST['usuario']);
     $user_password = trim($_POST['pwd']);
     $nombre = trim($_POST['Nombre']);

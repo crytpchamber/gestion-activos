@@ -104,11 +104,12 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Contraseña" required>
 
             </div>
+            <input type="hidden" class="form-control" name="register" id="register">
             <div class="form-group">
                 <select class="form-control" id="tipo" name="tipo" required>
                     <?php
                         foreach ($data as $row) {
-                            ?>
+                    ?>
 
                             <option value="<?php echo $row['idTipo_Usuario']; ?>">
                                 <?php echo $row['descripcion']; ?>
@@ -120,13 +121,13 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                     ?>
                 </select>
             </div>
-                <input type="hidden" class="form-control" name="register" id="register">
 
+<!--
             <div class="form-group">
-                <input id="filename" type="file" name="filename" accept="image/gif, image/jpg, image/jpeg, image/png" >
+                <input id="filename" type="file" name="filename" accept="image/gif, image/jpg, image/jpeg, image/png" onchange="readURL(this)" >
                 <img id="blah" src="#" alt="Imagen" />
             </div>
-
+-->
             <hr />
 
             <div class="form-group">

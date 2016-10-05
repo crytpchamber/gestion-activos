@@ -262,14 +262,21 @@ $('document').ready(function()
         /* Forma para registrar Usuario */
 
         var $elemento = $(this).parent().parent();
-        alert($elemento.attr('id'));
+        //alert($elemento.attr('id'));
         var data = $elemento.serialize();
+
+    //    var data = new FormData();
+
 
         $.ajax({
 
             type : 'POST',
             url  : 'register_process.php',
             data : data,
+    //       cache: false,
+    //       contentType: 'multipart/form-data',
+    //       mimeType: 'multipart/form-data',
+    //        processData: false,
             beforeSend: function()
             {
                 $("#error2").fadeOut();
@@ -277,6 +284,7 @@ $('document').ready(function()
             },
             success :  function(response)
             {
+
                 //alert('entro');
                 if(response=="ok"){
 
