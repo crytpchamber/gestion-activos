@@ -9,8 +9,9 @@ if(!isset($_SESSION['user_session']))
 include_once 'conf/dbconn.php';
 
 
-$stmt = $dbh->prepare("SELECT t.idActivos, t.Descripcion, t.fecha_adquisicion, t.tiempo_depre, t.valor_adquisicion, t.fecha_registro 
-                           FROM activos t ");
+$stmt = $dbh->prepare("SELECT t.idActivos, t.Descripcion, t.fecha_adquisicion, t.tiempo_depre, t.valor_adquisicion, " .
+                      " t.fecha_registro, t.fecha_ini_deprec " .
+                      "     FROM activos t ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -64,7 +65,21 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="ubicacion" id="ubicacion" placeholder="Ubicacion" required>
+                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" required>
+            </div>
+            <div class="form-group">
+                <label >Fecha de Adquisición</label>
+                <input type="date" class="form-control" name="fecha_adq" id="fecha_adq" placeholder="Fecha de Adquisición" required>
+            </div>
+            <div class="form-group">
+                <input type="number" min="0" class="form-control" name="tiempodepre" id="tiempodepre" placeholder="Tiempo a depreciar (años)" required>
+            </div>
+            <div class="form-group">
+                <input type="number" min="0" class="form-control" name="valorAdq" id="valorAdq" placeholder="Valor de Adquisicion" required>
+            </div>
+            <div class="form-group">
+                <label >Fecha Inicio de Depreciación</label>
+                <input type="date" class="form-control" name="fechaIni" id="fechaIni" placeholder="Fecha Inicio Depreciación" required>
             </div>
 
 
@@ -75,7 +90,9 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 <button type="submit" class="btn btn-default" name="btn-loginResp" id="btn-loginResp" value="" >
                     <span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar
                 </button>
-
+                <button type="reset" class="btn btn-default" name="btn-loginResp" id="btn-loginResp" value="" >
+                    <span class="glyphicon glyphicon-erase"></span> &nbsp; Limpiar
+                </button>
             </div>
         </form>
     </div>

@@ -44,7 +44,7 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
             <div class="profile-sidebar">
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
-                    <img src="imgs/<?php echo $row['foto'] ?>" class="img-responsive" alt="">
+                    <img src="uploads/<?php echo $row['foto'] ?>" class="img-responsive" alt="">
                 </div>
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->

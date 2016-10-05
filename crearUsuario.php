@@ -18,7 +18,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <script type="text/javascript">
-  /*  function readURL(input) {
+    function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
@@ -31,7 +31,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
             reader.readAsDataURL(input.files[0]);
         }
-    }*/
+    }
 
 </script>
 
@@ -121,18 +121,16 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 </select>
             </div>
                 <input type="hidden" class="form-control" name="register" id="register">
+
             <div class="form-group">
-                <input type="file" name="filename" if="filename">
-            </div>
-            <div class="form-group">
-                <!-- <input id="filename" type="file" name="filename" accept="image/gif, image/jpeg, image/png">
-                  <img id="blah" src="#" alt="your image" /> -->
+                <input id="filename" type="file" name="filename" accept="image/gif, image/jpg, image/jpeg, image/png" >
+                <img id="blah" src="#" alt="Imagen" />
             </div>
 
             <hr />
 
             <div class="form-group">
-                <button type="submit" class="btn btn-default" name="btn-login" id="btn-login"  >
+                <button type="submit" class="btn btn-default" name="btn-loginUsuario" id="btn-loginUsuario"  >
                     <span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar
                 </button>
 

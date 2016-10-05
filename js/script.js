@@ -184,13 +184,13 @@ $('document').ready(function()
             success: function(response){
                 //alert('Hola');
                 //$element.parent().parent().remove();
-                if(response=="ok") {
+                if(response.trim()=="ok") {
                     $element.parent().parent().remove();
                 } else {
 
                     $("#error2").fadeIn(1000, function(){
                         $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-login").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        $("#btn-loginUsuario").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                     });
                 }
             },
@@ -257,12 +257,12 @@ $('document').ready(function()
     });
 
     /* Registrar usuario nuevo en sistema */
-    $("#opciones").on("click","#btn-login", function(){
+    $("#opciones").on("click","#btn-loginUsuario", function(){
     //$('#btn-register').click(function() {
         /* Forma para registrar Usuario */
 
         var $elemento = $(this).parent().parent();
-        //alert($elemento.attr('id'));
+        alert($elemento.attr('id'));
         var data = $elemento.serialize();
 
         $.ajax({
@@ -273,7 +273,7 @@ $('document').ready(function()
             beforeSend: function()
             {
                 $("#error2").fadeOut();
-                $("#btn-login").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; Enviando ...');
+                $("#btn-loginUsuario").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; Enviando ...');
             },
             success :  function(response)
             {
@@ -300,7 +300,7 @@ $('document').ready(function()
 
                     $("#error2").fadeIn(1000, function(){
                         $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-login").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        $("#btn-loginUsuario").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                     });
                 }
             }
