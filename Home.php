@@ -68,27 +68,37 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="profile-usermenu">
                     <ul class="nav">
                         <li>
-                            <a href="#">
+                            <a id="Inicio" href="javascript:void(0);">
                                 <i class="glyphicon glyphicon-home"></i>
                                 Inicio </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a id="Responsable" href="javascript:void(0);">
                                 <i class="glyphicon glyphicon-user"></i>
-                                Account Settings </a>
+                                Responsables </a>
                         </li>
                         <li>
-                            <a href="#" target="_blank">
-                                <i class="glyphicon glyphicon-ok"></i>
-                                Tasks </a>
+                            <a id="Ubicacion" href="javascript:void(0);" >
+                                <i class="glyphicon glyphicon-road"></i>
+                                Ubicación </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a id="Activos" href="javascript:void(0);">
                                 <i class="glyphicon glyphicon-flag"></i>
-                                Help </a>
+                                Activos </a>
                         </li>
                         <li>
-                            <a id="Salir" href="#">
+                            <a id="Asignacion" href="javascript:void(0);">
+                                <i class="glyphicon glyphicon-check"></i>
+                                Asignacion de Activos </a>
+                        </li>
+                        <li>
+                            <a id="Reportes" href="javascript:void(0);">
+                                <i class="glyphicon glyphicon-open-file"></i>
+                                Reportes </a>
+                        </li>
+                        <li>
+                            <a id="Salir" href="javascript:void(0);">
                                 <i  class="glyphicon glyphicon-log-out"></i>
                                 Salir </a>
                         </li>

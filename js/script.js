@@ -71,11 +71,14 @@ $('document').ready(function()
             type:'GET',
             success: function(data){
                 //alert(data);
-                $('.profile-content #menuAdmin').html(data);
+                $('.profile-content #menuAdmin').hide().html(data).fadeIn('slow');
+                $('.profile-content #opciones').fadeOut('slow');
+
             }
         });
 
     });
+
 
 
     /* Configuracion de enlaces para salir del sistema*/
@@ -110,7 +113,7 @@ $('document').ready(function()
             },
             success: function(data){
 
-                $('#opciones').html(data);
+                $('#opciones').hide().html(data).fadeIn('slow');
             }
         });
 
@@ -128,7 +131,7 @@ $('document').ready(function()
             },
             success: function(data){
 
-                $('#opciones').html(data);
+                $('#opciones').hide().html(data).fadeIn('slow');
             }
         });
     });
@@ -145,7 +148,7 @@ $('document').ready(function()
             },
             success: function(data){
 
-                $('#opciones').html(data);
+                $('#opciones').hide().html(data).fadeIn('slow');
             }
         });
     });
@@ -161,7 +164,7 @@ $('document').ready(function()
             },
             success: function(data){
 
-                $('#opciones').html(data);
+                $('#opciones').hide().html(data).fadeIn('slow');
             }
         });
     });
@@ -409,6 +412,37 @@ $('document').ready(function()
         });
         return false;
     });
+    
+    $(".profile-usermenu #Inicio").click(function() {
+        $.ajax({
+            url:'Home.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(){
+                $('#menuAdmin').fadeOut('slow');
+                $('#opciones').fadeOut('slow');
+
+            }
+        });
+    });
+
+    $(".profile-usermenu #Responsable").click(function() {
+        $.ajax({
+            url:'responsable.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+                $('#menuAdmin').hide().html("<H1>Responsables</H1>").fadeIn('slow');
+                $('#opciones').hide().html(data).fadeIn('slow');;
+
+            }
+        });
+    });
+
 
 
 });
