@@ -36,7 +36,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             echo "<tr>";
             echo "<td>" . $row['idsucursal']."</td><td>".$row['Descripcion'] . "</td><td>" .
                 //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
-                "<button id='" .$row['idsucursal']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrar2'></button></td>";
+                "<button id='" .$row['idsucursal']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarSucursal'></button></td>";
             echo "</tr>";
         }
 
