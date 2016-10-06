@@ -293,9 +293,9 @@ $('document').ready(function()
             success :  function(response)
             {
 
-                alert('entro');
+
                 if(response=="ok"){
-                    alert('entro2');
+
                     $("#btn-loginUsuario").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
                     $.ajax({
                         url:'crearUsuario.php',
@@ -313,7 +313,7 @@ $('document').ready(function()
                     //setTimeout(' window.location.href = "Home.php"; ',2500);
                 }
                 else{
-                    alert('entro3');
+
                     $("#error2").fadeIn(1000, function(){
                         $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
                         $("#btn-loginUsuario").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
@@ -321,7 +321,7 @@ $('document').ready(function()
                 }
             },
             error : function(response2) {
-                alert('entro4');
+
                 $("#error2").fadeIn(1000, function(){
                     $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
                     $("#btn-loginUsuario").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
