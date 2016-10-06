@@ -106,7 +106,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <input type="hidden" class="form-control" name="register" id="register">
             <div class="form-group">
-                <select class="form-control" id="tipo" name="tipo" required>
+                <select class="form-control" id="tipo" name="tipo" title="tipo" >
                     <?php
                         foreach ($data as $row) {
                     ?>
@@ -122,12 +122,12 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 </select>
             </div>
 
-<!--
+
             <div class="form-group">
                 <input id="filename" type="file" name="filename" accept="image/gif, image/jpg, image/jpeg, image/png" onchange="readURL(this)" >
                 <img id="blah" src="#" alt="Imagen" />
             </div>
--->
+
             <hr />
 
             <div class="form-group">

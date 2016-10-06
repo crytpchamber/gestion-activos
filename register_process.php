@@ -1,22 +1,23 @@
 <?php
 session_start();
 require_once './conf/dbconn.php';
-header('Content-Type:multipart/form-data');
+//header('Content-Type:multipart/form-data');
 
 //echo $_POST['register'];
 
-if(isset($_POST['btn-loginUsuario']))
+if(isset($_POST['register']))
 {
     $registrar = 1;
-/*
+//exit();
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["filename"]["name"]);
     $nombreImg = basename($_FILES["filename"]["name"]);
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
+
     // Check if image file is a actual image or fake image
-    if(isset($_POST["register"])) {
+    if(isset($_POST["filename"])) {
         $check = getimagesize($_FILES["filename"]["tmp_name"]);
         if ($check !== false) {
             //echo "File is an image - " . $check["mime"] . ".";
@@ -50,13 +51,14 @@ if(isset($_POST['btn-loginUsuario']))
             echo "Disculpe, hubo un error cargando su imagen.";
         }
     }
-*/
+
     $user = trim($_POST['usuario']);
     $user_password = trim($_POST['pwd']);
     $nombre = trim($_POST['Nombre']);
     $apellido = trim($_POST['Apellido']);
     $cedula = trim($_POST['cedula']);
     $tipo = trim($_POST['tipo']);
+    //$imagen =
 
     if ($user == '' || $user_password == '' || $nombre == '' || $apellido == '' || $cedula == '' || $tipo == '') {
         $registrar = 0;
@@ -65,14 +67,15 @@ if(isset($_POST['btn-loginUsuario']))
     try
     {
         if ($registrar == 1) {
-            $stmt = $dbh->prepare("insert into usuarios (usuario, clave, Nombre, Apellido, Cedula, Tipo_Usuario_idTipo_Usuario) " .
-                "values (?,?,?,?,?,?)");
+            $stmt = $dbh->prepare("insert into usuarios (usuario, clave, Nombre, Apellido, Cedula, Tipo_Usuario_idTipo_Usuario, foto) " .
+                "values (?,?,?,?,?,?,?)");
             $stmt->bindParam(1, $user);
             $stmt->bindParam(2, $user_password);
             $stmt->bindParam(3, $nombre);
             $stmt->bindParam(4, $apellido);
             $stmt->bindParam(5, $cedula);
             $stmt->bindParam(6, $tipo);
+            $stmt->bindParam(7, $nombreImg);
 
             $stmt->execute();
             echo "ok";

@@ -257,28 +257,34 @@ $('document').ready(function()
     });
 
     /* Registrar usuario nuevo en sistema */
-    $("#opciones").on("click","#btn-loginUsuario", function(){
+    $("#opciones").on("submit","#registrar-usuario", function(event){
     //$('#btn-register').click(function() {
         /* Forma para registrar Usuario */
 
-        var $elemento = $(this).parent().parent();
+        //var $elemento = $(this).parent().parent();
         //alert($elemento.attr('id'));
-        var data = $elemento.serialize();
+        //var data = $elemento.serialize();
+        event.preventDefault();
 
-        console.log(JSON.stringify(data));
+        //console.log(new FormData($(this)));
 
-    //    var data = new FormData();
+        //var data = new FormData($elemento[0]);
+        //console.log(JSON.stringify(data.serialize()));
 
+        var formData = new FormData($(this)[0]);
+
+        console.log(formData);
 
         $.ajax({
 
             type : 'POST',
             url  : 'register_process.php',
-            data : data,
-    //       cache: false,
-    //       contentType: 'multipart/form-data',
-    //       mimeType: 'multipart/form-data',
-    //        processData: false,
+            //dataType: "JSON",
+            data : formData,
+            enctype: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false,
             beforeSend: function()
             {
                 $("#error2").fadeOut();
@@ -287,9 +293,9 @@ $('document').ready(function()
             success :  function(response)
             {
 
-                //alert('entro');
+                alert('entro');
                 if(response=="ok"){
-
+                    alert('entro2');
                     $("#btn-loginUsuario").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
                     $.ajax({
                         url:'crearUsuario.php',
@@ -307,12 +313,19 @@ $('document').ready(function()
                     //setTimeout(' window.location.href = "Home.php"; ',2500);
                 }
                 else{
-
+                    alert('entro3');
                     $("#error2").fadeIn(1000, function(){
                         $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
                         $("#btn-loginUsuario").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                     });
                 }
+            },
+            error : function(response2) {
+                alert('entro4');
+                $("#error2").fadeIn(1000, function(){
+                    $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#btn-loginUsuario").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                });
             }
         });
         return false;
