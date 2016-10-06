@@ -130,7 +130,7 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
-<script type="text/javascript" src="js/jquery.form.min.js"></script>
+<!-- <script type="text/javascript" src="js/jquery.form.min.js"></script> -->
 
 </body>
 </html>
