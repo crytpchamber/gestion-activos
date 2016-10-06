@@ -5,7 +5,7 @@ header('Content-Type:multipart/form-data');
 
 //echo $_POST['register'];
 
-if(isset($_POST['register']))
+if(isset($_POST['btn-loginUsuario']))
 {
     $registrar = 1;
 /*

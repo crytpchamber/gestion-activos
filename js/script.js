@@ -265,6 +265,8 @@ $('document').ready(function()
         //alert($elemento.attr('id'));
         var data = $elemento.serialize();
 
+        console.log(JSON.stringify(data));
+
     //    var data = new FormData();
 
 
@@ -288,7 +290,7 @@ $('document').ready(function()
                 //alert('entro');
                 if(response=="ok"){
 
-                    $("#btn-login").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
+                    $("#btn-loginUsuario").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
                     $.ajax({
                         url:'crearUsuario.php',
                         type:'GET',

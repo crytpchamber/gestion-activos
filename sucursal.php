@@ -21,7 +21,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <hr />
 
 <div id="tablaSucursal" class="table-responsive">
-    <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover">
         <thead>
         <tr>
             <th>Codigo</th>
