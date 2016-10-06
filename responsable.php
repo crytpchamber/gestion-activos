@@ -36,7 +36,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             echo "<tr>";
             echo "<td>" . $row['Nombre']." ".$row['Apellido'] . "</td><td>" . $row['Cedula'] . "</td><td>" .
                 //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
-                "<button id='" .$row['idResposable']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrar2'></button></td>";
+                "<button id='" .$row['idResposable']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarResp'></button></td>";
             echo "</tr>";
         }
 
@@ -53,7 +53,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="col-md-6 col-lg-6 col-sm-6 col-xs-10" >
         <form method="post" id="registrar-responsable" class="form-horizontal">
 
-            <div id="error2">
+            <div id="errorResp">
                 <!-- error will be shown here ! -->
             </div>
 
@@ -64,10 +64,10 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" required>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Cedula" required>
+                <input type="text" class="form-control" name="cedula" id="cedula" placeholder="Cedula" required>
             </div>
 
-            <input type="hidden" class="form-control" name="register" id="register">
+            <input type="hidden" class="form-control" name="reg_respons" id="reg_respons" value="prueba">
             <hr />
             
             <div class="form-group">
