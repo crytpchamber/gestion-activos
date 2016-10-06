@@ -261,15 +261,7 @@ $('document').ready(function()
     //$('#btn-register').click(function() {
         /* Forma para registrar Usuario */
 
-        //var $elemento = $(this).parent().parent();
-        //alert($elemento.attr('id'));
-        //var data = $elemento.serialize();
         event.preventDefault();
-
-        //console.log(new FormData($(this)));
-
-        //var data = new FormData($elemento[0]);
-        //console.log(JSON.stringify(data.serialize()));
 
         var formData = new FormData($(this)[0]);
 
@@ -281,7 +273,7 @@ $('document').ready(function()
             url  : 'register_process.php',
             //dataType: "JSON",
             data : formData,
-            enctype: "multipart/form-data",
+            encType: "multipart/form-data",
             contentType: false,
             cache: false,
             processData: false,
