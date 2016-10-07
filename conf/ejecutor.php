@@ -211,5 +211,82 @@ if (isset($_GET['eliminarUbic'])) {
 /* Fin Gestion de Ubicaciones */
 
 
+/* Carga de Activos */
+if (isset($_POST['reg_act'])) {
+    function registrarSucursal(){
+        require_once './dbconn.php';
+        $registrar = 1;
+
+        $nombre = trim($_POST['descripcion']);
+        $adquisicion = trim($_POST['fecha_adq']);
+        $tdepre = trim($_POST['tiempodepre']);
+        $valor = trim($_POST['valorAdq']);
+        $inicio = trim($_POST['fechaIni']);
+
+
+        if ($nombre == '' || $adquisicion == '' || $tdepre == '' || $valor == '' || $inicio == '') {
+            $registrar = 0;
+            echo "error registrando Activo. 1";
+        }
+
+        try {
+            if ($registrar == 1) {
+
+                $stmt = $dbh->prepare("select max(idActivos) as numero from activos ");
+                $stmt->execute();
+                $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $max = $row['numero'];
+                }
+
+                $max++;
+
+                $stmt = $dbh->prepare("insert into Activos (idActivos, Descripcion, fecha_adquisicion, " .
+                    " tiempo_depre, valor_adquisicion, fecha_registro, fecha_ini_deprec) " .
+                    "values ($max,?,?,?,?,NOW(),?)");
+                $stmt->bindParam(1, $nombre);
+                $stmt->bindParam(2, $adquisicion);
+                $stmt->bindParam(3, $tdepre);
+                $stmt->bindParam(4, $valor);
+                $stmt->bindParam(5, $inicio);
+
+
+                $stmt->execute();
+                echo "ok";
+            } else {
+                echo "Error registrando Activo. 2";
+            }
+        } catch(PDOException $e){
+
+            echo $e->getMessage();
+        }
+
+    }
+    registrarSucursal();
+
+}
+
+
+if (isset($_GET['eliminarAct'])) {
+    function eliminarSucu()
+    {
+        require_once './dbconn.php';
+        $idAct = trim($_GET['eliminarAct']);
+
+
+        try {
+
+            $stmt = $dbh->prepare("delete from activos where idActivos=:uid");
+            $stmt->execute(array(":uid" => $idAct));
+
+            echo 'ok';
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    eliminarSucu();
+}
+/* Fin Carga de Activos */
+
 
 ?>

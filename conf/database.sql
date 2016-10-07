@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-10-2016 a las 06:17:10
+-- Tiempo de generación: 07-10-2016 a las 04:28:30
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -28,7 +28,6 @@ USE `mydb`;
 -- Estructura de tabla para la tabla `activos`
 --
 
-DROP TABLE IF EXISTS `activos`;
 CREATE TABLE `activos` (
   `idActivos` int(11) NOT NULL,
   `Descripcion` varchar(45) NOT NULL,
@@ -39,13 +38,19 @@ CREATE TABLE `activos` (
   `fecha_ini_deprec` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `activos`
+--
+
+INSERT INTO `activos` (`idActivos`, `Descripcion`, `fecha_adquisicion`, `tiempo_depre`, `valor_adquisicion`, `fecha_registro`, `fecha_ini_deprec`) VALUES
+(1, 'Prueba de Activo', '2016-10-06', 5, '125050.550', '2016-10-06', '2016-10-07');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `mapas_acceso`
 --
 
-DROP TABLE IF EXISTS `mapas_acceso`;
 CREATE TABLE `mapas_acceso` (
   `idmapas_acceso` int(11) NOT NULL,
   `Descripcion` varchar(45) DEFAULT NULL,
@@ -68,7 +73,6 @@ INSERT INTO `mapas_acceso` (`idmapas_acceso`, `Descripcion`, `puedeEliminar`, `p
 -- Estructura de tabla para la tabla `modulos`
 --
 
-DROP TABLE IF EXISTS `modulos`;
 CREATE TABLE `modulos` (
   `idmodulos` int(11) NOT NULL,
   `descModulo` varchar(45) DEFAULT NULL,
@@ -88,7 +92,6 @@ INSERT INTO `modulos` (`idmodulos`, `descModulo`, `mapas_acceso_idmapas_acceso`)
 -- Estructura de tabla para la tabla `pistasauditoria`
 --
 
-DROP TABLE IF EXISTS `pistasauditoria`;
 CREATE TABLE `pistasauditoria` (
   `idpistasAuditoria` int(11) NOT NULL,
   `fechaPista` date DEFAULT NULL,
@@ -104,7 +107,6 @@ CREATE TABLE `pistasauditoria` (
 -- Estructura de tabla para la tabla `relacionactivos`
 --
 
-DROP TABLE IF EXISTS `relacionactivos`;
 CREATE TABLE `relacionactivos` (
   `idRelacionActivos` int(11) NOT NULL,
   `Ubicacion_idUbicacion` int(11) NOT NULL,
@@ -118,7 +120,6 @@ CREATE TABLE `relacionactivos` (
 -- Estructura de tabla para la tabla `resposable`
 --
 
-DROP TABLE IF EXISTS `resposable`;
 CREATE TABLE `resposable` (
   `idResposable` int(11) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
@@ -139,7 +140,6 @@ INSERT INTO `resposable` (`idResposable`, `Nombre`, `Apellido`, `Cedula`) VALUES
 -- Estructura de tabla para la tabla `sucursal`
 --
 
-DROP TABLE IF EXISTS `sucursal`;
 CREATE TABLE `sucursal` (
   `idsucursal` int(11) NOT NULL,
   `Descripcion` varchar(45) NOT NULL
@@ -162,7 +162,6 @@ INSERT INTO `sucursal` (`idsucursal`, `Descripcion`) VALUES
 -- Estructura de tabla para la tabla `tipo_usuario`
 --
 
-DROP TABLE IF EXISTS `tipo_usuario`;
 CREATE TABLE `tipo_usuario` (
   `idTipo_Usuario` int(11) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -183,12 +182,20 @@ INSERT INTO `tipo_usuario` (`idTipo_Usuario`, `descripcion`, `modulos_idmodulos`
 -- Estructura de tabla para la tabla `ubicacion`
 --
 
-DROP TABLE IF EXISTS `ubicacion`;
 CREATE TABLE `ubicacion` (
   `idUbicacion` int(11) NOT NULL,
   `Descripcion` varchar(45) DEFAULT NULL,
   `sucursal_idsucursal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `ubicacion`
+--
+
+INSERT INTO `ubicacion` (`idUbicacion`, `Descripcion`, `sucursal_idsucursal`) VALUES
+(1, 'Administracion', 1),
+(2, 'PCP/SHA', 1),
+(3, 'Almacen', 1);
 
 -- --------------------------------------------------------
 
@@ -196,7 +203,6 @@ CREATE TABLE `ubicacion` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `idUsuarios` int(11) NOT NULL,
   `usuario` varchar(45) DEFAULT NULL,

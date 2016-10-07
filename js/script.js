@@ -757,7 +757,7 @@ $('document').ready(function()
 
 
 
-
+    /* Acceder a activos*/
     $(".profile-usermenu #Activos").click(function() {
         $.ajax({
             url:'activos.php',
@@ -772,5 +772,94 @@ $('document').ready(function()
             }
         });
     });
+
+    /* Registrar Activo */
+    $("#opciones").on("click","#btn-loginAct", function(){
+        //$('#btn-register').click(function() {
+        /* Forma para registrar Responsables */
+
+        var $elemento = $(this).parent().parent();
+        //alert($elemento.attr('id'));
+        var data = $elemento.serialize();
+
+        $.ajax({
+
+            type : 'POST',
+            url  : './conf/ejecutor.php',
+            data : data,
+            beforeSend: function()
+            {
+                $("#errorAct").fadeOut();
+                $("#btn-loginAct").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; Enviando ...');
+            },
+            error : function(response2) {
+
+                $("#errorAct").fadeIn(1000, function(){
+                    $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                });
+            },
+            success :  function(response)
+            {
+                //alert('entro');
+                if(response.trim()=="ok"){
+
+                    $("#btn-loginAct").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
+                    $.ajax({
+                        url:'activos.php',
+                        type:'GET',
+                        error: function(xhr, error){
+                            console.log(xhr); console.log(error);
+                        },
+                        success: function(data){
+
+                            $('#opciones').html(data);
+                        }
+                    });
+
+                    alert('Activo registrado con Exito.');
+                    //setTimeout(' window.location.href = "Home.php"; ',2500);
+                }
+                else{
+
+                    $("#errorAct").fadeIn(1000, function(){
+                        $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
+    /* Borrar Activo */
+    $("#opciones").on("click",".borrarAct", function() {
+        console.log('entro2');
+        var id = $(this).attr("id");
+        var $element = $(this);
+
+        $.ajax({
+            url:'./conf/ejecutor.php?eliminarAct='+id,
+            type: "POST",
+            data: "eliminarAct="+id,
+            success: function(response){
+                //alert('Hola');
+                if(response.trim()=="ok") {
+                    $element.parent().parent().remove();
+                } else {
+
+                    $("#errorAct").fadeIn(1000, function(){
+                        $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                    });
+                }
+            },
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            }
+        });
+    });
+
+
 
 });
