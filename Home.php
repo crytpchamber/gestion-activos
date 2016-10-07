@@ -24,6 +24,7 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
     <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
     <link href="css/style.css" rel="stylesheet" media="screen">
     <link href="css/menu.css" rel="stylesheet" media="screen">
+    <link rel="shortcut icon" href="imgs/favicon.ico">
 
 
 

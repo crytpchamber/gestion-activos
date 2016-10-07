@@ -6,6 +6,7 @@
     <title>Login Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+    <link rel="shortcut icon" href="imgs/favicon.ico">
 
 
 </head>
