@@ -24,7 +24,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 <div id="tablaUbicacion" class="table-responsive">
-    <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover">
         <thead>
         <tr>
             <th>Ubicacion</th>
@@ -39,7 +39,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             echo "<tr>";
             echo "<td>" . $row['Descripcion'] . "</td><td>" . $row['Sucursal'] . "</td><td>" .
                 //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
-                "<button id='" .$row['idUbicacion']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrar2'></button></td>";
+                "<button id='" .$row['idUbicacion']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarUbic'></button></td>";
             echo "</tr>";
         }
 
@@ -65,7 +65,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="col-md-6 col-lg-6 col-sm-6 col-xs-10" >
         <form method="post" id="registrar-ubicacion" class="form-horizontal">
 
-            <div id="error2">
+            <div id="errorUbic">
                 <!-- error will be shown here ! -->
             </div>
 
@@ -92,11 +92,11 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
 
-            <input type="hidden" class="form-control" name="register" id="register">
+            <input type="hidden" class="form-control" name="reg_ubic" id="reg_ubic">
             <hr />
             
             <div class="form-group">
-                <button type="submit" class="btn btn-default" name="btn-loginResp" id="btn-loginResp" value="" >
+                <button type="submit" class="btn btn-default" name="btn-loginUbic" id="btn-loginUbic" value="" >
                     <span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar
                 </button>
 

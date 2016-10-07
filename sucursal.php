@@ -55,22 +55,20 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="col-md-6 col-lg-6 col-sm-6 col-xs-10" >
         <form method="post" id="registrar-sucursal" class="form-horizontal">
 
-            <div id="error2">
+            <div id="errorSucu">
                 <!-- error will be shown here ! -->
             </div>
 
-            <div class="form-group">
-                <input type="text" class="form-control" name="idsucu" id="idsucu" placeholder="Codigo" required>
-            </div>
+
             <div class="form-group">
                 <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" required>
             </div>
 
-            <input type="hidden" class="form-control" name="register" id="register">
+            <input type="hidden" class="form-control" name="reg_sucu" id="reg_sucu">
             <hr />
             
             <div class="form-group">
-                <button type="submit" class="btn btn-default" name="btn-loginResp" id="btn-loginResp" value="" >
+                <button type="submit" class="btn btn-default" name="btn-loginSucu" id="btn-loginSucu" value="" >
                     <span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar
                 </button>
 

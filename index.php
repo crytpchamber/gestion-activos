@@ -10,6 +10,20 @@
 
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-2"></div>
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-8" >
+            <img src="imgs/catemar.png" alt="logo de Catemar">
+            <hr />
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-2">
+
+        </div>
+
+    </div>
+</div>
+
 <div class="signin-form">
 
     <div class="container">
@@ -19,7 +33,7 @@
             <div class="col-md-4 col-lg-4 col-sm-4 col-xs-8" >
                 <form class="form-signin" method="post" id="login-form" >
 
-                    <h2 class="form-signin-heading">Entrar</h2><hr />
+                    <h2 class="form-signin-heading">Entrar</h2>
 
                     <div id="error">
                         <!-- error will be shown here ! -->

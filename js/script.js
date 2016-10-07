@@ -459,6 +459,7 @@ $('document').ready(function()
         });
     });
 
+    /* Registrar Responsable */
     $("#opciones").on("click","#btn-loginResp", function(){
         //$('#btn-register').click(function() {
         /* Forma para registrar Responsables */
@@ -547,7 +548,7 @@ $('document').ready(function()
 
 
 
-
+    /* Acceder a Sucursal */
     $(".profile-usermenu #Sucursal").click(function() {
         $.ajax({
             url:'sucursal.php',
@@ -563,6 +564,95 @@ $('document').ready(function()
         });
     });
 
+    /* Registrar Sucursal */
+    $("#opciones").on("click","#btn-loginSucu", function(){
+        //$('#btn-register').click(function() {
+        /* Forma para registrar Responsables */
+
+        var $elemento = $(this).parent().parent();
+        //alert($elemento.attr('id'));
+        var data = $elemento.serialize();
+
+        $.ajax({
+
+            type : 'POST',
+            url  : './conf/ejecutor.php',
+            data : data,
+            beforeSend: function()
+            {
+                $("#errorSucu").fadeOut();
+                $("#btn-loginSucu").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; Enviando ...');
+            },
+            error : function(response2) {
+
+                $("#errorSucu").fadeIn(1000, function(){
+                    $("#errorSucu").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#btn-loginSucu").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                });
+            },
+            success :  function(response)
+            {
+                //alert('entro');
+                if(response.trim()=="ok"){
+
+                    $("#btn-loginSucu").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
+                    $.ajax({
+                        url:'sucursal.php',
+                        type:'GET',
+                        error: function(xhr, error){
+                            console.log(xhr); console.log(error);
+                        },
+                        success: function(data){
+
+                            $('#opciones').html(data);
+                        }
+                    });
+
+                    alert('Sucursal registrada con Exito.');
+                    //setTimeout(' window.location.href = "Home.php"; ',2500);
+                }
+                else{
+
+                    $("#errorSucu").fadeIn(1000, function(){
+                        $("#errorSucu").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#btn-loginSucu").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
+    /* Borrar Sucursal */
+    $("#opciones").on("click",".borrarSucursal", function() {
+        console.log('entro2');
+        var id = $(this).attr("id");
+        var $element = $(this);
+
+        $.ajax({
+            url:'./conf/ejecutor.php?eliminarSucu='+id,
+            type: "POST",
+            data: "eliminarSucu="+id,
+            success: function(response){
+                //alert('Hola');
+                if(response.trim()=="ok") {
+                    $element.parent().parent().remove();
+                } else {
+
+                    $("#errorSucu").fadeIn(1000, function(){
+                        $("#errorSucu").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#btn-loginSucu").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                    });
+                }
+            },
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            }
+        });
+    });
+
+
+    /* Acceder a Ubicacion */
     $(".profile-usermenu #Ubicacion").click(function() {
         $.ajax({
             url:'ubicacion.php',
@@ -577,6 +667,95 @@ $('document').ready(function()
             }
         });
     });
+
+    /* Registrar Ubicacion */
+    $("#opciones").on("click","#btn-loginUbic", function(){
+        //$('#btn-register').click(function() {
+        /* Forma para registrar Responsables */
+
+        var $elemento = $(this).parent().parent();
+        //alert($elemento.attr('id'));
+        var data = $elemento.serialize();
+
+        $.ajax({
+
+            type : 'POST',
+            url  : './conf/ejecutor.php',
+            data : data,
+            beforeSend: function()
+            {
+                $("#errorUbic").fadeOut();
+                $("#btn-loginUbic").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; Enviando ...');
+            },
+            error : function(response2) {
+
+                $("#errorUbic").fadeIn(1000, function(){
+                    $("#errorUbic").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#btn-loginUbic").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                });
+            },
+            success :  function(response)
+            {
+                //alert('entro');
+                if(response.trim()=="ok"){
+
+                    $("#btn-loginUbic").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
+                    $.ajax({
+                        url:'ubicacion.php',
+                        type:'GET',
+                        error: function(xhr, error){
+                            console.log(xhr); console.log(error);
+                        },
+                        success: function(data){
+
+                            $('#opciones').html(data);
+                        }
+                    });
+
+                    alert('Ubicación registrada con Exito.');
+                    //setTimeout(' window.location.href = "Home.php"; ',2500);
+                }
+                else{
+
+                    $("#errorUbic").fadeIn(1000, function(){
+                        $("#errorUbic").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#btn-loginUbic").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
+    /* Borrar Ubicacion */
+    $("#opciones").on("click",".borrarUbic", function() {
+        console.log('entro2');
+        var id = $(this).attr("id");
+        var $element = $(this);
+
+        $.ajax({
+            url:'./conf/ejecutor.php?eliminarUbic='+id,
+            type: "POST",
+            data: "eliminarUbic="+id,
+            success: function(response){
+                //alert('Hola');
+                if(response.trim()=="ok") {
+                    $element.parent().parent().remove();
+                } else {
+
+                    $("#errorUbic").fadeIn(1000, function(){
+                        $("#errorUbic").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#btn-loginUbic").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                    });
+                }
+            },
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            }
+        });
+    });
+
+
 
 
     $(".profile-usermenu #Activos").click(function() {
