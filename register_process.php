@@ -15,42 +15,50 @@ if(isset($_POST['register']))
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
+    if ($nombreImg != '') {
+        // Check if image file is a actual image or fake image
+        if (isset($_POST["filename"])) {
+            $check = getimagesize($_FILES["filename"]["tmp_name"]);
+            if ($check !== false) {
+                //echo "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else {
+                echo "El archivo no es una imagen.";
+                $uploadOk = 0;
+            }
+        }
 
-    // Check if image file is a actual image or fake image
-    if(isset($_POST["filename"])) {
-        $check = getimagesize($_FILES["filename"]["tmp_name"]);
-        if ($check !== false) {
-            //echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
-        } else {
-            echo "El archivo no es una imagen.";
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            echo "Disculpe, ya existe un archivo con ese nombre.";
             $uploadOk = 0;
         }
-    }
 
-    // Check if file already exists
-    if (file_exists($target_file)) {
-        echo "Disculpe, ya existe un archivo con ese nombre.";
-        $uploadOk = 0;
-    }
-
-    // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif" ) {
-        echo "Disculpe, solo archivos JPG, JPEG, PNG o GIF permitidos.";
-        $uploadOk = 0;
-    }
-
-    if ($uploadOk == 0) {
-        echo "Disculpe, la imagen no pudo ser cargada.";
-    // if everything is ok, try to upload file
-    } else {
-        if (move_uploaded_file($_FILES["filename"]["tmp_name"], $target_file)) {
-            //echo "El ". basename( $_FILES["filename"]["name"]). " has been uploaded.";
-        } else {
-            echo "Disculpe, hubo un error cargando su imagen.";
+        // Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif"
+        ) {
+            echo "Disculpe, solo archivos JPG, JPEG, PNG o GIF permitidos.";
+            $uploadOk = 0;
         }
+
+        if ($uploadOk == 0) {
+            echo "Disculpe, la imagen no pudo ser cargada.";
+            // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["filename"]["tmp_name"], $target_file)) {
+                //echo "El ". basename( $_FILES["filename"]["name"]). " has been uploaded.";
+            } else {
+                echo "Disculpe, hubo un error cargando su imagen.";
+            }
+        }
+    } else {
+        $nombreImg = 'default.jpg';
+        $target_dir = "uploads/";
+        $target_file = $target_dir . 'default.jpg';
     }
+
+
 
     $user = trim($_POST['usuario']);
     $user_password = trim($_POST['pwd']);
