@@ -15,8 +15,9 @@ if (isset($_POST['reg_respons'])) {
         $nombre = trim($_POST['nombre']);
         $apellido = trim($_POST['apellido']);
         $cedula = trim($_POST['cedula']);
+        $ubicacion = trim($_POST['ubic']);
 
-        if ($nombre == '' || $apellido == '' || $cedula == '') {
+        if ($nombre == '' || $apellido == '' || $cedula == '' || $ubicacion == '') {
             $registrar = 0;
         }
 
@@ -32,12 +33,12 @@ if (isset($_POST['reg_respons'])) {
 
                 $max++;
                 
-                $stmt = $dbh->prepare("insert into resposable (idResposable, Nombre, Apellido, Cedula) " .
-                    "values ($max,?,?,?)");
+                $stmt = $dbh->prepare("insert into resposable (idResposable, Nombre, Apellido, Cedula, ubicacion_idUbicacion) " .
+                    "values ($max,?,?,?,?)");
                 $stmt->bindParam(1, $nombre);
                 $stmt->bindParam(2, $apellido);
                 $stmt->bindParam(3, $cedula);
-
+                $stmt->bindParam(4, $ubicacion);
 
                 $stmt->execute();
                 echo "ok";
@@ -144,7 +145,7 @@ if (isset($_GET['eliminarSucu'])) {
 
 /* Gestion de Ubicaciones */
 if (isset($_POST['reg_ubic'])) {
-    function registrarSucursal(){
+    function registrarUbicacion(){
         require_once './dbconn.php';
         $registrar = 1;
 
@@ -184,13 +185,13 @@ if (isset($_POST['reg_ubic'])) {
         }
 
     }
-    registrarSucursal();
+    registrarUbicacion();
 
 }
 
 
 if (isset($_GET['eliminarUbic'])) {
-    function eliminarSucu()
+    function eliminarUbic()
     {
         require_once './dbconn.php';
         $idUbic = trim($_GET['eliminarUbic']);
@@ -206,14 +207,14 @@ if (isset($_GET['eliminarUbic'])) {
             echo $e->getMessage();
         }
     }
-    eliminarSucu();
+    eliminarUbic();
 }
 /* Fin Gestion de Ubicaciones */
 
 
 /* Carga de Activos */
 if (isset($_POST['reg_act'])) {
-    function registrarSucursal(){
+    function registrarActivo(){
         require_once './dbconn.php';
         $registrar = 1;
 
@@ -222,9 +223,10 @@ if (isset($_POST['reg_act'])) {
         $tdepre = trim($_POST['tiempodepre']);
         $valor = trim($_POST['valorAdq']);
         $inicio = trim($_POST['fechaIni']);
+        $sucursal = trim($_POST['ubic']);
 
 
-        if ($nombre == '' || $adquisicion == '' || $tdepre == '' || $valor == '' || $inicio == '') {
+        if ($nombre == '' || $adquisicion == '' || $tdepre == '' || $valor == '' || $inicio == '' || $sucursal == '') {
             $registrar = 0;
             echo "error registrando Activo. 1";
         }
@@ -242,13 +244,14 @@ if (isset($_POST['reg_act'])) {
                 $max++;
 
                 $stmt = $dbh->prepare("insert into Activos (idActivos, Descripcion, fecha_adquisicion, " .
-                    " tiempo_depre, valor_adquisicion, fecha_registro, fecha_ini_deprec) " .
-                    "values ($max,?,?,?,?,NOW(),?)");
+                    " tiempo_depre, valor_adquisicion, fecha_registro, fecha_ini_deprec, ubicacion_idUbicacion) " .
+                    "values ($max,?,?,?,?,NOW(),?,?)");
                 $stmt->bindParam(1, $nombre);
                 $stmt->bindParam(2, $adquisicion);
                 $stmt->bindParam(3, $tdepre);
                 $stmt->bindParam(4, $valor);
                 $stmt->bindParam(5, $inicio);
+                $stmt->bindParam(6, $sucursal);
 
 
                 $stmt->execute();
@@ -262,13 +265,13 @@ if (isset($_POST['reg_act'])) {
         }
 
     }
-    registrarSucursal();
+    registrarActivo();
 
 }
 
 
 if (isset($_GET['eliminarAct'])) {
-    function eliminarSucu()
+    function eliminarAct()
     {
         require_once './dbconn.php';
         $idAct = trim($_GET['eliminarAct']);
@@ -284,7 +287,7 @@ if (isset($_GET['eliminarAct'])) {
             echo $e->getMessage();
         }
     }
-    eliminarSucu();
+    eliminarAct();
 }
 /* Fin Carga de Activos */
 

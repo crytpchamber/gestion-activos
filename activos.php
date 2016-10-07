@@ -10,8 +10,9 @@ include_once 'conf/dbconn.php';
 
 
 $stmt = $dbh->prepare("SELECT t.idActivos, t.Descripcion, t.fecha_adquisicion, t.tiempo_depre, t.valor_adquisicion, " .
-                      " t.fecha_registro, t.fecha_ini_deprec " .
-                      "     FROM activos t ");
+                      " t.fecha_registro, t.fecha_ini_deprec, u.Descripcion as DescUbicacion " .
+                      "     FROM activos t inner join ubicacion u " .
+                      " on u.idUbicacion = t.ubicacion_idUbicacion ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -31,6 +32,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Fecha Adquisicion</th>
             <th>Tiempo de Depreciación</th>
             <th>Valor de Adquisicion</th>
+            <th>Ubicación</th>
             <th>Eliminar</th>
         </tr>
         </thead>
@@ -41,6 +43,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             echo "<tr>";
             echo "<td>" . $row['Descripcion'] . "</td><td>" . $row['fecha_adquisicion'] . "</td>" .
                  "<td>" . $row['tiempo_depre'] . "</td><td>" . $row['valor_adquisicion'] . "</td><td>" .
+                $row['DescUbicacion'] . "</td><td>" .
                  //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
                 "<button id='" .$row['idActivos']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarAct'></button></td>";
             echo "</tr>";
@@ -54,6 +57,14 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <hr />
 
+<?php
+$stmt = $dbh->prepare("SELECT t.idUbicacion, t.Descripcion 
+                           FROM ubicacion t ");
+$stmt->execute();
+//$data = $stmt->fetchALL();
+$data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 
 <div class="row">
     <div class="col-md-3 col-lg-3 col-sm-3 col-xs-1"></div>
@@ -82,6 +93,23 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 <input type="date" class="form-control" name="fechaIni" id="fechaIni" placeholder="Fecha Inicio Depreciación" required>
             </div>
 
+            <div class="form-group">
+                <label >Ubicación</label>
+                <select class="form-control" id="ubic" name="ubic" title="ubic" >
+                    <?php
+                    foreach ($data as $row) {
+                        ?>
+
+                        <option value="<?php echo $row['idUbicacion']; ?>">
+                            <?php echo $row['Descripcion']; ?>
+                        </option>
+
+
+                        <?php
+                    }
+                    ?>
+                </select>
+            </div>
 
             <input type="hidden" class="form-control" name="reg_act" id="reg_act">
             <hr />

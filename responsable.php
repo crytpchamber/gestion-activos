@@ -9,8 +9,9 @@ if(!isset($_SESSION['user_session']))
 include_once 'conf/dbconn.php';
 
 
-$stmt = $dbh->prepare("SELECT t.idResposable, t.Nombre, t.Apellido, t.Cedula 
-                           FROM resposable t  ");
+$stmt = $dbh->prepare("SELECT t.idResposable, t.Nombre, t.Apellido, t.Cedula, t.ubicacion_idUbicacion, u.Descripcion " .
+                           " FROM resposable t inner join ubicacion u " .
+                           " on u.idUbicacion = t.ubicacion_idUbicacion ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -26,6 +27,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
             <th>Responsable</th>
             <th>Cedula</th>
+            <th>Ubicación</th>
             <th>Eliminar</th>
         </tr>
         </thead>
@@ -34,7 +36,8 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $row ) {
             echo "<tr>";
-            echo "<td>" . $row['Nombre']." ".$row['Apellido'] . "</td><td>" . $row['Cedula'] . "</td><td>" .
+            echo "<td>" . $row['Nombre']." ".$row['Apellido'] . "</td><td>" . $row['Cedula'] . "</td>" .
+                "<td>" . $row['Descripcion'] . "</td><td>" .
                 //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
                 "<button id='" .$row['idResposable']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarResp'></button></td>";
             echo "</tr>";
@@ -47,6 +50,16 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 </div><!--end of .table-responsive-->
 
 <hr />
+
+
+<?php
+$stmt = $dbh->prepare("SELECT t.idUbicacion, t.Descripcion 
+                           FROM ubicacion t ");
+$stmt->execute();
+//$data = $stmt->fetchALL();
+$data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 
 <div class="row">
     <div class="col-md-3 col-lg-3 col-sm-3 col-xs-1"></div>
@@ -66,6 +79,25 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="form-group">
                 <input type="text" class="form-control" name="cedula" id="cedula" placeholder="Cedula" required>
             </div>
+
+            <div class="form-group">
+                <label >Ubicación</label>
+                <select class="form-control" id="ubic" name="ubic" title="ubic" >
+                    <?php
+                    foreach ($data as $row) {
+                        ?>
+
+                        <option value="<?php echo $row['idUbicacion']; ?>">
+                            <?php echo $row['Descripcion']; ?>
+                        </option>
+
+
+                        <?php
+                    }
+                    ?>
+                </select>
+            </div>
+
 
             <input type="hidden" class="form-control" name="reg_respons" id="reg_respons" value="prueba">
             <hr />
