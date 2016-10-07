@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-10-2016 a las 21:13:52
+-- Tiempo de generación: 07-10-2016 a las 04:28:30
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -35,9 +35,15 @@ CREATE TABLE `activos` (
   `tiempo_depre` int(11) NOT NULL DEFAULT '0',
   `valor_adquisicion` decimal(18,3) NOT NULL DEFAULT '0.000',
   `fecha_registro` date NOT NULL,
-  `fecha_ini_deprec` date NOT NULL,
-  `ubicacion_idUbicacion` int(11) NOT NULL
+  `fecha_ini_deprec` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `activos`
+--
+
+INSERT INTO `activos` (`idActivos`, `Descripcion`, `fecha_adquisicion`, `tiempo_depre`, `valor_adquisicion`, `fecha_registro`, `fecha_ini_deprec`) VALUES
+(1, 'Prueba de Activo', '2016-10-06', 5, '125050.550', '2016-10-06', '2016-10-07');
 
 -- --------------------------------------------------------
 
@@ -50,15 +56,16 @@ CREATE TABLE `mapas_acceso` (
   `Descripcion` varchar(45) DEFAULT NULL,
   `puedeEliminar` tinyint(1) DEFAULT NULL,
   `puedeModificar` tinyint(1) DEFAULT NULL,
-  `puedeGuardar` tinyint(1) DEFAULT NULL
+  `puedeGuardar` tinyint(1) DEFAULT NULL,
+  `sucursales` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `mapas_acceso`
 --
 
-INSERT INTO `mapas_acceso` (`idmapas_acceso`, `Descripcion`, `puedeEliminar`, `puedeModificar`, `puedeGuardar`) VALUES
-(0, 'SuperUsuario', 1, 1, 1);
+INSERT INTO `mapas_acceso` (`idmapas_acceso`, `Descripcion`, `puedeEliminar`, `puedeModificar`, `puedeGuardar`, `sucursales`) VALUES
+(1, 'Mapa Principal', 1, 1, 1, '[Todas]');
 
 -- --------------------------------------------------------
 
@@ -69,19 +76,15 @@ INSERT INTO `mapas_acceso` (`idmapas_acceso`, `Descripcion`, `puedeEliminar`, `p
 CREATE TABLE `modulos` (
   `idmodulos` int(11) NOT NULL,
   `descModulo` varchar(45) DEFAULT NULL,
-  `mapas_acceso_idmapas_acceso` int(11) NOT NULL,
-  `ubicacion` tinyint(4) DEFAULT '0',
-  `sucursal` tinyint(4) DEFAULT '0',
-  `activos` tinyint(4) DEFAULT '0',
-  `responsable` tinyint(4) DEFAULT '0'
+  `mapas_acceso_idmapas_acceso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `modulos`
 --
 
-INSERT INTO `modulos` (`idmodulos`, `descModulo`, `mapas_acceso_idmapas_acceso`, `ubicacion`, `sucursal`, `activos`, `responsable`) VALUES
-(1, 'SuperUsuario', 0, 1, 1, 1, 1);
+INSERT INTO `modulos` (`idmodulos`, `descModulo`, `mapas_acceso_idmapas_acceso`) VALUES
+(1, 'Administrador', 1);
 
 -- --------------------------------------------------------
 
@@ -106,6 +109,7 @@ CREATE TABLE `pistasauditoria` (
 
 CREATE TABLE `relacionactivos` (
   `idRelacionActivos` int(11) NOT NULL,
+  `Ubicacion_idUbicacion` int(11) NOT NULL,
   `Activos_idActivos` int(11) NOT NULL,
   `Resposable_idResposable` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -120,9 +124,15 @@ CREATE TABLE `resposable` (
   `idResposable` int(11) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
   `Apellido` varchar(45) DEFAULT NULL,
-  `Cedula` varchar(15) DEFAULT NULL,
-  `ubicacion_idUbicacion` int(11) NOT NULL
+  `Cedula` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `resposable`
+--
+
+INSERT INTO `resposable` (`idResposable`, `Nombre`, `Apellido`, `Cedula`) VALUES
+(1, 'Carlos', 'Garcia', 'V-15.060.580');
 
 -- --------------------------------------------------------
 
@@ -134,6 +144,17 @@ CREATE TABLE `sucursal` (
   `idsucursal` int(11) NOT NULL,
   `Descripcion` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `sucursal`
+--
+
+INSERT INTO `sucursal` (`idsucursal`, `Descripcion`) VALUES
+(1, 'Region Occidente'),
+(2, 'Region Centro Occidente'),
+(3, 'Region Andina'),
+(4, 'Region Centro'),
+(5, 'Region Capital');
 
 -- --------------------------------------------------------
 
@@ -152,7 +173,8 @@ CREATE TABLE `tipo_usuario` (
 --
 
 INSERT INTO `tipo_usuario` (`idTipo_Usuario`, `descripcion`, `modulos_idmodulos`) VALUES
-(0, 'Super Usuario', 1);
+(1, 'Administrador', 1),
+(3, 'Auditor', 1);
 
 -- --------------------------------------------------------
 
@@ -165,6 +187,15 @@ CREATE TABLE `ubicacion` (
   `Descripcion` varchar(45) DEFAULT NULL,
   `sucursal_idsucursal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `ubicacion`
+--
+
+INSERT INTO `ubicacion` (`idUbicacion`, `Descripcion`, `sucursal_idsucursal`) VALUES
+(1, 'Administracion', 1),
+(2, 'PCP/SHA', 1),
+(3, 'Almacen', 1);
 
 -- --------------------------------------------------------
 
@@ -188,7 +219,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuarios`, `usuario`, `clave`, `Nombre`, `Apellido`, `Cedula`, `foto`, `Tipo_Usuario_idTipo_Usuario`) VALUES
-(41, 'admin', 'admin', 'Carlos', 'Bermudez', 'V-15.060.580', 'carlos.jpg', 0);
+(10, 'cbermudez', 'xrhhce', 'Carlos', 'Bermudez', 'V-15.060.580', 'carlos.jpg', 1),
+(40, 'dbermudez', '123', 'Daniel', 'Bermudez', 'V-15.060.580', 'daniel.jpg', 1);
 
 --
 -- Índices para tablas volcadas
@@ -198,8 +230,7 @@ INSERT INTO `usuarios` (`idUsuarios`, `usuario`, `clave`, `Nombre`, `Apellido`, 
 -- Indices de la tabla `activos`
 --
 ALTER TABLE `activos`
-  ADD PRIMARY KEY (`idActivos`),
-  ADD KEY `fk_activos_ubicacion1_idx` (`ubicacion_idUbicacion`);
+  ADD PRIMARY KEY (`idActivos`);
 
 --
 -- Indices de la tabla `mapas_acceso`
@@ -225,6 +256,7 @@ ALTER TABLE `pistasauditoria`
 --
 ALTER TABLE `relacionactivos`
   ADD PRIMARY KEY (`idRelacionActivos`),
+  ADD KEY `fk_RelacionActivos_Ubicacion1_idx` (`Ubicacion_idUbicacion`),
   ADD KEY `fk_RelacionActivos_Activos1_idx` (`Activos_idActivos`),
   ADD KEY `fk_RelacionActivos_Resposable1_idx` (`Resposable_idResposable`);
 
@@ -232,8 +264,7 @@ ALTER TABLE `relacionactivos`
 -- Indices de la tabla `resposable`
 --
 ALTER TABLE `resposable`
-  ADD PRIMARY KEY (`idResposable`),
-  ADD KEY `fk_resposable_ubicacion1_idx` (`ubicacion_idUbicacion`);
+  ADD PRIMARY KEY (`idResposable`);
 
 --
 -- Indices de la tabla `sucursal`
@@ -270,16 +301,10 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `idUsuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `activos`
---
-ALTER TABLE `activos`
-  ADD CONSTRAINT `fk_activos_ubicacion1` FOREIGN KEY (`ubicacion_idUbicacion`) REFERENCES `ubicacion` (`idUbicacion`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `modulos`
@@ -292,13 +317,8 @@ ALTER TABLE `modulos`
 --
 ALTER TABLE `relacionactivos`
   ADD CONSTRAINT `fk_RelacionActivos_Activos1` FOREIGN KEY (`Activos_idActivos`) REFERENCES `activos` (`idActivos`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_RelacionActivos_Resposable1` FOREIGN KEY (`Resposable_idResposable`) REFERENCES `resposable` (`idResposable`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `resposable`
---
-ALTER TABLE `resposable`
-  ADD CONSTRAINT `fk_resposable_ubicacion1` FOREIGN KEY (`ubicacion_idUbicacion`) REFERENCES `ubicacion` (`idUbicacion`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_RelacionActivos_Resposable1` FOREIGN KEY (`Resposable_idResposable`) REFERENCES `resposable` (`idResposable`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_RelacionActivos_Ubicacion1` FOREIGN KEY (`Ubicacion_idUbicacion`) REFERENCES `ubicacion` (`idUbicacion`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tipo_usuario`

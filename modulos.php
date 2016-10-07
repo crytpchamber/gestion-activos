@@ -9,7 +9,7 @@ if(!isset($_SESSION['user_session']))
 include_once 'conf/dbconn.php';
 
 
-$stmt = $dbh->prepare("SELECT m.idmodulos, m.descModulo, ma.Descripcion 
+$stmt = $dbh->prepare("SELECT m.idmodulos, m.descModulo, ma.Descripcion, m.ubicacion, m.sucursal, m.activos, m.responsable 
                            FROM  modulos m inner join mapas_acceso ma  
                            on ma.idmapas_acceso = m.mapas_acceso_idmapas_acceso ");
 $stmt->execute();
@@ -27,6 +27,10 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
             <th>Modulo</th>
             <th>Mapa de Acceso</th>
+            <th>Ubicación</th>
+            <th>Sucursal</th>
+            <th>Activos</th>
+            <th>Responsable</th>
             <th>Eliminar</th>
         </tr>
         </thead>
@@ -35,9 +39,30 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $row ) {
             echo "<tr>";
-            echo "<td>" . $row['descModulo']."</td><td> ".$row['Descripcion'] . "</td><td>" .
+            echo "<td>" . $row['descModulo']."</td><td> ".$row['Descripcion'] . "</td><td>" ;
+            // Acceso a modulos
+            if ($row['ubicacion'] == 1) {
+                echo "Si </td><td>";
+            } else {
+                echo "No </td><td>";
+            }
+            if ($row['sucursal'] == 1) {
+                echo "Si </td><td>";
+            } else {
+                echo "No </td><td>";
+            }
+            if ($row['activos'] == 1) {
+                echo "Si </td><td>";
+            } else {
+                echo "No </td><td>";
+            }
+            if ($row['responsable'] == 1) {
+                echo "Si </td><td>";
+            } else {
+                echo "No </td><td>";
+            }
                 //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
-                "<button id='" .$row['idmodulos']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrar3'></button></td>";
+            echo    "<button id='" .$row['idmodulos']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrar3'></button></td>";
             echo "</tr>";
         }
 
@@ -91,6 +116,15 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                     ?>
                 </select>
             </div>
+
+            <div class="form-group">
+                <label class="checkbox-inline"><input id="checkUbic" type="checkbox" value="">Ubicación</label>
+                <label class="checkbox-inline"><input id="checkSucu" type="checkbox" value="">Sucursal</label>
+                <label class="checkbox-inline"><input id="checkAct" type="checkbox" value="">Activos</label>
+                <label class="checkbox-inline"><input id="checkResp" type="checkbox" value="">Responsables</label>
+            </div>
+
+
             <input type="hidden" class="form-control" name="register" id="register">
             <hr />
             

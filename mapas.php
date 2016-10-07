@@ -79,13 +79,9 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
             <div class="form-group checkbox">
-                <label><input type="checkbox" value="">Puede Eliminar</label>
-            </div>
-            <div class="form-group checkbox">
-                <label><input type="checkbox" value="">Puede Modificar</label>
-            </div>
-            <div class="form-group checkbox">
-                <label><input type="checkbox" value="">Puede Guardar</label>
+                <label class="checkbox-inline"><input id="eliminar" type="checkbox" value="">Puede Eliminar</label>
+                <label class="checkbox-inline"><input id="modificar" type="checkbox" value="">Puede Modificar</label>
+                <label class="checkbox-inline"><input id="guardar" type="checkbox" value="">Puede Guardar</label>
             </div>
 
 
