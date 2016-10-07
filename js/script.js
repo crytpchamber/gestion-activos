@@ -755,10 +755,39 @@ $('document').ready(function()
         });
     });
 
+    /* Al precionar el boton de Gestion de Activos llamar el menu de Activos */
+    $(".profile-usermenu #Asignacion").click(function() {
+        $.ajax({
+            url:'activosMenu.php',
+            type:'GET',
+            success: function(data){
+                //alert(data);
+                $('.profile-content #menuAdmin').hide().html(data).fadeIn('slow');
+                $('.profile-content #opciones').fadeOut('slow');
 
+            }
+        });
+
+    });
+
+    $("#menuAdmin").on("click","#activosGestion", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'activos.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+            }
+        });
+    });
 
     /* Acceder a activos*/
-    $(".profile-usermenu #Activos").click(function() {
+    /*  $(".profile-usermenu #Activos").click(function() {
         $.ajax({
             url:'activos.php',
             type:'GET',
@@ -771,8 +800,8 @@ $('document').ready(function()
 
             }
         });
-    });
-
+     });
+     */
     /* Registrar Activo */
     $("#opciones").on("click","#btn-loginAct", function(){
         //$('#btn-register').click(function() {
@@ -859,7 +888,5 @@ $('document').ready(function()
             }
         });
     });
-
-
 
 });

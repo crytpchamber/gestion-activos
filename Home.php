@@ -88,11 +88,11 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
                                 <i class="glyphicon glyphicon-road"></i>
                                 Ubicación </a>
                         </li>
-                        <li>
+  <!--                      <li>
                             <a id="Activos" href="javascript:void(0);">
                                 <i class="glyphicon glyphicon-flag"></i>
                                 Activos </a>
-                        </li>
+                        </li>   -->
                         <li>
                             <a id="Asignacion" href="javascript:void(0);">
                                 <i class="glyphicon glyphicon-check"></i>
