@@ -979,4 +979,83 @@ $('document').ready(function()
         });
     });
 
+    /* Ingresar a Asignar Activos*/
+    $("#menuAdmin").on("click","#asignarGestion", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'asignarActivo.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+            }
+        });
+    });
+
+    /* Registrar Asignacion de Activo */
+    $("#opciones").on("click","#btn-loginRela", function(){
+        //$('#btn-register').click(function() {
+        /* Forma para registrar Responsables */
+
+        var $elemento = $(this).parent().parent();
+        //alert($elemento.attr('id'));
+        var data = $elemento.serialize();
+
+        $.ajax({
+
+            type : 'POST',
+            url  : './conf/ejecutor.php',
+            data : data,
+            beforeSend: function()
+            {
+                $("#errorRelacion").fadeOut();
+                $("#btn-loginRela").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; Enviando ...');
+            },
+            error : function(response2) {
+
+                $("#errorRelacion").fadeIn(1000, function(){
+                    $("#errorRelacion").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#btn-loginRela").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                });
+            },
+            success :  function(response)
+            {
+                //alert('entro');
+                if(response.trim()=="ok"){
+
+                    $("#btn-loginRela").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
+                    $.ajax({
+                        url:'asignarActivo.php',
+                        type:'GET',
+                        error: function(xhr, error){
+                            console.log(xhr); console.log(error);
+                        },
+                        success: function(data){
+
+                            $('#opciones').html(data);
+                        }
+                    });
+
+                    alert('Activo registrado con Exito.');
+                    //setTimeout(' window.location.href = "Home.php"; ',2500);
+                }
+                else{
+
+                    $("#errorRelacion").fadeIn(1000, function(){
+                        $("#errorRelacion").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#btn-loginRela").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
+
+
+
 });

@@ -292,4 +292,54 @@ if (isset($_GET['eliminarAct'])) {
 /* Fin Carga de Activos */
 
 
+/* Carga Asignacion de Activos */
+if (isset($_POST['reg_asig'])) {
+    function asignarActivo(){
+        require_once './dbconn.php';
+        $registrar = 1;
+
+        $activo = trim($_POST['activo']);
+        $responsable = trim($_POST['responsable']);
+
+
+
+        if ($activo == '' || $responsable == '') {
+            $registrar = 0;
+            echo "error registrando Asignacion de Activo. 1";
+        }
+
+        try {
+            if ($registrar == 1) {
+
+                $stmt = $dbh->prepare("select max(idRelacionActivos) as numero from relacionactivos ");
+                $stmt->execute();
+                $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $max = $row['numero'];
+                }
+
+                $max++;
+
+                $stmt = $dbh->prepare("insert into relacionactivos (idRelacionActivos, Activos_idActivos, Resposable_idResposable) " .
+                    "values ($max,?,?)");
+                $stmt->bindParam(1, $activo);
+                $stmt->bindParam(2, $responsable);
+
+
+                $stmt->execute();
+                echo "ok";
+            } else {
+                echo "Error registrando Asignacion de Activo. 2";
+            }
+        } catch(PDOException $e){
+
+            echo $e->getMessage();
+        }
+
+    }
+    asignarActivo();
+
+}
+
+
 ?>

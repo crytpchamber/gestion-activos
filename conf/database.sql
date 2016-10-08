@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-10-2016 a las 21:13:52
+-- Tiempo de generación: 08-10-2016 a las 05:10:47
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -28,6 +28,7 @@ USE `mydb`;
 -- Estructura de tabla para la tabla `activos`
 --
 
+DROP TABLE IF EXISTS `activos`;
 CREATE TABLE `activos` (
   `idActivos` int(11) NOT NULL,
   `Descripcion` varchar(45) NOT NULL,
@@ -39,12 +40,21 @@ CREATE TABLE `activos` (
   `ubicacion_idUbicacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `activos`
+--
+
+INSERT INTO `activos` (`idActivos`, `Descripcion`, `fecha_adquisicion`, `tiempo_depre`, `valor_adquisicion`, `fecha_registro`, `fecha_ini_deprec`, `ubicacion_idUbicacion`) VALUES
+(1, 'DELL Latitude 6510', '2016-03-14', 5, '150000.000', '2016-10-07', '2016-04-14', 1),
+(2, 'prueba', '2016-03-14', 6, '1222222.000', '2016-10-07', '2016-03-14', 1);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `mapas_acceso`
 --
 
+DROP TABLE IF EXISTS `mapas_acceso`;
 CREATE TABLE `mapas_acceso` (
   `idmapas_acceso` int(11) NOT NULL,
   `Descripcion` varchar(45) DEFAULT NULL,
@@ -58,7 +68,8 @@ CREATE TABLE `mapas_acceso` (
 --
 
 INSERT INTO `mapas_acceso` (`idmapas_acceso`, `Descripcion`, `puedeEliminar`, `puedeModificar`, `puedeGuardar`) VALUES
-(0, 'SuperUsuario', 1, 1, 1);
+(0, 'SuperUsuario', 1, 1, 1),
+(1, 'Auditor', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -66,6 +77,7 @@ INSERT INTO `mapas_acceso` (`idmapas_acceso`, `Descripcion`, `puedeEliminar`, `p
 -- Estructura de tabla para la tabla `modulos`
 --
 
+DROP TABLE IF EXISTS `modulos`;
 CREATE TABLE `modulos` (
   `idmodulos` int(11) NOT NULL,
   `descModulo` varchar(45) DEFAULT NULL,
@@ -81,7 +93,8 @@ CREATE TABLE `modulos` (
 --
 
 INSERT INTO `modulos` (`idmodulos`, `descModulo`, `mapas_acceso_idmapas_acceso`, `ubicacion`, `sucursal`, `activos`, `responsable`) VALUES
-(1, 'SuperUsuario', 0, 1, 1, 1, 1);
+(1, 'SuperUsuario', 0, 1, 1, 1, 1),
+(2, 'Auditor', 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -89,6 +102,7 @@ INSERT INTO `modulos` (`idmodulos`, `descModulo`, `mapas_acceso_idmapas_acceso`,
 -- Estructura de tabla para la tabla `pistasauditoria`
 --
 
+DROP TABLE IF EXISTS `pistasauditoria`;
 CREATE TABLE `pistasauditoria` (
   `idpistasAuditoria` int(11) NOT NULL,
   `fechaPista` date DEFAULT NULL,
@@ -104,11 +118,20 @@ CREATE TABLE `pistasauditoria` (
 -- Estructura de tabla para la tabla `relacionactivos`
 --
 
+DROP TABLE IF EXISTS `relacionactivos`;
 CREATE TABLE `relacionactivos` (
   `idRelacionActivos` int(11) NOT NULL,
   `Activos_idActivos` int(11) NOT NULL,
   `Resposable_idResposable` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `relacionactivos`
+--
+
+INSERT INTO `relacionactivos` (`idRelacionActivos`, `Activos_idActivos`, `Resposable_idResposable`) VALUES
+(1, 1, 1),
+(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -116,6 +139,7 @@ CREATE TABLE `relacionactivos` (
 -- Estructura de tabla para la tabla `resposable`
 --
 
+DROP TABLE IF EXISTS `resposable`;
 CREATE TABLE `resposable` (
   `idResposable` int(11) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
@@ -124,16 +148,31 @@ CREATE TABLE `resposable` (
   `ubicacion_idUbicacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `resposable`
+--
+
+INSERT INTO `resposable` (`idResposable`, `Nombre`, `Apellido`, `Cedula`, `ubicacion_idUbicacion`) VALUES
+(1, 'Carlos', 'Bermudez', 'V-15.060.580', 1);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sucursal`
 --
 
+DROP TABLE IF EXISTS `sucursal`;
 CREATE TABLE `sucursal` (
   `idsucursal` int(11) NOT NULL,
   `Descripcion` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `sucursal`
+--
+
+INSERT INTO `sucursal` (`idsucursal`, `Descripcion`) VALUES
+(1, 'Catemar Region Occidente');
 
 -- --------------------------------------------------------
 
@@ -141,6 +180,7 @@ CREATE TABLE `sucursal` (
 -- Estructura de tabla para la tabla `tipo_usuario`
 --
 
+DROP TABLE IF EXISTS `tipo_usuario`;
 CREATE TABLE `tipo_usuario` (
   `idTipo_Usuario` int(11) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -152,7 +192,8 @@ CREATE TABLE `tipo_usuario` (
 --
 
 INSERT INTO `tipo_usuario` (`idTipo_Usuario`, `descripcion`, `modulos_idmodulos`) VALUES
-(0, 'Super Usuario', 1);
+(0, 'Super Usuario', 1),
+(1, 'Auditor', 2);
 
 -- --------------------------------------------------------
 
@@ -160,11 +201,19 @@ INSERT INTO `tipo_usuario` (`idTipo_Usuario`, `descripcion`, `modulos_idmodulos`
 -- Estructura de tabla para la tabla `ubicacion`
 --
 
+DROP TABLE IF EXISTS `ubicacion`;
 CREATE TABLE `ubicacion` (
   `idUbicacion` int(11) NOT NULL,
   `Descripcion` varchar(45) DEFAULT NULL,
   `sucursal_idsucursal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `ubicacion`
+--
+
+INSERT INTO `ubicacion` (`idUbicacion`, `Descripcion`, `sucursal_idsucursal`) VALUES
+(1, 'TI', 1);
 
 -- --------------------------------------------------------
 
@@ -172,6 +221,7 @@ CREATE TABLE `ubicacion` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `idUsuarios` int(11) NOT NULL,
   `usuario` varchar(45) DEFAULT NULL,
@@ -188,7 +238,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuarios`, `usuario`, `clave`, `Nombre`, `Apellido`, `Cedula`, `foto`, `Tipo_Usuario_idTipo_Usuario`) VALUES
-(41, 'admin', 'admin', 'Carlos', 'Bermudez', 'V-15.060.580', 'carlos.jpg', 0);
+(41, 'admin', 'admin', 'Carlos', 'Bermudez', 'V-15.060.580', 'carlos.jpg', 0),
+(42, 'dchavez', '123', 'Daniel', 'Chavez', 'V-19.060.580', 'default.jpg', 1);
 
 --
 -- Índices para tablas volcadas
@@ -270,7 +321,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `idUsuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- Restricciones para tablas volcadas
 --
