@@ -1176,6 +1176,50 @@ $('document').ready(function()
     });
 
 
+    /* Ingresar a Modificar Asignacion de Activos*/
+    $("#menuAdmin").on("click","#eliminarGestion", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'eliminarAsignacion.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+            }
+        });
+    });
+
+    /* Borrar Asignacion de Activo */
+    $("#opciones").on("click",".eliminAsignacion", function() {
+        console.log('entro2');
+        var id = $(this).attr("id");
+        var $element = $(this);
+
+        $.ajax({
+            url:'./conf/ejecutor.php?eliminarAsig='+id,
+            type: "POST",
+            data: "eliminarAsig="+id,
+            success: function(response){
+                //alert('Hola');
+                if(response.trim()=="ok") {
+                    $element.parent().parent().remove();
+                } else {
+
+                    $("#errorEliminarAsig").fadeIn(1000, function(){
+                        $("#errorEliminarAsig").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                       // $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                    });
+                }
+            },
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            }
+        });
+    });
 
 
 });

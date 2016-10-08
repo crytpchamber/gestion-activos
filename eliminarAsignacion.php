@@ -49,6 +49,7 @@ $data4=$stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
+
 <hr />
 
 
@@ -61,7 +62,7 @@ $data4=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Responsable</th>
             <th>Sucursal</th>
             <th>Ubicación</th>
-            <th>Modificar</th>
+            <th>Eliminar</th>
         </tr>
         </thead>
         <tbody>
@@ -71,7 +72,7 @@ $data4=$stmt->fetchAll(PDO::FETCH_ASSOC);
             echo "<tr>";
             echo "<td>" . $row['Descripcion'] . "</td><td>" . $row['Nombre'] ." " . $row['Apellido'] .  "</td>" .
                 "<td>" . $row['sucursal'] . "</td><td>" . $row['ubicacion'] . "</td><td>" .
-                "<button id='" .$row['idRelacionActivos']. "' type='button' class='btn btn-default btn-sm glyphicon glyphicon-edit modifAsignacion'></button></td>";
+                "<button id='" .$row['idRelacionActivos']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove eliminAsignacion'></button></td>";
 
             //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
 
@@ -140,7 +141,6 @@ $data4=$stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 
-
 <hr />
 
 <?php
@@ -161,7 +161,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="col-md-3 col-lg-3 col-sm-3 col-xs-1"></div>
     <div class="col-md-6 col-lg-6 col-sm-6 col-xs-10" >
 
-            <div id="errorRelacion">
+            <div id="errorEliminarAsig">
                 <!-- error will be shown here ! -->
             </div>
 

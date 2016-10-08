@@ -341,5 +341,26 @@ if (isset($_POST['reg_asig'])) {
 
 }
 
+if (isset($_GET['eliminarAsig'])) {
+    function eliminarRelacAct()
+    {
+        require_once './dbconn.php';
+        $idAct = trim($_GET['eliminarAsig']);
+
+
+        try {
+
+            $stmt = $dbh->prepare("delete from relacionactivos where idRelacionActivos=:uid");
+            $stmt->execute(array(":uid" => $idAct));
+
+            echo 'ok';
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    eliminarRelacAct();
+}
+
+
 
 ?>
