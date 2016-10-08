@@ -11,6 +11,7 @@ body {
 .profile-sidebar {
     padding: 20px 0 10px 0;
     background: #fff;
+    border-radius: 15px;
 }
 
 .profile-userpic img {
@@ -105,4 +106,5 @@ body {
     padding: 20px;
     background: #fff;
     min-height: 585px;
+    border-radius: 15px;
 }
