@@ -78,10 +78,26 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 <input type="text" class="form-control" name="mapa" id="mapa" placeholder="Descripción" required>
             </div>
 
-            <div class="form-group checkbox">
-                <label class="checkbox-inline"><input id="eliminar" type="checkbox" value="">Puede Eliminar</label>
-                <label class="checkbox-inline"><input id="modificar" type="checkbox" value="">Puede Modificar</label>
-                <label class="checkbox-inline"><input id="guardar" type="checkbox" value="">Puede Guardar</label>
+            <div class="form-group">
+                <label>Puede Eliminar</label>
+                <select class="form-control" id="eliminar" name="eliminar">
+                    <option value="0" selected>No</option>
+                    <option value="1">Si</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Puede Modificar</label>
+                <select class="form-control" id="modificar" name="modificar">
+                    <option value="0" selected>No</option>
+                    <option value="1">Si</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Puede Guardar</label>
+                <select class="form-control" id="guardar" name="guardar">
+                    <option value="0" selected>No</option>
+                    <option value="1">Si</option>
+                </select>
             </div>
 
 
@@ -89,7 +105,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <hr />
 
             <div class="form-group">
-                <button type="submit" class="btn btn-default" name="btn-login3" id="btn-login4"  >
+                <button type="submit" class="btn btn-default" name="btn-login4" id="btn-login4"  >
                     <span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar
                 </button>
 

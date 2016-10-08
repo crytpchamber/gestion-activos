@@ -101,6 +101,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
             <div class="form-group">
+                <label>Mapa de Acceso</label>
                 <select class="form-control" id="mapa" name="mapa" required>
                     <?php
                     foreach ($data as $row) {
@@ -116,13 +117,35 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                     ?>
                 </select>
             </div>
-
             <div class="form-group">
-                <label class="checkbox-inline"><input id="checkUbic" type="checkbox" value="">Ubicación</label>
-                <label class="checkbox-inline"><input id="checkSucu" type="checkbox" value="">Sucursal</label>
-                <label class="checkbox-inline"><input id="checkAct" type="checkbox" value="">Activos</label>
-                <label class="checkbox-inline"><input id="checkResp" type="checkbox" value="">Responsables</label>
+                <label>Accesar Activos</label>
+                <select class="form-control" id="checkAct" name="checkAct">
+                    <option value="0" selected>No</option>
+                    <option value="1">Si</option>
+                </select>
             </div>
+            <div class="form-group">
+                <label>Accesar Responsables</label>
+                <select class="form-control" id="checkResp" name="checkResp">
+                    <option value="0" selected>No</option>
+                    <option value="1">Si</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Accesar Ubicaciones</label>
+                <select class="form-control" id="checkUbic" name="checkUbic">
+                    <option value="0" selected>No</option>
+                    <option value="1">Si</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Accesar Sucursales</label>
+                <select class="form-control" id="checkSucu" name="checkSucu">
+                    <option value="0" selected>No</option>
+                    <option value="1">Si</option>
+                </select>
+            </div>
+
 
 
             <input type="hidden" class="form-control" name="register" id="register">

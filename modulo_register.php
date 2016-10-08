@@ -2,7 +2,7 @@
 session_start();
 require_once './conf/dbconn.php';
 
-echo $_POST['register'];
+//echo $_POST['register'];
 
 if(isset($_POST['register']))
 {
@@ -10,9 +10,13 @@ if(isset($_POST['register']))
 
     $modulo = trim($_POST['modulo']);
     $mapa = trim($_POST['mapa']);
+    $ubicacion = trim($_POST['checkUbic']);
+    $sucursal = trim($_POST['checkSucu']);
+    $activos = trim($_POST['checkAct']);
+    $responsable = trim($_POST['checkResp']);
 
 
-    if ($mapa == '' || $modulo == '' ) {
+    if ($mapa == '' || $modulo == '' || $ubicacion == '' || $sucursal == '' || $activos =='' || $responsable == '') {
         $registrar = 0;
     }
 
@@ -27,10 +31,15 @@ if(isset($_POST['register']))
             }
 
             //echo $max;
-            $stmt = $dbh->prepare("insert into modulos (idmodulos, descModulo, mapas_acceso_idmapas_acceso) " .
-                "values ($max+1,?,?)");
+            $stmt = $dbh->prepare("insert into modulos (idmodulos, descModulo, mapas_acceso_idmapas_acceso, " .
+                "ubicacion, sucursal, activos, responsable )"  .
+                "values ($max+1,?,?,?,?,?,?)");
             $stmt->bindParam(1, $modulo);
             $stmt->bindParam(2, $mapa);
+            $stmt->bindParam(3, $ubicacion);
+            $stmt->bindParam(4, $sucursal);
+            $stmt->bindParam(5, $activos);
+            $stmt->bindParam(6, $responsable);
 
 
             $stmt->execute();

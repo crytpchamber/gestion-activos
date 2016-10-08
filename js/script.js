@@ -169,6 +169,92 @@ $('document').ready(function()
         });
     });
 
+    /* Registrar mapa nuevo en sistema */
+    $("#opciones").on("click","#btn-login4", function(){
+        //$('#btn-register').click(function() {
+        /* Forma para registrar Modulos */
+
+        var $elemento = $(this).parent().parent();
+        //alert($elemento.attr('id'));
+
+
+        var data = $elemento.serialize();
+
+        //console.log(JSON.stringify(data));
+
+        $.ajax({
+
+            type : 'POST',
+            url  : 'mapa_register.php',
+            data : data,
+            beforeSend: function()
+            {
+                $("#error4").fadeOut();
+                $("#btn-login4").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; Enviando ...');
+            },
+            success :  function(response)
+            {
+                //alert('entro');
+                if(response=="ok"){
+
+                    $("#btn-login4").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
+                    $.ajax({
+                        url:'mapas.php',
+                        type:'GET',
+                        error: function(xhr, error){
+                            console.log(xhr); console.log(error);
+                        },
+                        success: function(data){
+
+                            $('#opciones').html(data);
+                        }
+                    });
+
+                    alert('Mapa registrado con Exito.');
+                    //setTimeout(' window.location.href = "Home.php"; ',2500);
+                }
+                else{
+
+                    $("#error4").fadeIn(1000, function(){
+                        $("#error4").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#btn-login4").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                    });
+                }
+            }
+        });
+        return false;
+    });
+    /* Fin registrar mapa */
+
+    /* Eliminar mapa del sistema */
+    $("#opciones").on("click",".borrar4", function() {
+        console.log('entro2');
+        var id = $(this).attr("id");
+        var $element = $(this);
+
+        $.ajax({
+            url:'eliminarMapa.php?id='+id,
+            type: "POST",
+            data: "id="+id,
+            success: function(response){
+                //alert('Hola');
+                //$element.parent().parent().remove();
+                if(response.trim()=="ok") {
+                    $element.parent().parent().remove();
+                } else {
+
+                    $("#error4").fadeIn(1000, function(){
+                        $("#error4").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#btn-login4").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                    });
+                }
+            },
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            }
+        });
+    });
+    /* Fin Eliminar mapa del sistema */
 
 
     /* Eliminar usuario del sistema */
@@ -383,7 +469,11 @@ $('document').ready(function()
 
         var $elemento = $(this).parent().parent();
         //alert($elemento.attr('id'));
+
+
         var data = $elemento.serialize();
+
+        //console.log(JSON.stringify(data));
 
         $.ajax({
 
