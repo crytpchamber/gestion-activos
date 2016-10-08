@@ -1056,6 +1056,130 @@ $('document').ready(function()
     });
 
 
+    /* Ingresar a Modificar Asignacion de Activos*/
+    $("#menuAdmin").on("click","#modificarGestion", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'modificarAsignacion.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+            }
+        });
+    });
+
+
+    /* Filtrar Asignaciones por Responsable */
+    $("#opciones").on("change",".filtros", function(){
+
+        console.log('entro');
+        //$('#opciones').hide().html(data).fadeIn('slow');
+
+        var rows = $('#opciones #tableRelacion tr').each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            //alert('entro');
+
+            row.data('name-chars', [
+                columns.eq(1).html(),
+            ]);
+            //console.log(row.data());
+        });
+
+        var char = $(this).val();
+        //alert('entro');
+        rows.each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            var chars_to_match = row.data('name-chars');
+            if($.inArray(char, chars_to_match) > -1) {
+
+                columns.show();
+            }
+            else {
+                columns.hide();
+            }
+        });
+    });
+
+    /* Filtrar Asignaciones por Sucursal */
+    $("#opciones").on("change",".filtros2", function(){
+
+        console.log('entro');
+        //$('#opciones').hide().html(data).fadeIn('slow');
+
+        var rows = $('#opciones #tableRelacion tr').each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            //alert('entro');
+
+            row.data('name-chars', [
+                columns.eq(2).html(),
+            ]);
+            //console.log(row.data());
+        });
+
+        var char = $(this).val();
+        //alert('entro');
+        rows.each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            var chars_to_match = row.data('name-chars');
+            if($.inArray(char, chars_to_match) > -1) {
+
+                columns.show();
+            }
+            else {
+                columns.hide();
+            }
+        });
+
+    });
+
+    /* Filtrar Asignaciones por Ubicacion */
+    $("#opciones").on("change",".filtros3", function(){
+
+        console.log('entro');
+        //$('#opciones').hide().html(data).fadeIn('slow');
+
+        var rows = $('#opciones #tableRelacion tr').each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            //alert('entro');
+
+            row.data('name-chars', [
+                columns.eq(3).html(),
+            ]);
+            //console.log(row.data());
+        });
+
+        var char = $(this).val();
+        //alert('entro');
+        rows.each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            var chars_to_match = row.data('name-chars');
+            if($.inArray(char, chars_to_match) > -1) {
+
+                columns.show();
+            }
+            else {
+                columns.hide();
+            }
+        });
+
+    });
+
+
 
 
 });
+
+
+
+
