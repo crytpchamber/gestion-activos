@@ -1,9 +1,9 @@
 <ul class="topnav" id="myTopnav">
-    <li style="width: 25%; text-align: center"><a id="activosGestion" href="javascript:void(0);">Crear Activos</a></li>
-    <li style="width: 25%; text-align: center"><a id="asignarGestion" href="javascript:void(0);">Asignar Activos</a></li>
+    <li style="width: 33%; text-align: center"><a id="activosGestion" href="javascript:void(0);">Crear Activos</a></li>
+    <li style="width: 34%; text-align: center"><a id="asignarGestion" href="javascript:void(0);">Asignar Activos</a></li>
 
-    <li style="width: 25%; text-align: center"><a id="modificarGestion" href="javascript:void(0);">Modificar Asignacion</a></li>
-    <li style="width: 25%; text-align: center"><a id="eliminarGestion" href="javascript:void(0);">Eliminar Asignacion</a></li>
+   <!-- <li style="width: 25%; text-align: center"><a id="modificarGestion" href="javascript:void(0);">Modificar Asignacion</a></li> -->
+    <li style="width: 33%; text-align: center"><a id="eliminarGestion" href="javascript:void(0);">Eliminar Asignacion</a></li>
 
     <li class="icon">
         <a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
