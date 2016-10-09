@@ -708,7 +708,7 @@ $('document').ready(function()
         });
     });
 
-    /* Acceder a eliminar Sucursal */
+    /* Acceder a Crear Sucursal */
     $("#menuAdmin").on("click","#crearSucu", function(){
 
         console.log('entro');
@@ -818,18 +818,55 @@ $('document').ready(function()
     /* Acceder a Ubicacion */
     $(".profile-usermenu #Ubicacion").click(function() {
         $.ajax({
+            url:'ubicacionMenu.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+                //$('#menuAdmin').hide().html("<H1>Ubicacion</H1>").fadeIn('slow');
+                $('#menuAdmin').hide().html(data).fadeIn('slow');
+                $('#opciones').fadeOut('slow');
+
+            }
+        });
+    });
+
+    /* Acceder a Crear Ubicacion */
+    $("#menuAdmin").on("click","#crearUbic", function(){
+
+        console.log('entro');
+        $.ajax({
             url:'ubicacion.php',
             type:'GET',
             error: function(xhr, error){
                 console.log(xhr); console.log(error);
             },
             success: function(data){
-                $('#menuAdmin').hide().html("<H1>Ubicacion</H1>").fadeIn('slow');
-                $('#opciones').hide().html(data).fadeIn('slow');;
 
+                $('#opciones').hide().html(data).fadeIn('slow');
             }
         });
     });
+
+    /* Acceder a Crear Sucursal */
+    $("#menuAdmin").on("click","#eliminarUbic", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'ubicacionEliminar.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+            }
+        });
+    });
+
+
 
     /* Registrar Ubicacion */
     $("#opciones").on("click","#btn-loginUbic", function(){

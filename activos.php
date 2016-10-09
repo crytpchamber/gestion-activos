@@ -33,7 +33,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Tiempo de Depreciación</th>
             <th>Valor de Adquisicion</th>
             <th>Ubicación</th>
-            <th>Eliminar</th>
+            <th>Opciones</th>
         </tr>
         </thead>
         <tbody>
@@ -42,10 +42,12 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($data as $row ) {
             echo "<tr>";
             echo "<td>" . $row['Descripcion'] . "</td><td>" . $row['fecha_adquisicion'] . "</td>" .
-                 "<td>" . $row['tiempo_depre'] . "</td><td>" . $row['valor_adquisicion'] . "</td><td>" .
-                $row['DescUbicacion'] . "</td><td>" .
+                 "<td width='12%'>" . $row['tiempo_depre'] . "</td><td>" . $row['valor_adquisicion'] . "</td><td>" .
+                $row['DescUbicacion'] . "</td><td width='12%'>" .
                  //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
-                "<button id='" .$row['idActivos']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarAct'></button></td>";
+                "<button id='" .$row['idActivos']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarAct'></button>
+                <button id='" .$row['idActivos']. "' type='button' class='btn btn-default btn-sm glyphicon glyphicon-edit modifAsignacion'></button>
+                </td>";
             echo "</tr>";
         }
 

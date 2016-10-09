@@ -89,6 +89,11 @@ $data4=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="row">
     <div class="col-md-3 col-lg-3 col-sm-3 col-xs-1"></div>
     <div class="col-md-6 col-lg-6 col-sm-6 col-xs-10" >
+        <div id="errorEliminarAsig">
+            <!-- error will be shown here ! -->
+        </div>
+
+
         <label >Filtrar por Responsable</label>
         <select class="form-control filtros" id="responsable" name="responsable" title="responsable" >
             <?php
@@ -135,38 +140,14 @@ $data4=$stmt->fetchAll(PDO::FETCH_ASSOC);
             }
             ?>
         </select>
+        <hr />
     </div>
     <div class="col-md-3 col-lg-3 col-sm-3 col-xs-1"></div>
 
 </div>
 
 
-<hr />
-
-<?php
-$stmt = $dbh->prepare("SELECT t.idActivos, t.Descripcion " .
-                          " FROM activos t ");
-$stmt->execute();
-//$data = $stmt->fetchALL();
-$data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
 
-
-?>
-
-
-<div class="row">
-    <div class="col-md-3 col-lg-3 col-sm-3 col-xs-1"></div>
-    <div class="col-md-6 col-lg-6 col-sm-6 col-xs-10" >
-
-            <div id="errorEliminarAsig">
-                <!-- error will be shown here ! -->
-            </div>
-
-
-
-    </div>
-    <div class="col-md-3 col-lg-3 col-sm-3 col-xs-1"></div>
-</div>
