@@ -1399,6 +1399,76 @@ $('document').ready(function()
 
     });
 
+    /* Filtrar Ubicacion por Ubicacion */
+    $("#opciones").on("change",".filtrosUbic2", function(){
+
+        console.log('entro');
+        //$('#opciones').hide().html(data).fadeIn('slow');
+
+        var rows = $('#opciones #tablaUbicacion tr').each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            //alert('entro');
+
+            row.data('name-chars', [
+                columns.eq(0).html(),
+            ]);
+            //console.log(row.data());
+        });
+
+        var char = $(this).val();
+        //alert('entro');
+        rows.each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            var chars_to_match = row.data('name-chars');
+            if($.inArray(char, chars_to_match) > -1) {
+
+                columns.show();
+            }
+            else {
+                columns.hide();
+            }
+        });
+
+    });
+
+
+    /* Filtrar Ubicacion por Sucursal */
+    $("#opciones").on("change",".filtrosUbic", function(){
+
+        console.log('entro');
+        //$('#opciones').hide().html(data).fadeIn('slow');
+
+        var rows = $('#opciones #tablaUbicacion tr').each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            //alert('entro');
+
+            row.data('name-chars', [
+                columns.eq(1).html(),
+            ]);
+            //console.log(row.data());
+        });
+
+        var char = $(this).val();
+        //alert('entro');
+        rows.each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            var chars_to_match = row.data('name-chars');
+            if($.inArray(char, chars_to_match) > -1) {
+
+                columns.show();
+            }
+            else {
+                columns.hide();
+            }
+        });
+
+    });
+    
+    
 
 });
 
