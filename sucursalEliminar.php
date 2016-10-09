@@ -26,7 +26,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
             <th>Codigo</th>
             <th>Sucursal</th>
-            <!-- <th>Eliminar</th> -->
+            <th>Eliminar</th>
         </tr>
         </thead>
         <tbody>
@@ -34,9 +34,9 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $row ) {
             echo "<tr>";
-            echo "<td>" . $row['idsucursal']."</td><td>".$row['Descripcion'] . "</td>" ;
+            echo "<td>" . $row['idsucursal']."</td><td>".$row['Descripcion'] . "</td><td>" .
                 //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
-                //"<button id='" .$row['idsucursal']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarSucursal'></button></td>";
+                "<button id='" .$row['idsucursal']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarSucursal'></button></td>";
             echo "</tr>";
         }
 
@@ -53,27 +53,30 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="row">
     <div class="col-md-3 col-lg-3 col-sm-3 col-xs-1"></div>
     <div class="col-md-6 col-lg-6 col-sm-6 col-xs-10" >
-        <form method="post" id="registrar-sucursal" class="form-horizontal">
 
-            <div id="errorSucu">
-                <!-- error will be shown here ! -->
-            </div>
+        <div id="errorSucu">
+            <!-- error will be shown here ! -->
+        </div>
+
+        <label >Filtrar por Sucursal</label>
+        <select class="form-control filtrosResp2" id="responsable" name="responsable" title="responsable" >
+            <?php
+            foreach ($data as $row) {
+                ?>
+
+                <option value="<?php echo $row['Descripcion']; ?>">
+                    <?php echo $row['Descripcion']; ?>
+                </option>
 
 
-            <div class="form-group">
-                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" required>
-            </div>
+                <?php
+            }
+            ?>
+        </select>
 
-            <input type="hidden" class="form-control" name="reg_sucu" id="reg_sucu">
-            <hr />
-            
-            <div class="form-group">
-                <button type="submit" class="btn btn-default" name="btn-loginSucu" id="btn-loginSucu" value="" >
-                    <span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar
-                </button>
+        <hr />
 
-            </div>
-        </form>
     </div>
     <div class="col-md-3 col-lg-3 col-sm-3 col-xs-1"></div>
+
 </div>

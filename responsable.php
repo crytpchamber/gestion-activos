@@ -28,7 +28,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Responsable</th>
             <th>Cedula</th>
             <th>Ubicación</th>
-            <th>Eliminar</th>
+            <!-- <th>Eliminar</th> -->
         </tr>
         </thead>
         <tbody>
@@ -37,9 +37,9 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($data as $row ) {
             echo "<tr>";
             echo "<td>" . $row['Nombre']." ".$row['Apellido'] . "</td><td>" . $row['Cedula'] . "</td>" .
-                "<td>" . $row['Descripcion'] . "</td><td>" .
+                "<td>" . $row['Descripcion'] . "</td>" ;
                 //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
-                "<button id='" .$row['idResposable']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarResp'></button></td>";
+               // "<button id='" .$row['idResposable']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarResp'></button></td>";
             echo "</tr>";
         }
 

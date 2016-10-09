@@ -536,18 +536,54 @@ $('document').ready(function()
     /* Acceder a responsables */
     $(".profile-usermenu #Responsable").click(function() {
         $.ajax({
+            url:'responsableMenu.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+                //$('#menuAdmin').hide().html("<H1>Responsables</H1>").fadeIn('slow');
+                $('#menuAdmin').hide().html(data).fadeIn('slow');
+                $('#opciones').fadeOut('slow');
+
+            }
+        });
+    });
+
+    /* Acceder a registrar responsables */
+    $("#menuAdmin").on("click","#crearRespons", function(){
+
+        console.log('entro');
+        $.ajax({
             url:'responsable.php',
             type:'GET',
             error: function(xhr, error){
                 console.log(xhr); console.log(error);
             },
             success: function(data){
-                $('#menuAdmin').hide().html("<H1>Responsables</H1>").fadeIn('slow');
-                $('#opciones').hide().html(data).fadeIn('slow');;
 
+                $('#opciones').hide().html(data).fadeIn('slow');
             }
         });
     });
+    /* Acceder a eliminar responsables */
+    $("#menuAdmin").on("click","#eliminarRespons", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'responsableEliminar.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+            }
+        });
+    });
+
+
 
     /* Registrar Responsable */
     $("#opciones").on("click","#btn-loginResp", function(){
@@ -641,18 +677,55 @@ $('document').ready(function()
     /* Acceder a Sucursal */
     $(".profile-usermenu #Sucursal").click(function() {
         $.ajax({
+            url:'sucursalMenu.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+                //$('#menuAdmin').hide().html("<H1>Sucursales</H1>").fadeIn('slow');
+                $('#menuAdmin').hide().html(data).fadeIn('slow');
+                $('#opciones').fadeOut('slow');
+
+            }
+        });
+    });
+
+    /* Acceder a eliminar Sucursal */
+    $("#menuAdmin").on("click","#eliminarSucu", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'sucursalEliminar.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+            }
+        });
+    });
+
+    /* Acceder a eliminar Sucursal */
+    $("#menuAdmin").on("click","#crearSucu", function(){
+
+        console.log('entro');
+        $.ajax({
             url:'sucursal.php',
             type:'GET',
             error: function(xhr, error){
                 console.log(xhr); console.log(error);
             },
             success: function(data){
-                $('#menuAdmin').hide().html("<H1>Sucursales</H1>").fadeIn('slow');
-                $('#opciones').hide().html(data).fadeIn('slow');;
 
+                $('#opciones').hide().html(data).fadeIn('slow');
             }
         });
     });
+
+
 
     /* Registrar Sucursal */
     $("#opciones").on("click","#btn-loginSucu", function(){
@@ -1219,6 +1292,74 @@ $('document').ready(function()
                 console.log(xhr); console.log(error);
             }
         });
+    });
+
+
+    /* Filtrar Responsable por Responsable */
+    $("#opciones").on("change",".filtrosResp", function(){
+
+        console.log('entro');
+        //$('#opciones').hide().html(data).fadeIn('slow');
+
+        var rows = $('#opciones #tablaResponsable tr').each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            //alert('entro');
+
+            row.data('name-chars', [
+                columns.eq(0).html(),
+            ]);
+            //console.log(row.data());
+        });
+
+        var char = $(this).val();
+        //alert('entro');
+        rows.each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            var chars_to_match = row.data('name-chars');
+            if($.inArray(char, chars_to_match) > -1) {
+
+                columns.show();
+            }
+            else {
+                columns.hide();
+            }
+        });
+    });
+
+    /* Filtrar Responsables por Ubicacion */
+    $("#opciones").on("change",".filtrosResp2", function(){
+
+        console.log('entro');
+        //$('#opciones').hide().html(data).fadeIn('slow');
+
+        var rows = $('#opciones #tablaResponsable tr').each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            //alert('entro');
+
+            row.data('name-chars', [
+                columns.eq(2).html(),
+            ]);
+            //console.log(row.data());
+        });
+
+        var char = $(this).val();
+        //alert('entro');
+        rows.each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            var chars_to_match = row.data('name-chars');
+            if($.inArray(char, chars_to_match) > -1) {
+
+                columns.show();
+            }
+            else {
+                columns.hide();
+            }
+        });
+
     });
 
 
