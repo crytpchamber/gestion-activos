@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2016 a las 05:10:47
+-- Tiempo de generación: 10-10-2016 a las 02:31:01
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -45,8 +45,10 @@ CREATE TABLE `activos` (
 --
 
 INSERT INTO `activos` (`idActivos`, `Descripcion`, `fecha_adquisicion`, `tiempo_depre`, `valor_adquisicion`, `fecha_registro`, `fecha_ini_deprec`, `ubicacion_idUbicacion`) VALUES
-(1, 'DELL Latitude 6510', '2016-03-14', 5, '150000.000', '2016-10-07', '2016-04-14', 1),
-(2, 'prueba', '2016-03-14', 6, '1222222.000', '2016-10-07', '2016-03-14', 1);
+(1, 'DELL Latitude 6510', '2016-03-16', 5, '155000.000', '2016-10-07', '2016-04-14', 1),
+(2, 'prueba', '2016-03-19', 6, '1222.000', '2016-10-07', '2016-03-14', 1),
+(3, 'DELL mas pequeÃ±a', '2011-04-13', 6, '125000.000', '2016-10-08', '2011-04-14', 1),
+(4, 'Prueba de Activo', '2011-04-16', 6, '300000.000', '2016-10-09', '2016-10-09', 2);
 
 -- --------------------------------------------------------
 
@@ -131,7 +133,8 @@ CREATE TABLE `relacionactivos` (
 
 INSERT INTO `relacionactivos` (`idRelacionActivos`, `Activos_idActivos`, `Resposable_idResposable`) VALUES
 (1, 1, 1),
-(2, 2, 1);
+(3, 3, 2),
+(4, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -153,7 +156,9 @@ CREATE TABLE `resposable` (
 --
 
 INSERT INTO `resposable` (`idResposable`, `Nombre`, `Apellido`, `Cedula`, `ubicacion_idUbicacion`) VALUES
-(1, 'Carlos', 'Bermudez', 'V-15.060.580', 1);
+(1, 'Carlos', 'Bermudez', 'V-15.060.580', 1),
+(2, 'Daniel', 'Chavez', 'V-15.060.580', 1),
+(3, 'Juan', 'Verhook', 'V-19.060.580', 2);
 
 -- --------------------------------------------------------
 
@@ -172,7 +177,8 @@ CREATE TABLE `sucursal` (
 --
 
 INSERT INTO `sucursal` (`idsucursal`, `Descripcion`) VALUES
-(1, 'Catemar Region Occidente');
+(1, 'Catemar Region Occidente'),
+(2, 'Catemar Region Centro-Occidente');
 
 -- --------------------------------------------------------
 
@@ -213,7 +219,10 @@ CREATE TABLE `ubicacion` (
 --
 
 INSERT INTO `ubicacion` (`idUbicacion`, `Descripcion`, `sucursal_idsucursal`) VALUES
-(1, 'TI', 1);
+(1, 'TI', 1),
+(2, 'Auditoria', 1),
+(3, 'TI', 2),
+(4, 'Administracion', 2);
 
 -- --------------------------------------------------------
 

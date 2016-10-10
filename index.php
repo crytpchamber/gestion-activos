@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-2"></div>
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-8" >
-            <img src="imgs/catemar.png" alt="logo de Catemar">
+            <img src="imgs/catemar.png" class="img-responsive" alt="logo de Catemar">
             <hr />
         </div>
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-2">
