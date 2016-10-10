@@ -10,12 +10,19 @@ include_once 'conf/dbconn.php';
 
 
 $stmt = $dbh->prepare("SELECT t.idActivos, t.Descripcion, t.fecha_adquisicion, t.tiempo_depre, t.valor_adquisicion, " .
-                      " t.fecha_registro, t.fecha_ini_deprec, u.Descripcion as DescUbicacion " .
+                      " t.fecha_registro, t.fecha_ini_deprec, t.ubicacion_idUbicacion, u.Descripcion as DescUbicacion " .
                       "     FROM activos t inner join ubicacion u " .
                       " on u.idUbicacion = t.ubicacion_idUbicacion ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+$stmt = $dbh->prepare("SELECT t.idUbicacion, t.Descripcion 
+                           FROM ubicacion t ");
+$stmt->execute();
+//$data = $stmt->fetchALL();
+$data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -41,14 +48,33 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $row ) {
             echo "<tr>";
-            echo "<td>" . $row['Descripcion'] . "</td><td>" . $row['fecha_adquisicion'] . "</td>" .
-                 "<td width='12%'>" . $row['tiempo_depre'] . "</td><td>" . $row['valor_adquisicion'] . "</td><td>" .
-                $row['DescUbicacion'] . "</td><td width='12%'>" .
+            echo "<td width='25%'>" . $row['Descripcion'] . "</td>" .
+                " <td width='12%'><input class='form-control' type='date' class='fechaadq' id='tiempoadq".$row['idActivos']."' value='" . $row['fecha_adquisicion'] . "'></td>" .
+                " <td width='12%'><input class='form-control' style='width:70%' type='number' id='tiempodepre".$row['idActivos']."' value='" . $row['tiempo_depre']. "'></td>" .
+                " <td width='25%'><input class='form-control' style='width:100%' type='number' id='valor".$row['idActivos']."' value='"  . $row['valor_adquisicion'] . "'></td>".
+                " <td width='12%'><select class='form-control' id='ubic".$row['idActivos']."' name='ubic' title='ubic' >" ;
+
+            foreach ($data2 as $row2) {
+
+                    if ($row2['idUbicacion']==$row['ubicacion_idUbicacion']) {
+                        echo "<option value='" . $row2['idUbicacion'] . "' selected> " . $row2['Descripcion'] . "</option>";
+                    } else {
+                        echo "<option value='" . $row2['idUbicacion'] . "'> " . $row2['Descripcion'] . "</option>";
+                    }
+            }
+
+
+
+            echo "</select></td><td width='14%'> ".
+
+
+
                  //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
                 "<button id='" .$row['idActivos']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarAct'></button>
-                <button id='" .$row['idActivos']. "' type='button' class='btn btn-default btn-sm glyphicon glyphicon-edit modifAsignacion'></button>
+                <button id='" .$row['idActivos']. "' type='button' class='btn btn-default btn-sm glyphicon glyphicon-edit modifActivo'></button>
                 </td>";
             echo "</tr>";
+            //echo $row['tiempo_depre'];
         }
 
         ?>
@@ -60,11 +86,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <hr />
 
 <?php
-$stmt = $dbh->prepare("SELECT t.idUbicacion, t.Descripcion 
-                           FROM ubicacion t ");
-$stmt->execute();
-//$data = $stmt->fetchALL();
-$data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 ?>
 
@@ -99,7 +121,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 <label >Ubicación</label>
                 <select class="form-control" id="ubic" name="ubic" title="ubic" >
                     <?php
-                    foreach ($data as $row) {
+                    foreach ($data2 as $row) {
                         ?>
 
                         <option value="<?php echo $row['idUbicacion']; ?>">

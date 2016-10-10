@@ -1089,6 +1089,70 @@ $('document').ready(function()
         });
     });
 
+
+    /* Modificar Activo */
+    $("#opciones").on("click",".modifActivo", function() {
+        console.log('entro2');
+        var id = $(this).attr("id");
+        var $element = $(this);
+        var tiempoadq = "tiempoadq"+id;
+        var tiempodepre = "tiempodepre"+id;
+        var valor = "valor"+id;
+        var ubic = "ubic"+id;
+        
+        //alert(tiempoadq);
+
+
+        var data2 = {tiempoadq:$("#"+tiempoadq).val(),tiempodepre:$("#"+tiempodepre).val(),
+         valor:$("#"+valor).val(),ubic:$("#"+ubic).val(),btnmodAct:'1'};
+
+        //var data = data2.serialize();
+
+        //console.log(JSON.stringify(data2));
+
+        //alert($data);
+
+
+        $.ajax({
+            url:'./conf/ejecutor.php?modificarAct='+id,
+            type: "POST",
+            data: data2,
+            success: function(response){
+                //alert('Hola');
+                if(response.trim()=="ok") {
+                    //$element.parent().parent().remove();
+                    alert('Registro modificado con Exito.');
+                } else {
+                    //alert('entro1');
+                    $("#errorAct").fadeIn(1000, function(){
+                        $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                    });
+                }
+            },
+            error: function(xhr, error){
+                alert('entro2');
+                console.log(xhr); console.log(error);
+            }
+        });
+    });
+
+    $("#opciones").on("click",".fechaadq", function() {
+        var elemento = $(this);
+        alert('cambio');
+
+        $('.fechaadq').datepicker()
+            .on("change", function (e) {
+                alert("Date changed: ", e.target.value);
+            });
+
+    });
+
+
+
+
+
+
     /* Ingresar a Asignar Activos*/
     $("#menuAdmin").on("click","#asignarGestion", function(){
 

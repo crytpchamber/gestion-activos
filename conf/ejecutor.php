@@ -361,6 +361,46 @@ if (isset($_GET['eliminarAsig'])) {
     eliminarRelacAct();
 }
 
+/* Modificar Activo*/
+if (isset($_POST['btnmodAct'])) {
+    function modificarActivo()
+    {
+       // echo 'entro';
+        require_once './dbconn.php';
+        $idAct = trim($_GET['modificarAct']);
+        $tiempoadq = trim($_POST['tiempoadq']);
+        $tiempodepre = trim($_POST['tiempodepre']);
+        $valor = trim($_POST['valor']);
+        $ubic = trim($_POST['ubic']);
+        $date = 0;
+        //echo date_format((string)$tiempoadq,"dd-MM-YYYY");
+        //echo $tiempoadq;
+
+        try {
+
+            $stmt = $dbh->prepare("update activos set fecha_adquisicion = '". $tiempoadq ."', ".
+                                  "tiempo_depre = ".$tiempodepre .", " .
+                                  " valor_adquisicion = ".$valor.", " .
+                                  "ubicacion_idUbicacion = '".$ubic ."' " .
+                                  " where idActivos=:uid");
+            //$stmt->bindParam(':fecha_adq', trim($tiempoadq), PDO::PARAM_STR, 10);
+            //$stmt->bindParam('tiempodepre', $tiempodepre, PDO::PARAM_INT);
+            //$stmt->bindParam('valAdqui',  $valor, PDO::PARAM_STR);
+            //$stmt->bindParam('ubicacion', $ubic, PDO::PARAM_INT);
+
+
+
+            $stmt->execute(array(":uid" => $idAct));
+
+            echo 'ok';
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    modificarActivo();
+}
+
+
 
 
 ?>
