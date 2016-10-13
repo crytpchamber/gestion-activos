@@ -55,9 +55,14 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($data as $row ) {
                     echo "<tr>";
                     echo "<td>" . $row['usuario'] . "</td><td>" . $row['Nombre']." ".$row['Apellido'] . "</td><td>" .
-                        $row['Cedula'] . "</td><td>" . $row['tipoUsuario'] . "</td><td>" .
+                        $row['Cedula'] . "</td><td>" . $row['tipoUsuario'] . "</td><td>" ;
                        //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
-                        "<button id='" .$row['usuario']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrar'></button></td>";
+                    if ($row['usuario']=="admin") {
+                        echo "</td>";
+                    } else {
+                        echo "<button id='" .$row['usuario']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrar'></button></td>";
+                    }
+
                     echo "</tr>";
                 }
 

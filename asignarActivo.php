@@ -61,8 +61,9 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <hr />
 
 <?php
-$stmt = $dbh->prepare("SELECT t.idActivos, t.Descripcion 
-                           FROM activos t ");
+$stmt = $dbh->prepare("SELECT t.idActivos, t.Descripcion ".
+                           " FROM activos t " .
+                        " Where t.idActivos not in (select Activos_idActivos from relacionactivos)");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -21,6 +21,7 @@ if (isset($_POST['reg_respons'])) {
             $registrar = 0;
         }
 
+        $existe = 0;
         try {
             if ($registrar == 1) {
 
@@ -32,16 +33,29 @@ if (isset($_POST['reg_respons'])) {
                 }
 
                 $max++;
-                
-                $stmt = $dbh->prepare("insert into resposable (idResposable, Nombre, Apellido, Cedula, ubicacion_idUbicacion) " .
-                    "values ($max,?,?,?,?)");
-                $stmt->bindParam(1, $nombre);
-                $stmt->bindParam(2, $apellido);
-                $stmt->bindParam(3, $cedula);
-                $stmt->bindParam(4, $ubicacion);
 
-                $stmt->execute();
-                echo "ok";
+                $stmt = $dbh->prepare("select idResposable, Nombre as numero from resposable ".
+                    "where (Nombre = :uid and Apellido = :uid2) or Cedula = :uid3 ");
+                $stmt->execute(array(":uid" => $nombre,":uid2" => $apellido, ":uid3" => $cedula));
+                $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $existe++;
+                }
+
+                if ($existe>0) {
+                    echo "Ya existe un registo con ese nombre o Cedula.";
+                } else {
+
+                    $stmt = $dbh->prepare("insert into resposable (idResposable, Nombre, Apellido, Cedula, ubicacion_idUbicacion) " .
+                        "values ($max,?,?,?,?)");
+                    $stmt->bindParam(1, $nombre);
+                    $stmt->bindParam(2, $apellido);
+                    $stmt->bindParam(3, $cedula);
+                    $stmt->bindParam(4, $ubicacion);
+
+                    $stmt->execute();
+                    echo "ok";
+                }
             } else {
                 echo "Error registrando Usuario.";
             }
@@ -91,6 +105,7 @@ if (isset($_POST['reg_sucu'])) {
         }
 
         try {
+            $existe = 0;
             if ($registrar == 1) {
 
                 $stmt = $dbh->prepare("select max(idsucursal) as numero from sucursal ");
@@ -102,12 +117,26 @@ if (isset($_POST['reg_sucu'])) {
 
                 $max++;
 
-                $stmt = $dbh->prepare("insert into sucursal (idsucursal, Descripcion) " .
-                    "values ($max,?)");
-                $stmt->bindParam(1, $nombre);
 
-                $stmt->execute();
-                echo "ok";
+                $stmt = $dbh->prepare("select idsucursal, Descripcion as numero from sucursal ".
+                    "where Descripcion = :uid");
+                $stmt->execute(array(":uid" => $nombre));
+                $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $existe++;
+                }
+
+                if ($existe>0) {
+                    echo "Ya existe un registo con ese nombre.";
+                } else {
+
+                    $stmt = $dbh->prepare("insert into sucursal (idsucursal, Descripcion) " .
+                        "values ($max,?)");
+                    $stmt->bindParam(1, $nombre);
+
+                    $stmt->execute();
+                    echo "ok";
+                }
             } else {
                 echo "Error registrando Sucursal.";
             }
@@ -158,6 +187,7 @@ if (isset($_POST['reg_ubic'])) {
         }
 
         try {
+            $existe = 0;
             if ($registrar == 1) {
 
                 $stmt = $dbh->prepare("select max(idUbicacion) as numero from ubicacion ");
@@ -169,13 +199,25 @@ if (isset($_POST['reg_ubic'])) {
 
                 $max++;
 
-                $stmt = $dbh->prepare("insert into ubicacion (idUbicacion, Descripcion, sucursal_idsucursal) " .
-                    "values ($max,?,?)");
-                $stmt->bindParam(1, $nombre);
-                $stmt->bindParam(2, $sucursal);
+                $stmt = $dbh->prepare("select idUbicacion, Descripcion as numero from ubicacion ".
+                                    "where Descripcion = :uid");
+                $stmt->execute(array(":uid" => $nombre));
+                $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $existe++;
+                }
 
-                $stmt->execute();
-                echo "ok";
+                if ($existe>0) {
+                    echo "Ya existe un registo con ese nombre.";
+                } else {
+                    $stmt = $dbh->prepare("insert into ubicacion (idUbicacion, Descripcion, sucursal_idsucursal) " .
+                        "values ($max,?,?)");
+                    $stmt->bindParam(1, $nombre);
+                    $stmt->bindParam(2, $sucursal);
+
+                    $stmt->execute();
+                    echo "ok";
+                }
             } else {
                 echo "Error registrando Ubicacion.";
             }
@@ -232,6 +274,7 @@ if (isset($_POST['reg_act'])) {
         }
 
         try {
+            $existe = 0;
             if ($registrar == 1) {
 
                 $stmt = $dbh->prepare("select max(idActivos) as numero from activos ");
@@ -243,19 +286,34 @@ if (isset($_POST['reg_act'])) {
 
                 $max++;
 
-                $stmt = $dbh->prepare("insert into Activos (idActivos, Descripcion, fecha_adquisicion, " .
-                    " tiempo_depre, valor_adquisicion, fecha_registro, fecha_ini_deprec, ubicacion_idUbicacion) " .
-                    "values ($max,?,?,?,?,NOW(),?,?)");
-                $stmt->bindParam(1, $nombre);
-                $stmt->bindParam(2, $adquisicion);
-                $stmt->bindParam(3, $tdepre);
-                $stmt->bindParam(4, $valor);
-                $stmt->bindParam(5, $inicio);
-                $stmt->bindParam(6, $sucursal);
 
 
-                $stmt->execute();
-                echo "ok";
+                $stmt = $dbh->prepare("select idActivos from Activos ".
+                    "where (Descripcion = :uid ) ");
+                $stmt->execute(array(":uid" => $nombre));
+                $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $existe++;
+                }
+
+                if ($existe>0) {
+                    echo "Ya existe un registo con ese nombre.";
+                } else {
+
+                    $stmt = $dbh->prepare("insert into Activos (idActivos, Descripcion, fecha_adquisicion, " .
+                        " tiempo_depre, valor_adquisicion, fecha_registro, fecha_ini_deprec, ubicacion_idUbicacion) " .
+                        "values ($max,?,?,?,?,NOW(),?,?)");
+                    $stmt->bindParam(1, $nombre);
+                    $stmt->bindParam(2, $adquisicion);
+                    $stmt->bindParam(3, $tdepre);
+                    $stmt->bindParam(4, $valor);
+                    $stmt->bindParam(5, $inicio);
+                    $stmt->bindParam(6, $sucursal);
+
+
+                    $stmt->execute();
+                    echo "ok";
+                }
             } else {
                 echo "Error registrando Activo. 2";
             }
