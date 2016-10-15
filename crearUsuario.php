@@ -8,9 +8,9 @@ if(!isset($_SESSION['user_session']))
 
 include_once 'conf/dbconn.php';
 
-$stmt = $dbh->prepare("SELECT u.idUsuarios, u.usuario, u.Nombre, u.Apellido, u.Cedula, t.descripcion as tipoUsuario 
-                       FROM usuarios as u inner join tipo_usuario t 
-                       on t.idTipo_Usuario = u.Tipo_Usuario_idTipo_Usuario ");
+$stmt = $dbh->prepare(" SELECT u.idUsuarios, u.usuario, u.Nombre, u.Apellido, u.Cedula, t.descripcion as tipoUsuario ".
+                      " FROM usuarios as u inner join tipo_usuario t ".
+                      " on t.idTipo_Usuario = u.Tipo_Usuario_idTipo_Usuario ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -75,8 +75,8 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <hr />
 
 <?php
-    $stmt = $dbh->prepare("SELECT t.idTipo_Usuario, t.descripcion 
-                           FROM tipo_usuario t ");
+    $stmt = $dbh->prepare("SELECT t.idTipo_Usuario, t.descripcion " .
+                          " FROM tipo_usuario t ");
     $stmt->execute();
     //$data = $stmt->fetchALL();
     $data=$stmt->fetchAll(PDO::FETCH_ASSOC);

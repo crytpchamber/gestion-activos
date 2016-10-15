@@ -68,8 +68,8 @@ $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$stmt = $dbh->prepare("SELECT t.idResposable, t.Nombre, t.Apellido 
-                           FROM resposable t ");
+$stmt = $dbh->prepare("SELECT t.idResposable, t.Nombre, t.Apellido " .
+                          " FROM resposable t ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);

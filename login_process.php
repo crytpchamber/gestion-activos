@@ -13,7 +13,12 @@ if(isset($_POST['btn-login']))
     try
     {
 
-        $stmt = $dbh->prepare("SELECT * FROM usuarios WHERE usuario=:user");
+        $stmt = $dbh->prepare("SELECT u.*, t.descripcion as tipo_desc, m.ubicacion, m.sucursal, m.activos, m.responsable, ".
+            " ma.puedeEliminar, ma.puedeGuardar, ma.puedeModificar " .
+            " FROM usuarios u inner join tipo_usuario t on u.Tipo_Usuario_idTipo_Usuario = t.idTipo_Usuario " .
+            " inner join modulos m on m.idmodulos = t.modulos_idmodulos inner join mapas_acceso ma on " .
+            " ma.idmapas_acceso = m.mapas_acceso_idmapas_acceso " .
+            " WHERE usuario=:user ");
         $stmt->execute(array(":user"=>$user));
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $count = $stmt->rowCount();
@@ -22,6 +27,14 @@ if(isset($_POST['btn-login']))
 
             echo "ok"; // log in
             $_SESSION['user_session'] = $row['idUsuarios'];
+            $_SESSION['usuarios'] = 0 ;
+            $_SESSION['ubicacion'] = $row['ubicacion'] ;
+            $_SESSION['sucursal'] = $row['sucursal'];
+            $_SESSION['activos'] = $row['activos'];
+            $_SESSION['responsable'] = $row['responsable'];
+            $_SESSION['eliminar'] = $row['puedeEliminar'];
+            $_SESSION['guardar'] = $row['puedeGuardar'];
+            $_SESSION['modificar'] = $row['puedeModificar'];
         }
         else{
 

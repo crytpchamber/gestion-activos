@@ -9,8 +9,8 @@ if(!isset($_SESSION['user_session']))
 
 include_once 'conf/dbconn.php';
 
-$stmt = $dbh->prepare("SELECT u.*, t.descripcion as tipoUsuario FROM usuarios as u inner join tipo_usuario t 
-                       on t.idTipo_Usuario = u.Tipo_Usuario_idTipo_Usuario WHERE idUsuarios=:uid");
+$stmt = $dbh->prepare("SELECT u.*, t.descripcion as tipoUsuario FROM usuarios as u inner join tipo_usuario t " .
+                      " on t.idTipo_Usuario = u.Tipo_Usuario_idTipo_Usuario WHERE idUsuarios=:uid");
 $stmt->execute(array(":uid"=>$_SESSION['user_session']));
 $row=$stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -61,7 +61,13 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
-                    <button id="Administrar" type="button" class="btn btn-success btn-sm">Administrador</button>
+                    <?php
+                        if ($row['Tipo_Usuario_idTipo_Usuario']==0) {
+                            echo "<button id='Administrar' type='button' class='btn btn-success btn-sm'>Administrador</button>";
+                        }
+
+                    ?>
+
                     <button id="Salir" type="button" class="btn btn-danger btn-sm">Salir</button>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->

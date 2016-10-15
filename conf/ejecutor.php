@@ -273,53 +273,57 @@ if (isset($_POST['reg_act'])) {
             echo "error registrando Activo. 1";
         }
 
-        try {
-            $existe = 0;
-            if ($registrar == 1) {
+        if ($_SESSION['guardar']==0) {
+            echo "error";
+        }else {
 
-                $stmt = $dbh->prepare("select max(idActivos) as numero from activos ");
-                $stmt->execute();
-                $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($data as $row) {
-                    $max = $row['numero'];
-                }
+            try {
+                $existe = 0;
+                if ($registrar == 1) {
 
-                $max++;
-
-
-
-                $stmt = $dbh->prepare("select idActivos from Activos ".
-                    "where (Descripcion = :uid ) ");
-                $stmt->execute(array(":uid" => $nombre));
-                $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($data as $row) {
-                    $existe++;
-                }
-
-                if ($existe>0) {
-                    echo "Ya existe un registo con ese nombre.";
-                } else {
-
-                    $stmt = $dbh->prepare("insert into Activos (idActivos, Descripcion, fecha_adquisicion, " .
-                        " tiempo_depre, valor_adquisicion, fecha_registro, fecha_ini_deprec, ubicacion_idUbicacion) " .
-                        "values ($max,?,?,?,?,NOW(),?,?)");
-                    $stmt->bindParam(1, $nombre);
-                    $stmt->bindParam(2, $adquisicion);
-                    $stmt->bindParam(3, $tdepre);
-                    $stmt->bindParam(4, $valor);
-                    $stmt->bindParam(5, $inicio);
-                    $stmt->bindParam(6, $sucursal);
-
-
+                    $stmt = $dbh->prepare("select max(idActivos) as numero from activos ");
                     $stmt->execute();
-                    echo "ok";
-                }
-            } else {
-                echo "Error registrando Activo. 2";
-            }
-        } catch(PDOException $e){
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($data as $row) {
+                        $max = $row['numero'];
+                    }
 
-            echo $e->getMessage();
+                    $max++;
+
+
+                    $stmt = $dbh->prepare("select idActivos from Activos " .
+                        "where (Descripcion = :uid ) ");
+                    $stmt->execute(array(":uid" => $nombre));
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($data as $row) {
+                        $existe++;
+                    }
+
+                    if ($existe > 0) {
+                        echo "Ya existe un registo con ese nombre.";
+                    } else {
+
+                        $stmt = $dbh->prepare("insert into Activos (idActivos, Descripcion, fecha_adquisicion, " .
+                            " tiempo_depre, valor_adquisicion, fecha_registro, fecha_ini_deprec, ubicacion_idUbicacion) " .
+                            "values ($max,?,?,?,?,NOW(),?,?)");
+                        $stmt->bindParam(1, $nombre);
+                        $stmt->bindParam(2, $adquisicion);
+                        $stmt->bindParam(3, $tdepre);
+                        $stmt->bindParam(4, $valor);
+                        $stmt->bindParam(5, $inicio);
+                        $stmt->bindParam(6, $sucursal);
+
+
+                        $stmt->execute();
+                        echo "ok";
+                    }
+                } else {
+                    echo "Error registrando Activo. 2";
+                }
+            } catch (PDOException $e) {
+
+                echo $e->getMessage();
+            }
         }
 
     }
@@ -334,15 +338,18 @@ if (isset($_GET['eliminarAct'])) {
         require_once './dbconn.php';
         $idAct = trim($_GET['eliminarAct']);
 
+        if ($_SESSION['eliminar']==0) {
+            echo "error";
+        }else {
+            try {
 
-        try {
+                $stmt = $dbh->prepare("delete from activos where idActivos=:uid");
+                $stmt->execute(array(":uid" => $idAct));
 
-            $stmt = $dbh->prepare("delete from activos where idActivos=:uid");
-            $stmt->execute(array(":uid" => $idAct));
-
-            echo 'ok';
-        } catch (PDOException $e) {
-            echo $e->getMessage();
+                echo 'ok';
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
         }
     }
     eliminarAct();
@@ -366,32 +373,37 @@ if (isset($_POST['reg_asig'])) {
             echo "error registrando Asignacion de Activo. 1";
         }
 
-        try {
-            if ($registrar == 1) {
+        if ($_SESSION['guardar']==0) {
+            echo "error";
+        }else {
 
-                $stmt = $dbh->prepare("select max(idRelacionActivos) as numero from relacionactivos ");
-                $stmt->execute();
-                $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($data as $row) {
-                    $max = $row['numero'];
+            try {
+                if ($registrar == 1) {
+
+                    $stmt = $dbh->prepare("select max(idRelacionActivos) as numero from relacionactivos ");
+                    $stmt->execute();
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($data as $row) {
+                        $max = $row['numero'];
+                    }
+
+                    $max++;
+
+                    $stmt = $dbh->prepare("insert into relacionactivos (idRelacionActivos, Activos_idActivos, Resposable_idResposable) " .
+                        "values ($max,?,?)");
+                    $stmt->bindParam(1, $activo);
+                    $stmt->bindParam(2, $responsable);
+
+
+                    $stmt->execute();
+                    echo "ok";
+                } else {
+                    echo "Error registrando Asignacion de Activo. 2";
                 }
+            } catch (PDOException $e) {
 
-                $max++;
-
-                $stmt = $dbh->prepare("insert into relacionactivos (idRelacionActivos, Activos_idActivos, Resposable_idResposable) " .
-                    "values ($max,?,?)");
-                $stmt->bindParam(1, $activo);
-                $stmt->bindParam(2, $responsable);
-
-
-                $stmt->execute();
-                echo "ok";
-            } else {
-                echo "Error registrando Asignacion de Activo. 2";
+                echo $e->getMessage();
             }
-        } catch(PDOException $e){
-
-            echo $e->getMessage();
         }
 
     }
@@ -405,15 +417,18 @@ if (isset($_GET['eliminarAsig'])) {
         require_once './dbconn.php';
         $idAct = trim($_GET['eliminarAsig']);
 
+        if ($_SESSION['eliminar']==0) {
+            echo "error";
+        }else {
+            try {
 
-        try {
+                $stmt = $dbh->prepare("delete from relacionactivos where idRelacionActivos=:uid");
+                $stmt->execute(array(":uid" => $idAct));
 
-            $stmt = $dbh->prepare("delete from relacionactivos where idRelacionActivos=:uid");
-            $stmt->execute(array(":uid" => $idAct));
-
-            echo 'ok';
-        } catch (PDOException $e) {
-            echo $e->getMessage();
+                echo 'ok';
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
         }
     }
     eliminarRelacAct();
@@ -433,26 +448,30 @@ if (isset($_POST['btnmodAct'])) {
         $date = 0;
         //echo date_format((string)$tiempoadq,"dd-MM-YYYY");
         //echo $tiempoadq;
+        //echo $_SESSION['modificar']." ...";
+        if ($_SESSION['modificar'] == 0 ) {
+            echo "error";
+        } else {
+            try {
 
-        try {
-
-            $stmt = $dbh->prepare("update activos set fecha_adquisicion = '". $tiempoadq ."', ".
-                                  "tiempo_depre = ".$tiempodepre .", " .
-                                  " valor_adquisicion = ".$valor.", " .
-                                  "ubicacion_idUbicacion = '".$ubic ."' " .
-                                  " where idActivos=:uid");
-            //$stmt->bindParam(':fecha_adq', trim($tiempoadq), PDO::PARAM_STR, 10);
-            //$stmt->bindParam('tiempodepre', $tiempodepre, PDO::PARAM_INT);
-            //$stmt->bindParam('valAdqui',  $valor, PDO::PARAM_STR);
-            //$stmt->bindParam('ubicacion', $ubic, PDO::PARAM_INT);
+                $stmt = $dbh->prepare("update activos set fecha_adquisicion = '". $tiempoadq ."', ".
+                                      "tiempo_depre = ".$tiempodepre .", " .
+                                      " valor_adquisicion = ".$valor.", " .
+                                      "ubicacion_idUbicacion = '".$ubic ."' " .
+                                      " where idActivos=:uid");
+                //$stmt->bindParam(':fecha_adq', trim($tiempoadq), PDO::PARAM_STR, 10);
+                //$stmt->bindParam('tiempodepre', $tiempodepre, PDO::PARAM_INT);
+                //$stmt->bindParam('valAdqui',  $valor, PDO::PARAM_STR);
+                //$stmt->bindParam('ubicacion', $ubic, PDO::PARAM_INT);
 
 
 
-            $stmt->execute(array(":uid" => $idAct));
+                $stmt->execute(array(":uid" => $idAct));
 
-            echo 'ok';
-        } catch (PDOException $e) {
-            echo $e->getMessage();
+                echo 'ok';
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
         }
     }
     modificarActivo();

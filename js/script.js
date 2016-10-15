@@ -113,7 +113,9 @@ $('document').ready(function()
             },
             success: function(data){
 
-                $('#opciones').hide().html(data).fadeIn('slow');
+                    $('#opciones').hide().html(data).fadeIn('slow');
+
+
             }
         });
 
@@ -543,8 +545,13 @@ $('document').ready(function()
             },
             success: function(data){
                 //$('#menuAdmin').hide().html("<H1>Responsables</H1>").fadeIn('slow');
-                $('#menuAdmin').hide().html(data).fadeIn('slow');
-                $('#opciones').fadeOut('slow');
+                if (data.trim()=='error') {
+                    alert('No tiene permiso para acceder a este modulo.');
+
+                }else {
+                    $('#menuAdmin').hide().html(data).fadeIn('slow');
+                    $('#opciones').fadeOut('slow');
+                }
 
             }
         });
@@ -561,8 +568,13 @@ $('document').ready(function()
                 console.log(xhr); console.log(error);
             },
             success: function(data){
+                //alert(data);
+                if (data.trim()=='error') {
+                    alert('No tiene permiso para Registrar Responsables.');
 
-                $('#opciones').hide().html(data).fadeIn('slow');
+                }else {
+                    $('#opciones').hide().html(data).fadeIn('slow');
+                }
             }
         });
     });
@@ -577,8 +589,12 @@ $('document').ready(function()
                 console.log(xhr); console.log(error);
             },
             success: function(data){
+                if (data.trim()=='error') {
+                    alert('No tiene permiso para Eliminar Responsables.');
 
-                $('#opciones').hide().html(data).fadeIn('slow');
+                }else {
+                    $('#opciones').hide().html(data).fadeIn('slow');
+                }
             }
         });
     });
@@ -614,30 +630,36 @@ $('document').ready(function()
             success :  function(response)
             {
                 //alert('entro');
-                if(response.trim()=="ok"){
+                if (response.trim()=='error') {
+                    alert('No tiene permiso para registrar responsables.');
 
-                    $("#btn-loginResp").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
-                    $.ajax({
-                        url:'responsable.php',
-                        type:'GET',
-                        error: function(xhr, error){
-                            console.log(xhr); console.log(error);
-                        },
-                        success: function(data){
+                }else {
+                    if (response.trim() == "ok") {
 
-                            $('#opciones').html(data);
-                        }
-                    });
+                        $("#btn-loginResp").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
+                        $.ajax({
+                            url: 'responsable.php',
+                            type: 'GET',
+                            error: function (xhr, error) {
+                                console.log(xhr);
+                                console.log(error);
+                            },
+                            success: function (data) {
 
-                    alert('Responsable registrado con Exito.');
-                    //setTimeout(' window.location.href = "Home.php"; ',2500);
-                }
-                else{
+                                $('#opciones').html(data);
+                            }
+                        });
 
-                    $("#errorResp").fadeIn(1000, function(){
-                        $("#errorResp").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-loginResp").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
+                        alert('Responsable registrado con Exito.');
+                        //setTimeout(' window.location.href = "Home.php"; ',2500);
+                    }
+                    else {
+
+                        $("#errorResp").fadeIn(1000, function () {
+                            $("#errorResp").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#btn-loginResp").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
                 }
             }
         });
@@ -656,14 +678,19 @@ $('document').ready(function()
             data: "eliminarResp="+id,
             success: function(response){
                 //alert('Hola');
-                if(response.trim()=="ok") {
-                    $element.parent().parent().remove();
-                } else {
+                if (response.trim()=='error') {
+                    alert('No tiene permiso para eliminar registros.');
 
-                    $("#errorResp").fadeIn(1000, function(){
-                        $("#errorResp").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-loginResp").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
+                }else {
+                    if (response.trim() == "ok") {
+                        $element.parent().parent().remove();
+                    } else {
+
+                        $("#errorResp").fadeIn(1000, function () {
+                            $("#errorResp").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#btn-loginResp").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
                 }
             },
             error: function(xhr, error){
@@ -684,8 +711,13 @@ $('document').ready(function()
             },
             success: function(data){
                 //$('#menuAdmin').hide().html("<H1>Sucursales</H1>").fadeIn('slow');
-                $('#menuAdmin').hide().html(data).fadeIn('slow');
-                $('#opciones').fadeOut('slow');
+                if (data.trim()=='error') {
+                    alert('No tiene permiso para acceder a este modulo.');
+
+                }else {
+                    $('#menuAdmin').hide().html(data).fadeIn('slow');
+                    $('#opciones').fadeOut('slow');
+                }
 
             }
         });
@@ -702,8 +734,12 @@ $('document').ready(function()
                 console.log(xhr); console.log(error);
             },
             success: function(data){
+                if (data.trim()=='error') {
+                    alert('No tiene permiso para acceder a esta opción.');
 
-                $('#opciones').hide().html(data).fadeIn('slow');
+                }else {
+                    $('#opciones').hide().html(data).fadeIn('slow');
+                }
             }
         });
     });
@@ -719,8 +755,12 @@ $('document').ready(function()
                 console.log(xhr); console.log(error);
             },
             success: function(data){
+                if (data.trim()=='error') {
+                    alert('No tiene permiso para acceder a esta opción.');
 
-                $('#opciones').hide().html(data).fadeIn('slow');
+                }else {
+                    $('#opciones').hide().html(data).fadeIn('slow');
+                }
             }
         });
     });
@@ -825,8 +865,13 @@ $('document').ready(function()
             },
             success: function(data){
                 //$('#menuAdmin').hide().html("<H1>Ubicacion</H1>").fadeIn('slow');
-                $('#menuAdmin').hide().html(data).fadeIn('slow');
-                $('#opciones').fadeOut('slow');
+                if (data.trim()=='error') {
+                    alert('No tiene permiso para acceder a este modulo.');
+
+                }else {
+                    $('#menuAdmin').hide().html(data).fadeIn('slow');
+                    $('#opciones').fadeOut('slow');
+                }
 
             }
         });
@@ -843,13 +888,17 @@ $('document').ready(function()
                 console.log(xhr); console.log(error);
             },
             success: function(data){
+                if (data.trim()=='error') {
+                    alert('No tiene permiso para acceder a este modulo.');
 
-                $('#opciones').hide().html(data).fadeIn('slow');
+                }else {
+                    $('#opciones').hide().html(data).fadeIn('slow');
+                }
             }
         });
     });
 
-    /* Acceder a Crear Sucursal */
+    /* Acceder a Eliminar Ubicacion*/
     $("#menuAdmin").on("click","#eliminarUbic", function(){
 
         console.log('entro');
@@ -860,8 +909,12 @@ $('document').ready(function()
                 console.log(xhr); console.log(error);
             },
             success: function(data){
+                if (data.trim()=='error') {
+                    alert('No tiene permiso para acceder a este modulo.');
 
-                $('#opciones').hide().html(data).fadeIn('slow');
+                }else {
+                    $('#opciones').hide().html(data).fadeIn('slow');
+                }
             }
         });
     });
@@ -962,8 +1015,13 @@ $('document').ready(function()
             type:'GET',
             success: function(data){
                 //alert(data);
-                $('.profile-content #menuAdmin').hide().html(data).fadeIn('slow');
-                $('.profile-content #opciones').fadeOut('slow');
+                if (data.trim()=='error') {
+                    alert('No tiene permiso para acceder a este modulo.');
+
+                }else {
+                    $('.profile-content #menuAdmin').hide().html(data).fadeIn('slow');
+                    $('.profile-content #opciones').fadeOut('slow');
+                }
 
             }
         });
@@ -980,8 +1038,12 @@ $('document').ready(function()
                 console.log(xhr); console.log(error);
             },
             success: function(data){
+                if (data.trim()=='error') {
+                    alert('No tiene permiso para acceder a esta opción.');
 
-                $('#opciones').hide().html(data).fadeIn('slow');
+                }else {
+                    $('#opciones').hide().html(data).fadeIn('slow');
+                }
             }
         });
     });
@@ -1031,31 +1093,40 @@ $('document').ready(function()
             success :  function(response)
             {
                 //alert('entro');
-                if(response.trim()=="ok"){
 
-                    $("#btn-loginAct").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
-                    $.ajax({
-                        url:'activos.php',
-                        type:'GET',
-                        error: function(xhr, error){
-                            console.log(xhr); console.log(error);
-                        },
-                        success: function(data){
 
-                            $('#opciones').html(data);
-                        }
-                    });
-
-                    alert('Activo registrado con Exito.');
-                    //setTimeout(' window.location.href = "Home.php"; ',2500);
-                }
-                else{
-
-                    $("#errorAct").fadeIn(1000, function(){
-                        $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                    if (response.trim()=='error') {
+                        alert('No tiene permiso para registrar activos.');
                         $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
-                }
+                    }else {
+
+                        if(response.trim()=="ok"){
+                            $("#btn-loginAct").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
+                            $.ajax({
+                                url: 'activos.php',
+                                type: 'GET',
+                                error: function (xhr, error) {
+                                    console.log(xhr);
+                                    console.log(error);
+                                },
+                                success: function (data) {
+
+                                    $('#opciones').html(data);
+                                }
+                            });
+
+                            alert('Activo registrado con Exito.');
+                        }
+                        else{
+
+                            $("#errorAct").fadeIn(1000, function(){
+                                $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                                $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                            });
+                        }
+                    }
+                    //setTimeout(' window.location.href = "Home.php"; ',2500);
+
             }
         });
         return false;
@@ -1067,26 +1138,34 @@ $('document').ready(function()
         var id = $(this).attr("id");
         var $element = $(this);
 
-        $.ajax({
-            url:'./conf/ejecutor.php?eliminarAct='+id,
-            type: "POST",
-            data: "eliminarAct="+id,
-            success: function(response){
-                //alert('Hola');
-                if(response.trim()=="ok") {
-                    $element.parent().parent().remove();
-                } else {
 
-                    $("#errorAct").fadeIn(1000, function(){
-                        $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
+            $.ajax({
+                url: './conf/ejecutor.php?eliminarAct=' + id,
+                type: "POST",
+                data: "eliminarAct=" + id,
+                success: function (response) {
+                    //alert('Hola');
+                    if (response.trim()=='error') {
+                        alert('No tiene permiso para eliminar activos.');
+
+                    }else {
+                        if (response.trim() == "ok") {
+                            $element.parent().parent().remove();
+                        } else {
+
+                            $("#errorAct").fadeIn(1000, function () {
+                                $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                                $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                            });
+                        }
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log(xhr);
+                    console.log(error);
                 }
-            },
-            error: function(xhr, error){
-                console.log(xhr); console.log(error);
-            }
-        });
+            });
+
     });
 
 
@@ -1113,30 +1192,38 @@ $('document').ready(function()
         //alert($data);
 
 
-        $.ajax({
-            url:'./conf/ejecutor.php?modificarAct='+id,
-            type: "POST",
-            data: data2,
-            success: function(response){
-                //alert('Hola');
-                if(response.trim()=="ok") {
-                    //$element.parent().parent().remove();
-                    alert('Registro modificado con Exito.');
-                } else {
-                    //alert('entro1');
-                    $("#errorAct").fadeIn(1000, function(){
-                        $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
-                }
-            },
-            error: function(xhr, error){
-                alert('entro2');
-                console.log(xhr); console.log(error);
-            }
-        });
-    });
+            $.ajax({
+                url: './conf/ejecutor.php?modificarAct=' + id,
+                type: "POST",
+                data: data2,
+                success: function (response) {
+                    if (response.trim()=='error') {
+                        alert('No tiene permiso para modificar activos.');
 
+                    }else {
+                        //alert('Hola');
+                        if (response.trim() == "ok") {
+                            //$element.parent().parent().remove();
+                            alert('Registro modificado con Exito.');
+                        } else {
+                            //alert('entro1');
+                            $("#errorAct").fadeIn(1000, function () {
+                                $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                                $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                            });
+                        }
+                    }
+
+                },
+                error: function (xhr, error) {
+                    alert('entro2');
+                    console.log(xhr);
+                    console.log(error);
+                }
+            });
+
+    });
+/*
     $("#opciones").on("click",".fechaadq", function() {
         var elemento = $(this);
         alert('cambio');
@@ -1147,7 +1234,7 @@ $('document').ready(function()
             });
 
     });
-
+*/
 
 
 
@@ -1199,30 +1286,35 @@ $('document').ready(function()
             success :  function(response)
             {
                 //alert('entro');
-                if(response.trim()=="ok"){
+                if (response.trim()=="error") {
+                    alert('No tiene permisos para realizar asinacion de activos.');
+                    $("#btn-loginRela").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                } else {
+                    if(response.trim()=="ok"){
 
-                    $("#btn-loginRela").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
-                    $.ajax({
-                        url:'asignarActivo.php',
-                        type:'GET',
-                        error: function(xhr, error){
-                            console.log(xhr); console.log(error);
-                        },
-                        success: function(data){
+                        $("#btn-loginRela").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
+                        $.ajax({
+                            url:'asignarActivo.php',
+                            type:'GET',
+                            error: function(xhr, error){
+                                console.log(xhr); console.log(error);
+                            },
+                            success: function(data){
 
-                            $('#opciones').html(data);
-                        }
-                    });
+                                $('#opciones').html(data);
+                            }
+                        });
 
-                    alert('Activo registrado con Exito.');
-                    //setTimeout(' window.location.href = "Home.php"; ',2500);
-                }
-                else{
+                        alert('Activo registrado con Exito.');
+                        //setTimeout(' window.location.href = "Home.php"; ',2500);
+                    }
+                    else{
 
-                    $("#errorRelacion").fadeIn(1000, function(){
-                        $("#errorRelacion").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-loginRela").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
+                        $("#errorRelacion").fadeIn(1000, function(){
+                            $("#errorRelacion").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                            $("#btn-loginRela").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
                 }
             }
         });
@@ -1350,7 +1442,7 @@ $('document').ready(function()
     });
 
 
-    /* Ingresar a Modificar Asignacion de Activos*/
+    /* Ingresar a eliminar Asignacion de Activos*/
     $("#menuAdmin").on("click","#eliminarGestion", function(){
 
         console.log('entro');
@@ -1379,14 +1471,19 @@ $('document').ready(function()
             data: "eliminarAsig="+id,
             success: function(response){
                 //alert('Hola');
-                if(response.trim()=="ok") {
-                    $element.parent().parent().remove();
+                if (response.trim()=='error'){
+                    alert('No esta autorizado para eliminar relaciones.');
                 } else {
 
-                    $("#errorEliminarAsig").fadeIn(1000, function(){
-                        $("#errorEliminarAsig").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                       // $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
+                    if (response.trim() == "ok") {
+                        $element.parent().parent().remove();
+                    } else {
+
+                        $("#errorEliminarAsig").fadeIn(1000, function () {
+                            $("#errorEliminarAsig").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            // $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
                 }
             },
             error: function(xhr, error){
@@ -1413,13 +1510,14 @@ $('document').ready(function()
             //console.log(row.data());
         });
 
-        var char = $(this).val();
+        var char = $(this).find('option:selected').text();
+        //var char = $(this).val();
         //alert('entro');
         rows.each(function() {
             var row = $(this);
             var columns = row.children('td');
             var chars_to_match = row.data('name-chars');
-            if($.inArray(char, chars_to_match) > -1) {
+            if($.inArray(char.trim(), chars_to_match) > -1) {
 
                 columns.show();
             }
@@ -1446,13 +1544,14 @@ $('document').ready(function()
             //console.log(row.data());
         });
 
-        var char = $(this).val();
+        var char = $(this).find('option:selected').text();
+        //var char = $(this).val();
         //alert('entro');
         rows.each(function() {
             var row = $(this);
             var columns = row.children('td');
             var chars_to_match = row.data('name-chars');
-            if($.inArray(char, chars_to_match) > -1) {
+            if($.inArray(char.trim(), chars_to_match) > -1) {
 
                 columns.show();
             }
@@ -1480,13 +1579,14 @@ $('document').ready(function()
             //console.log(row.data());
         });
 
-        var char = $(this).val();
+        var char = $(this).find('option:selected').text();
+        //var char = $(this).val();
         //alert('entro');
         rows.each(function() {
             var row = $(this);
             var columns = row.children('td');
             var chars_to_match = row.data('name-chars');
-            if($.inArray(char, chars_to_match) > -1) {
+            if($.inArray(char.trim(), chars_to_match) > -1) {
 
                 columns.show();
             }
@@ -1515,13 +1615,52 @@ $('document').ready(function()
             //console.log(row.data());
         });
 
-        var char = $(this).val();
-        //alert('entro');
+        var char = $(this).find('option:selected').text();
+        //var char = $(this).val();
+        //alert(char);
         rows.each(function() {
             var row = $(this);
             var columns = row.children('td');
             var chars_to_match = row.data('name-chars');
-            if($.inArray(char, chars_to_match) > -1) {
+            //alert(chars_to_match);
+            if($.inArray(char.trim(), chars_to_match) > -1) {
+
+                columns.show();
+            }
+            else {
+                columns.hide();
+            }
+        });
+
+    });
+
+
+    /* Filtrar Sucursal por Sucursal */
+    $("#opciones").on("change",".filtrosSucu", function(){
+
+        console.log('entro');
+        //$('#opciones').hide().html(data).fadeIn('slow');
+
+        var rows = $('#opciones #tablaSucursal tr').each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            //alert('entro');
+
+            row.data('name-chars', [
+                columns.eq(1).html(),
+            ]);
+            //console.log(row.data());
+        });
+
+        var char = $(this).find('option:selected').text();
+        //var char = $(this).val();
+        //alert(char);
+        rows.each(function() {
+            var row = $(this);
+            var columns = row.children('td');
+            var chars_to_match = row.data('name-chars');
+            //alert(chars_to_match);
+            if($.inArray(char.trim(), chars_to_match) > -1) {
 
                 columns.show();
             }
