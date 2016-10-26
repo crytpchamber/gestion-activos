@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-10-2016 a las 02:31:01
+-- Tiempo de generación: 26-10-2016 a las 23:10:37
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `mydb`
 --
+DROP DATABASE `mydb`;
 CREATE DATABASE IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `mydb`;
 
@@ -37,18 +38,41 @@ CREATE TABLE `activos` (
   `valor_adquisicion` decimal(18,3) NOT NULL DEFAULT '0.000',
   `fecha_registro` date NOT NULL,
   `fecha_ini_deprec` date NOT NULL,
-  `ubicacion_idUbicacion` int(11) NOT NULL
+  `serial` varchar(45) NOT NULL,
+  `ubicacion_idUbicacion` int(11) NOT NULL,
+  `categorias_idCategoria` int(11) NOT NULL,
+  `idSubCategoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `activos`
 --
 
-INSERT INTO `activos` (`idActivos`, `Descripcion`, `fecha_adquisicion`, `tiempo_depre`, `valor_adquisicion`, `fecha_registro`, `fecha_ini_deprec`, `ubicacion_idUbicacion`) VALUES
-(1, 'DELL Latitude 6510', '2016-03-16', 5, '155000.000', '2016-10-07', '2016-04-14', 1),
-(2, 'prueba', '2016-03-19', 6, '1222.000', '2016-10-07', '2016-03-14', 1),
-(3, 'DELL mas pequeÃ±a', '2011-04-13', 6, '125000.000', '2016-10-08', '2011-04-14', 1),
-(4, 'Prueba de Activo', '2011-04-16', 6, '300000.000', '2016-10-09', '2016-10-09', 2);
+INSERT INTO `activos` (`idActivos`, `Descripcion`, `fecha_adquisicion`, `tiempo_depre`, `valor_adquisicion`, `fecha_registro`, `fecha_ini_deprec`, `serial`, `ubicacion_idUbicacion`, `categorias_idCategoria`, `idSubCategoria`) VALUES
+(1, 'Laptop Dell E6510', '2011-03-14', 5, '250000.000', '2016-10-07', '2011-04-14', '', 1, 1, 1),
+(2, 'Boligrafo Azul', '2016-10-07', 3, '1050.000', '2016-10-07', '2016-10-07', '', 2, 3, 2),
+(3, 'dwedcew', '2016-10-20', 6, '20000.000', '2016-10-20', '2016-10-20', '', 1, 3, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categorias`
+--
+
+DROP TABLE IF EXISTS `categorias`;
+CREATE TABLE `categorias` (
+  `idCategoria` int(11) NOT NULL,
+  `Descripcion` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`idCategoria`, `Descripcion`) VALUES
+(1, 'Maquinarias'),
+(2, 'Teconologicos'),
+(3, 'Articulos de Oficina');
 
 -- --------------------------------------------------------
 
@@ -71,7 +95,7 @@ CREATE TABLE `mapas_acceso` (
 
 INSERT INTO `mapas_acceso` (`idmapas_acceso`, `Descripcion`, `puedeEliminar`, `puedeModificar`, `puedeGuardar`) VALUES
 (0, 'SuperUsuario', 1, 1, 1),
-(1, 'Auditor', 0, 0, 1);
+(1, 'Auditor', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -132,9 +156,7 @@ CREATE TABLE `relacionactivos` (
 --
 
 INSERT INTO `relacionactivos` (`idRelacionActivos`, `Activos_idActivos`, `Resposable_idResposable`) VALUES
-(1, 1, 1),
-(3, 3, 2),
-(4, 4, 2);
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -156,9 +178,28 @@ CREATE TABLE `resposable` (
 --
 
 INSERT INTO `resposable` (`idResposable`, `Nombre`, `Apellido`, `Cedula`, `ubicacion_idUbicacion`) VALUES
-(1, 'Carlos', 'Bermudez', 'V-15.060.580', 1),
-(2, 'Daniel', 'Chavez', 'V-15.060.580', 1),
-(3, 'Juan', 'Verhook', 'V-19.060.580', 2);
+(1, 'Carlos', 'Bermudez', 'V-15.060.580', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `subcategoria`
+--
+
+DROP TABLE IF EXISTS `subcategoria`;
+CREATE TABLE `subcategoria` (
+  `idSubCategoria` int(11) NOT NULL,
+  `Descripcion` varchar(45) NOT NULL,
+  `idCategoria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `subcategoria`
+--
+
+INSERT INTO `subcategoria` (`idSubCategoria`, `Descripcion`, `idCategoria`) VALUES
+(1, 'Laptop', 2),
+(2, 'Articulos de Oficina', 3);
 
 -- --------------------------------------------------------
 
@@ -177,8 +218,9 @@ CREATE TABLE `sucursal` (
 --
 
 INSERT INTO `sucursal` (`idsucursal`, `Descripcion`) VALUES
-(1, 'Catemar Region Occidente'),
-(2, 'Catemar Region Centro-Occidente');
+(1, 'Region Occidente'),
+(2, 'Region Centro-Occidente'),
+(3, 'RegiÃ³n Andina');
 
 -- --------------------------------------------------------
 
@@ -219,10 +261,8 @@ CREATE TABLE `ubicacion` (
 --
 
 INSERT INTO `ubicacion` (`idUbicacion`, `Descripcion`, `sucursal_idsucursal`) VALUES
-(1, 'TI', 1),
-(2, 'Auditoria', 1),
-(3, 'TI', 2),
-(4, 'Administracion', 2);
+(1, 'Administracion Occidente', 1),
+(2, 'TI Occidente', 1);
 
 -- --------------------------------------------------------
 
@@ -248,7 +288,7 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`idUsuarios`, `usuario`, `clave`, `Nombre`, `Apellido`, `Cedula`, `foto`, `Tipo_Usuario_idTipo_Usuario`) VALUES
 (41, 'admin', 'admin', 'Carlos', 'Bermudez', 'V-15.060.580', 'carlos.jpg', 0),
-(42, 'dchavez', '123', 'Daniel', 'Chavez', 'V-19.060.580', 'default.jpg', 1);
+(42, 'dchavez', '123', 'Daniel', 'Chavez', '2398334', 'default.jpg', 1);
 
 --
 -- Índices para tablas volcadas
@@ -259,7 +299,15 @@ INSERT INTO `usuarios` (`idUsuarios`, `usuario`, `clave`, `Nombre`, `Apellido`, 
 --
 ALTER TABLE `activos`
   ADD PRIMARY KEY (`idActivos`),
-  ADD KEY `fk_activos_ubicacion1_idx` (`ubicacion_idUbicacion`);
+  ADD KEY `fk_activos_ubicacion1_idx` (`ubicacion_idUbicacion`),
+  ADD KEY `Categoria_idCategoria` (`categorias_idCategoria`),
+  ADD KEY `idSubCategoria` (`idSubCategoria`);
+
+--
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`idCategoria`);
 
 --
 -- Indices de la tabla `mapas_acceso`
@@ -294,6 +342,13 @@ ALTER TABLE `relacionactivos`
 ALTER TABLE `resposable`
   ADD PRIMARY KEY (`idResposable`),
   ADD KEY `fk_resposable_ubicacion1_idx` (`ubicacion_idUbicacion`);
+
+--
+-- Indices de la tabla `subcategoria`
+--
+ALTER TABLE `subcategoria`
+  ADD PRIMARY KEY (`idSubCategoria`),
+  ADD KEY `Categoria_idCategoria` (`idCategoria`);
 
 --
 -- Indices de la tabla `sucursal`
@@ -339,6 +394,8 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `activos`
 --
 ALTER TABLE `activos`
+  ADD CONSTRAINT `fk_activos_categorias1` FOREIGN KEY (`categorias_idCategoria`) REFERENCES `categorias` (`idCategoria`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_activos_subcategoria1` FOREIGN KEY (`idSubCategoria`) REFERENCES `subcategoria` (`idSubCategoria`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_activos_ubicacion1` FOREIGN KEY (`ubicacion_idUbicacion`) REFERENCES `ubicacion` (`idUbicacion`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -359,6 +416,12 @@ ALTER TABLE `relacionactivos`
 --
 ALTER TABLE `resposable`
   ADD CONSTRAINT `fk_resposable_ubicacion1` FOREIGN KEY (`ubicacion_idUbicacion`) REFERENCES `ubicacion` (`idUbicacion`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `subcategoria`
+--
+ALTER TABLE `subcategoria`
+  ADD CONSTRAINT `fk_subcategoria_categoria1` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`idCategoria`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tipo_usuario`
