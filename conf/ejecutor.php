@@ -477,6 +477,163 @@ if (isset($_POST['btnmodAct'])) {
     modificarActivo();
 }
 
+/* Carga de Categorias */
+if (isset($_POST['reg_cate'])) {
+    function registrarCategoria(){
+        require_once './dbconn.php';
+        $registrar = 1;
+
+        $nombre = trim($_POST['descripcion']);
+
+
+        if (trim($nombre) == '') {
+            $registrar = 0;
+            echo "error registrando Categoria. 1";
+        }
+
+        if ($_SESSION['guardar']==0) {
+            echo "error";
+        }else {
+
+            try {
+                $existe = 0;
+                if ($registrar == 1) {
+
+                    $stmt = $dbh->prepare("select max(idCategoria) as numero from categorias ");
+                    $stmt->execute();
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($data as $row) {
+                        $max = $row['numero'];
+                    }
+
+                    $max++;
+
+
+                    $stmt = $dbh->prepare("select idCategoria from categorias " .
+                        "where (Descripcion = :uid ) ");
+                    $stmt->execute(array(":uid" => $nombre));
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($data as $row) {
+                        $existe++;
+                    }
+
+                    if ($existe > 0) {
+                        echo "Ya existe un registo con ese nombre.";
+                    } else {
+
+                        $stmt = $dbh->prepare("insert into categorias (idCategoria, Descripcion) " .
+                            "values ($max,?)");
+                        $stmt->bindParam(1, $nombre);
+
+                        $stmt->execute();
+                        echo "ok";
+                    }
+                } else {
+                    echo "Error registrando Categoria. 2";
+                }
+            } catch (PDOException $e) {
+
+                echo $e->getMessage();
+            }
+        }
+
+    }
+    registrarCategoria();
+
+}
+
+
+if (isset($_GET['eliminarsCate'])) {
+    function eliminarSubCateg()
+    {
+        require_once './dbconn.php';
+        $idAct = trim($_GET['eliminarsCate']);
+
+        if ($_SESSION['eliminar']==0) {
+            echo "error";
+        }else {
+            try {
+
+                $stmt = $dbh->prepare("delete from subcategoria where idSubCategoria=:uid");
+                $stmt->execute(array(":uid" => $idAct));
+
+                echo 'ok';
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+    }
+    eliminarSubCateg();
+}
+
+
+
+/* Carga de Sub-Categorias */
+if (isset($_POST['reg_scate'])) {
+    function registrarSubCategoria(){
+        require_once './dbconn.php';
+        $registrar = 1;
+
+        $nombre = trim($_POST['descripcion']);
+        $categoria = trim($_POST['categoria']);
+
+
+        if (trim($nombre) == '' || trim($categoria) == '') {
+            $registrar = 0;
+            echo "error registrando Sub-Categoria. 1";
+        }
+
+        if ($_SESSION['guardar']==0) {
+            echo "error";
+        }else {
+
+            try {
+                $existe = 0;
+                if ($registrar == 1) {
+
+                    $stmt = $dbh->prepare("select max(idSubCategoria) as numero from subcategoria ");
+                    $stmt->execute();
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($data as $row) {
+                        $max = $row['numero'];
+                    }
+
+                    $max++;
+
+
+                    $stmt = $dbh->prepare("select idSubCategoria from subcategoria " .
+                        "where (Descripcion = :uid and idCategoria = :cate ) ");
+                    $stmt->execute(array(":uid" => $nombre,":cate" => $categoria));
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($data as $row) {
+                        $existe++;
+                    }
+
+                    if ($existe > 0) {
+                        echo "Ya existe un registo con ese nombre.";
+                    } else {
+
+                        $stmt = $dbh->prepare("insert into subcategoria (idSubCategoria, Descripcion, idCategoria) " .
+                            "values ($max,?,?)");
+                        $stmt->bindParam(1, $nombre);
+                        $stmt->bindParam(2, $categoria);
+
+                        $stmt->execute();
+                        echo "ok";
+                    }
+                } else {
+                    echo "Error registrando Sub-Categoria. 2";
+                }
+            } catch (PDOException $e) {
+
+                echo $e->getMessage();
+            }
+        }
+
+    }
+    registrarSubCategoria();
+
+}
 
 
 

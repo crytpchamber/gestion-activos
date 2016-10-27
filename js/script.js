@@ -1693,7 +1693,7 @@ $('document').ready(function()
             }
         });
     });
-
+    // acceder a crear Categorias
     $("#menuAdmin").on("click","#crearCategoria", function(){
 
         console.log('entro');
@@ -1708,6 +1708,228 @@ $('document').ready(function()
             }
         });
     });
+
+    /* Registrar Categorias */
+    $("#opciones").on("click","#btn-loginCate", function(){
+        //$('#btn-register').click(function() {
+        /* Forma para registrar Responsables */
+
+        var $elemento = $(this).parent().parent();
+        //alert($elemento.attr('id'));
+        var data = $elemento.serialize();
+
+        $.ajax({
+
+            type : 'POST',
+            url  : './conf/ejecutor.php',
+            data : data,
+            beforeSend: function()
+            {
+                $("#errorCate").fadeOut();
+                $("#btn-loginCate").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; Enviando ...');
+            },
+            error : function(response2) {
+
+                $("#errorCate").fadeIn(1000, function(){
+                    $("#errorCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#btn-loginCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                });
+            },
+            success :  function(response)
+            {
+                //alert('entro');
+                if (response.trim()=="error") {
+                    alert('No tiene permisos para crear Categorias.');
+                    $("#btn-loginCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                } else {
+                    if(response.trim()=="ok"){
+
+                        $("#btn-loginCate").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
+                        $.ajax({
+                            url:'categorias.php',
+                            type:'GET',
+                            error: function(xhr, error){
+                                console.log(xhr); console.log(error);
+                            },
+                            success: function(data){
+
+                                $('#opciones').html(data);
+                            }
+                        });
+
+                        alert('Categoria registrada con Exito.');
+                        //setTimeout(' window.location.href = "Home.php"; ',2500);
+                    }
+                    else{
+
+                        $("#errorCate").fadeIn(1000, function(){
+                            $("#errorCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                            $("#btn-loginCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
+                }
+            }
+        });
+        return false;
+    });
+
+
+    /* Borrar Categoria */
+    $("#opciones").on("click",".borrarCateg", function() {
+        console.log('entro2');
+        var id = $(this).attr("id");
+        var $element = $(this);
+
+
+        $.ajax({
+            url: './conf/ejecutor.php?eliminarCate=' + id,
+            type: "POST",
+            data: "eliminarCate=" + id,
+            success: function (response) {
+                //alert('Hola');
+                if (response.trim()=='error') {
+                    alert('No tiene permiso para eliminar Categorias.');
+
+                }else {
+                    if (response.trim() == "ok") {
+                        $element.parent().parent().remove();
+                    } else {
+
+                        $("#errorCate").fadeIn(1000, function () {
+                            $("#errorCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#btn-loginCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
+                }
+            },
+            error: function (xhr, error) {
+                console.log(xhr);
+                console.log(error);
+            }
+        });
+
+    });
+
+
+    // acceder a crear Sub Categorias
+    $("#menuAdmin").on("click","#crearSubCategoria", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'subcategorias.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+                $('#opciones').hide().html(data).fadeIn('slow');
+            }
+        });
+    });
+
+    /* Registrar Sub Categorias */
+    $("#opciones").on("click","#btn-loginsCate", function(){
+        //$('#btn-register').click(function() {
+        /* Forma para registrar Responsables */
+
+        var $elemento = $(this).parent().parent();
+        //alert($elemento.attr('id'));
+        var data = $elemento.serialize();
+
+        $.ajax({
+
+            type : 'POST',
+            url  : './conf/ejecutor.php',
+            data : data,
+            beforeSend: function()
+            {
+                $("#errorSubCate").fadeOut();
+                $("#btn-loginsCate").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; Enviando ...');
+            },
+            error : function(response2) {
+
+                $("#errorSubCate").fadeIn(1000, function(){
+                    $("#errorSubCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#btn-loginsCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                });
+            },
+            success :  function(response)
+            {
+                //alert('entro');
+                if (response.trim()=="error") {
+                    alert('No tiene permisos para crear Sub-Categorias.');
+                    $("#btn-loginsCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                } else {
+                    if(response.trim()=="ok"){
+
+                        $("#btn-loginsCate").html('<img src="imgs/ajax-loader2.gif" /> &nbsp; Iniciando ...');
+                        $.ajax({
+                            url:'subcategorias.php',
+                            type:'GET',
+                            error: function(xhr, error){
+                                console.log(xhr); console.log(error);
+                            },
+                            success: function(data){
+
+                                $('#opciones').html(data);
+                            }
+                        });
+
+                        alert('Sub-Categoria registrada con Exito.');
+                        //setTimeout(' window.location.href = "Home.php"; ',2500);
+                    }
+                    else{
+
+                        $("#errorSubCate").fadeIn(1000, function(){
+                            $("#errorSubCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                            $("#btn-loginsCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
+                }
+            }
+        });
+        return false;
+    });
+
+
+
+    /* Borrar Sub Categoria */
+    $("#opciones").on("click",".borrarSubCateg", function() {
+        console.log('entro2');
+        var id = $(this).attr("id");
+        var $element = $(this);
+
+
+        $.ajax({
+            url: './conf/ejecutor.php?eliminarsCate=' + id,
+            type: "POST",
+            data: "eliminarsCate=" + id,
+            success: function (response) {
+                //alert('Hola');
+                if (response.trim()=='error') {
+                    alert('No tiene permiso para eliminar Sub-Categorias.');
+
+                }else {
+                    if (response.trim() == "ok") {
+                        $element.parent().parent().remove();
+                    } else {
+
+                        $("#errorSubCate").fadeIn(1000, function () {
+                            $("#errorSubCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#btn-loginsCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
+                }
+            },
+            error: function (xhr, error) {
+                console.log(xhr);
+                console.log(error);
+            }
+        });
+
+    });
+
+
 
 
 
