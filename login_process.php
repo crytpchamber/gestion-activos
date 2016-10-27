@@ -14,7 +14,7 @@ if(isset($_POST['btn-login']))
     {
 
         $stmt = $dbh->prepare("SELECT u.*, t.descripcion as tipo_desc, m.ubicacion, m.sucursal, m.activos, m.responsable, ".
-            " ma.puedeEliminar, ma.puedeGuardar, ma.puedeModificar " .
+            " m.categorias, ma.puedeEliminar, ma.puedeGuardar, ma.puedeModificar " .
             " FROM usuarios u inner join tipo_usuario t on u.Tipo_Usuario_idTipo_Usuario = t.idTipo_Usuario " .
             " inner join modulos m on m.idmodulos = t.modulos_idmodulos inner join mapas_acceso ma on " .
             " ma.idmapas_acceso = m.mapas_acceso_idmapas_acceso " .
@@ -32,9 +32,11 @@ if(isset($_POST['btn-login']))
             $_SESSION['sucursal'] = $row['sucursal'];
             $_SESSION['activos'] = $row['activos'];
             $_SESSION['responsable'] = $row['responsable'];
+            $_SESSION['categorias'] = $row['categorias'];
             $_SESSION['eliminar'] = $row['puedeEliminar'];
             $_SESSION['guardar'] = $row['puedeGuardar'];
             $_SESSION['modificar'] = $row['puedeModificar'];
+
         }
         else{
 

@@ -1670,8 +1670,46 @@ $('document').ready(function()
         });
 
     });
-    
-    
+
+
+    /* Acceder a menu de Categorias */
+    $(".profile-usermenu #Categorias").click(function() {
+        $.ajax({
+            url:'categoriasMenu.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+                //$('#menuAdmin').hide().html("<H1>Sucursales</H1>").fadeIn('slow');
+                if (data.trim()=='error') {
+                    alert('No tiene permiso para acceder a este modulo.');
+
+                }else {
+                    $('#menuAdmin').hide().html(data).fadeIn('slow');
+                    $('#opciones').fadeOut('slow');
+                }
+
+            }
+        });
+    });
+
+    $("#menuAdmin").on("click","#crearCategoria", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'categorias.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+                $('#opciones').hide().html(data).fadeIn('slow');
+            }
+        });
+    });
+
+
 
 });
 
