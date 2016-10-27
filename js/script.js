@@ -1929,7 +1929,42 @@ $('document').ready(function()
 
     });
 
+    //detectar cambio de categoria en activos y actualizar combo de sub categorias
+    $("#opciones").on("change","#categ", function() {
+        console.log('entro2');
+        var id = $(this).val();
+        var $element = $(this);
 
+
+        $.ajax({
+            url: './conf/ejecutor.php?bCate=' + id,
+            type: "POST",
+            data: "bCate=" + id,
+            success: function (response) {
+                //alert('Hola');
+                if (response.trim()=='error') {
+                    alert('No ha seleccionado una categoria correcta.');
+
+                }else {
+                    if (response.trim() != "error") {
+                        $('#subcateg').html(response);
+                        //alert(response);
+                    } else {
+
+                        $("#errorAct").fadeIn(1000, function () {
+                            $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
+                }
+            },
+            error: function (xhr, error) {
+                console.log(xhr);
+                console.log(error);
+            }
+        });
+
+    });
 
 
 

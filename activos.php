@@ -18,11 +18,19 @@ $stmt->execute();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-$stmt = $dbh->prepare("SELECT t.idUbicacion, t.Descripcion 
-                           FROM ubicacion t ");
+$stmt = $dbh->prepare("SELECT t.idUbicacion, t.Descripcion " .
+                      "FROM ubicacion t ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+$stmt = $dbh->prepare("SELECT t.idCategoria, t.Descripcion " .
+    "FROM categorias t ");
+$stmt->execute();
+//$data = $stmt->fetchALL();
+$data3=$stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 
 ?>
@@ -134,6 +142,34 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
                     ?>
                 </select>
             </div>
+
+            <div class="form-group">
+                <label >Categoria</label>
+                <select class="form-control" id="categ" name="categ" title="categ" >
+                    <?php
+                    foreach ($data3 as $row) {
+                        ?>
+
+                        <option value="<?php echo $row['idCategoria']; ?>">
+                            <?php echo $row['Descripcion']; ?>
+                        </option>
+
+
+                        <?php
+                    }
+                    ?>
+                </select>
+            </div>
+
+            <div class="form-group" id="subcateg">
+                <label >Sub-Categoria</label>
+                <select class="form-control" id="scateg" name="scateg" title="scateg" >
+                    <option value=" ">
+                        Seleccione una Categoria.
+                    </option>
+                </select>
+            </div>
+
 
             <input type="hidden" class="form-control" name="reg_act" id="reg_act">
             <hr />

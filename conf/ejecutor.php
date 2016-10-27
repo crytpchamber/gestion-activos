@@ -266,9 +266,11 @@ if (isset($_POST['reg_act'])) {
         $valor = trim($_POST['valorAdq']);
         $inicio = trim($_POST['fechaIni']);
         $sucursal = trim($_POST['ubic']);
+        $categ  = trim($_POST['categ']);
+        $scateg = trim($_POST['scateg']);
 
 
-        if ($nombre == '' || $adquisicion == '' || $tdepre == '' || $valor == '' || $inicio == '' || $sucursal == '') {
+        if ($nombre == '' || $adquisicion == '' || $tdepre == '' || $valor == '' || $inicio == '' || $sucursal == '' || $categ == '' || $scateg == '') {
             $registrar = 0;
             echo "error registrando Activo. 1";
         }
@@ -304,15 +306,17 @@ if (isset($_POST['reg_act'])) {
                     } else {
 
                         $stmt = $dbh->prepare("insert into Activos (idActivos, Descripcion, fecha_adquisicion, " .
-                            " tiempo_depre, valor_adquisicion, fecha_registro, fecha_ini_deprec, ubicacion_idUbicacion) " .
-                            "values ($max,?,?,?,?,NOW(),?,?)");
+                            " tiempo_depre, valor_adquisicion, fecha_registro, fecha_ini_deprec, ubicacion_idUbicacion, ".
+                            " categorias_idCategoria, idSubCategoria) " .
+                            "values ($max,?,?,?,?,NOW(),?,?,?,?)");
                         $stmt->bindParam(1, $nombre);
                         $stmt->bindParam(2, $adquisicion);
                         $stmt->bindParam(3, $tdepre);
                         $stmt->bindParam(4, $valor);
                         $stmt->bindParam(5, $inicio);
                         $stmt->bindParam(6, $sucursal);
-
+                        $stmt->bindParam(7, $categ);
+                        $stmt->bindParam(8, $scateg);
 
                         $stmt->execute();
                         echo "ok";
@@ -634,6 +638,46 @@ if (isset($_POST['reg_scate'])) {
     registrarSubCategoria();
 
 }
+
+
+if (isset($_GET['bCate'])) {
+    function comboSubCategoria() {
+        require_once './dbconn.php';
+        $bCate = trim($_GET['bCate']);
+
+        if ($bCate == '') {
+            echo 'error';
+        } else {
+            try {
+                $stmt = $dbh->prepare("select idSubCategoria, Descripcion  from subcategoria " .
+                                      "where idCategoria = :uid ");
+
+                $stmt->execute(array(":uid" => $bCate));
+
+                $data4 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                echo "<label >Sub-Categoria</label> 
+                     <select class='form-control' id='scateg' name='scateg' title='scateg' > ";
+                foreach ($data4 as $row) {
+                    echo "<option value='" .$row['idSubCategoria']."'> ";
+                    echo $row['Descripcion'];
+                    echo "</option>";
+                }
+
+                echo "</select>";
+
+                //echo 'ok';
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+    }
+    comboSubCategoria();
+
+
+}
+
 
 
 
