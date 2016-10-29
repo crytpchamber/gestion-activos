@@ -54,6 +54,32 @@ if (isset($_POST['reg_respons'])) {
                     $stmt->bindParam(4, $ubicacion);
 
                     $stmt->execute();
+
+                    $idResp = $max;
+
+                    // buscar ultimo id de pista de auditoria
+                    $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+                    $stmt->execute();
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($data as $row) {
+                        $max = $row['numero'];
+                    }
+
+                    $max++;
+                    // observacion de la pista y usuario que esta registrando.
+                    $observacion = "se registro el Responsable: $idResp";
+                    $usuario = trim($_SESSION['user_session']);
+
+                    //pistas de auditoria al ingresar registro
+                    $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                        " modulo, observacion, usuario) " .
+                        "values ($max,NOW(),'I','Responsables','$observacion','$usuario')");
+
+                    $stmt->execute();
+
+
+
+
                     echo "ok";
                 }
             } else {
@@ -78,9 +104,30 @@ if (isset($_GET['eliminarResp'])) {
 
 
         try {
-            
+
+            // eliminar responsable
             $stmt = $dbh->prepare("delete from resposable where idResposable=:uid");
             $stmt->execute(array(":uid" => $idResp));
+
+            // buscar ultimo id de pista de auditoria
+            $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($data as $row) {
+                $max = $row['numero'];
+            }
+
+            $max++;
+            // observacion de la pista y usuario que esta registrando.
+            $observacion = "se elimino el Responsable: $idResp";
+            $usuario = trim($_SESSION['user_session']);
+
+            //pistas de auditoria al ingresar registro
+            $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                " modulo, observacion, usuario) " .
+                "values ($max,NOW(),'E','Responsables','$observacion','$usuario')");
+
+            $stmt->execute();
 
             echo 'ok';
         } catch (PDOException $e) {
@@ -135,6 +182,31 @@ if (isset($_POST['reg_sucu'])) {
                     $stmt->bindParam(1, $nombre);
 
                     $stmt->execute();
+
+                    $idSucu = $max;
+                    // buscar ultimo id de pista de auditoria
+                    $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+                    $stmt->execute();
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($data as $row) {
+                        $max = $row['numero'];
+                    }
+
+                    $max++;
+                    // observacion de la pista y usuario que esta registrando.
+                    $observacion = "se registro la Sucursal: $idSucu";
+                    $usuario = trim($_SESSION['user_session']);
+
+                    //pistas de auditoria al ingresar registro
+                    $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                        " modulo, observacion, usuario) " .
+                        "values ($max,NOW(),'I','Sucursales','$observacion','$usuario')");
+
+                    $stmt->execute();
+
+
+
+
                     echo "ok";
                 }
             } else {
@@ -160,8 +232,32 @@ if (isset($_GET['eliminarSucu'])) {
 
         try {
 
+            // eliminar sucursal
             $stmt = $dbh->prepare("delete from sucursal where idsucursal=:uid");
             $stmt->execute(array(":uid" => $idSucu));
+
+            // buscar ultimo id de pista de auditoria
+            $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($data as $row) {
+                $max = $row['numero'];
+            }
+
+            $max++;
+            // observacion de la pista y usuario que esta registrando.
+            $observacion = "se elimino la Sucursal: $idSucu";
+            $usuario = trim($_SESSION['user_session']);
+
+            //pistas de auditoria al ingresar registro
+            $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                " modulo, observacion, usuario) " .
+                "values ($max,NOW(),'E','Sucursales','$observacion','$usuario')");
+
+            $stmt->execute();
+
+
+
 
             echo 'ok';
         } catch (PDOException $e) {
@@ -216,6 +312,31 @@ if (isset($_POST['reg_ubic'])) {
                     $stmt->bindParam(2, $sucursal);
 
                     $stmt->execute();
+
+                    $idUbic = $max;
+                    // buscar ultimo id de pista de auditoria
+                    $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+                    $stmt->execute();
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($data as $row) {
+                        $max = $row['numero'];
+                    }
+
+                    $max++;
+                    // observacion de la pista y usuario que esta registrando.
+                    $observacion = "se registro la Sucursal: $idUbic";
+                    $usuario = trim($_SESSION['user_session']);
+
+                    //pistas de auditoria al ingresar registro
+                    $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                        " modulo, observacion, usuario) " .
+                        "values ($max,NOW(),'I','Ubicaciones','$observacion','$usuario')");
+
+                    $stmt->execute();
+
+
+
+
                     echo "ok";
                 }
             } else {
@@ -243,6 +364,26 @@ if (isset($_GET['eliminarUbic'])) {
 
             $stmt = $dbh->prepare("delete from ubicacion where idUbicacion=:uid");
             $stmt->execute(array(":uid" => $idUbic));
+
+            // buscar ultimo id de pista de auditoria
+            $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($data as $row) {
+                $max = $row['numero'];
+            }
+
+            $max++;
+            // observacion de la pista y usuario que esta registrando.
+            $observacion = "se elimino la Ubicacion: $idUbic";
+            $usuario = trim($_SESSION['user_session']);
+
+            //pistas de auditoria al ingresar registro
+            $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                " modulo, observacion, usuario) " .
+                "values ($max,NOW(),'E','Ubicaciones','$observacion','$usuario')");
+
+            $stmt->execute();
 
             echo 'ok';
         } catch (PDOException $e) {
@@ -327,6 +468,27 @@ if (isset($_POST['reg_act'])) {
                         $stmt->bindParam(9, $serial);
 
                         $stmt->execute();
+
+                        // buscar ultimo id de pista de auditoria
+                        $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+                        $stmt->execute();
+                        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($data as $row) {
+                            $max = $row['numero'];
+                        }
+
+                        $max++;
+                        // observacion de la pista y usuario que esta registrando.
+                        $observacion = "se registro el activo: $serial";
+                        $usuario = trim($_SESSION['user_session']);
+
+                        //pistas de auditoria al ingresar registro
+                        $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                            " modulo, observacion, usuario) " .
+                            "values ($max,NOW(),'I','Activos','$observacion','$usuario')");
+
+                        $stmt->execute();
+
                         echo "ok";
                     }
                 } else {
@@ -355,8 +517,32 @@ if (isset($_GET['eliminarAct'])) {
         }else {
             try {
 
+                //eliminar activo
                 $stmt = $dbh->prepare("delete from activos where idActivos=:uid");
                 $stmt->execute(array(":uid" => $idAct));
+
+                // buscar ultimo id de pista de auditoria
+                $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+                $stmt->execute();
+                $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $max = $row['numero'];
+                }
+
+                $max++;
+                // observacion de la pista y usuario que esta registrando.
+                $observacion = "se elimino el Activo: $idAct";
+                $usuario = trim($_SESSION['user_session']);
+
+                //pistas de auditoria al ingresar registro
+                $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                    " modulo, observacion, usuario) " .
+                    "values ($max,NOW(),'E','Activos','$observacion','$usuario')");
+
+                $stmt->execute();
+
+
+
 
                 echo 'ok';
             } catch (PDOException $e) {
@@ -408,6 +594,29 @@ if (isset($_POST['reg_asig'])) {
 
 
                     $stmt->execute();
+
+                    $idAct = $max;
+                    // buscar ultimo id de pista de auditoria
+                    $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+                    $stmt->execute();
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($data as $row) {
+                        $max = $row['numero'];
+                    }
+
+                    $max++;
+                    // observacion de la pista y usuario que esta registrando.
+                    $observacion = "se registro la Asignacion de Activo: $idAct";
+                    $usuario = trim($_SESSION['user_session']);
+
+                    //pistas de auditoria al ingresar registro
+                    $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                        " modulo, observacion, usuario) " .
+                        "values ($max,NOW(),'I','Gestion de Activos','$observacion','$usuario')");
+
+                    $stmt->execute();
+
+
                     echo "ok";
                 } else {
                     echo "Error registrando Asignacion de Activo. 2";
@@ -434,8 +643,33 @@ if (isset($_GET['eliminarAsig'])) {
         }else {
             try {
 
+                // eliminar asignacion de activos
                 $stmt = $dbh->prepare("delete from relacionactivos where idRelacionActivos=:uid");
                 $stmt->execute(array(":uid" => $idAct));
+
+
+                // buscar ultimo id de pista de auditoria
+                $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+                $stmt->execute();
+                $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $max = $row['numero'];
+                }
+
+                $max++;
+                // observacion de la pista y usuario que esta registrando.
+                $observacion = "se elimino la Asignacion de Activo: $idAct";
+                $usuario = trim($_SESSION['user_session']);
+
+                //pistas de auditoria al ingresar registro
+                $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                    " modulo, observacion, usuario) " .
+                    "values ($max,NOW(),'E','Gestion de Activos','$observacion','$usuario')");
+
+                $stmt->execute();
+
+
+
 
                 echo 'ok';
             } catch (PDOException $e) {
@@ -466,6 +700,31 @@ if (isset($_POST['btnmodAct'])) {
         } else {
             try {
 
+                $stmt = $dbh->prepare("select * from activos where idActivos = :uid");
+                $stmt->execute(array(":uid" => $idAct));
+                $dataAnt = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                $observacion = "";
+                foreach ($dataAnt as $row) {
+                    if ($row['fecha_adquisicion'] != $tiempoadq) {
+                        $fechaAnt = $row['fecha_adquisicion'];
+                        $observacion = $observacion . "'Se modifico la fecha de adquisicion de $fechaAnt -> $tiempoadq. ' ";
+                    }
+                    if ($row['tiempo_depre'] != $tiempodepre) {
+                        $tiempoAnt = $row['tiempo_depre'];
+                        $observacion = $observacion . "'Se modifico la fecha de adquisicion de $tiempoAnt -> $tiempodepre. ' ";
+                    }
+                    if ($row['valor_adquisicion'] != $valor) {
+                        $valorAnt = $row['valor_adquisicion'];
+                        $observacion = $observacion . "'Se modifico la fecha de adquisicion de $valorAnt -> $valor. ' ";
+                    }
+                    if ($row['ubicacion_idUbicacion'] != $ubic) {
+                        $ubicAnt = $row['ubicacion_idUbicacion'];
+                        $observacion = $observacion . "'Se modifico la fecha de adquisicion de $ubicAnt -> $ubic. ' ";
+                    }
+                }
+
+
                 $stmt = $dbh->prepare("update activos set fecha_adquisicion = '". $tiempoadq ."', ".
                                       "tiempo_depre = ".$tiempodepre .", " .
                                       " valor_adquisicion = ".$valor.", " .
@@ -479,6 +738,32 @@ if (isset($_POST['btnmodAct'])) {
 
 
                 $stmt->execute(array(":uid" => $idAct));
+
+
+
+                // buscar ultimo id de pista de auditoria
+                $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+                $stmt->execute();
+                $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $max = $row['numero'];
+                }
+
+                $max++;
+                // observacion de la pista y usuario que esta registrando.
+
+                $usuario = trim($_SESSION['user_session']);
+
+                //pistas de auditoria al ingresar registro
+                $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                    " modulo, observacion, usuario) " .
+                    "values ($max,NOW(),'M','Activos',$observacion,'$usuario')");
+
+                $stmt->execute();
+
+
+
+
 
                 echo 'ok';
             } catch (PDOException $e) {
@@ -538,6 +823,31 @@ if (isset($_POST['reg_cate'])) {
                         $stmt->bindParam(1, $nombre);
 
                         $stmt->execute();
+
+                        $idCat = $max;
+                        // buscar ultimo id de pista de auditoria
+                        $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+                        $stmt->execute();
+                        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($data as $row) {
+                            $max = $row['numero'];
+                        }
+
+                        $max++;
+                        // observacion de la pista y usuario que esta registrando.
+                        $observacion = "'Se registro la categoria: $idCat. '";
+                        $usuario = trim($_SESSION['user_session']);
+
+                        //pistas de auditoria al ingresar registro
+                        $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                            " modulo, observacion, usuario) " .
+                            "values ($max,NOW(),'I','Categorias',$observacion,'$usuario')");
+
+                        $stmt->execute();
+
+
+
+
                         echo "ok";
                     }
                 } else {
@@ -554,6 +864,54 @@ if (isset($_POST['reg_cate'])) {
 
 }
 
+if (isset($_GET['eliminarCate'])) {
+    function eliminarCateg()
+    {
+        require_once './dbconn.php';
+        $idAct = trim($_GET['eliminarCate']);
+
+        if ($_SESSION['eliminar']==0) {
+            echo "error";
+        }else {
+            try {
+
+
+                $stmt = $dbh->prepare("delete from categorias where idCategoria=:uid");
+                $stmt->execute(array(":uid" => $idAct));
+
+                // buscar ultimo id de pista de auditoria
+                $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+                $stmt->execute();
+                $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $max = $row['numero'];
+                }
+
+                $max++;
+                // observacion de la pista y usuario que esta registrando.
+                $observacion = "Se elimino la categoria: $idAct. ";
+                $usuario = trim($_SESSION['user_session']);
+
+                //pistas de auditoria al ingresar registro
+                $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                    " modulo, observacion, usuario) " .
+                    "values ($max,NOW(),'E','Categorias','$observacion','$usuario')");
+
+                $stmt->execute();
+
+
+
+
+
+                echo 'ok';
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+    }
+    eliminarCateg();
+}
+
 
 if (isset($_GET['eliminarsCate'])) {
     function eliminarSubCateg()
@@ -568,6 +926,27 @@ if (isset($_GET['eliminarsCate'])) {
 
                 $stmt = $dbh->prepare("delete from subcategoria where idSubCategoria=:uid");
                 $stmt->execute(array(":uid" => $idAct));
+
+
+                // buscar ultimo id de pista de auditoria
+                $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+                $stmt->execute();
+                $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $max = $row['numero'];
+                }
+
+                $max++;
+                // observacion de la pista y usuario que esta registrando.
+                $observacion = "Se elimino la Sub-Categoria: $idAct. ";
+                $usuario = trim($_SESSION['user_session']);
+
+                //pistas de auditoria al ingresar registro
+                $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                    " modulo, observacion, usuario) " .
+                    "values ($max,NOW(),'E','Sub-Categoria','$observacion','$usuario')");
+
+                $stmt->execute();
 
                 echo 'ok';
             } catch (PDOException $e) {
@@ -631,6 +1010,32 @@ if (isset($_POST['reg_scate'])) {
                         $stmt->bindParam(2, $categoria);
 
                         $stmt->execute();
+
+
+                        $idSubC = $max;
+                        // buscar ultimo id de pista de auditoria
+                        $stmt = $dbh->prepare("select max(idpistasAuditoria) as numero from pistasauditoria ");
+                        $stmt->execute();
+                        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($data as $row) {
+                            $max = $row['numero'];
+                        }
+
+                        $max++;
+                        // observacion de la pista y usuario que esta registrando.
+                        $observacion = "'Se registro la Sub-Categoria: $idSubC. '";
+                        $usuario = trim($_SESSION['user_session']);
+
+                        //pistas de auditoria al ingresar registro
+                        $stmt = $dbh->prepare("insert into pistasauditoria (idpistasAuditoria, fechaPista, tipo_operacion, " .
+                            " modulo, observacion, usuario) " .
+                            "values ($max,NOW(),'I','Sub-Categorias',$observacion,'$usuario')");
+
+                        $stmt->execute();
+
+
+
+
                         echo "ok";
                     }
                 } else {
