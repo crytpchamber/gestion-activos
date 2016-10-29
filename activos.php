@@ -108,6 +108,9 @@ $data3=$stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
             <div class="form-group">
+                <input type="text" class="form-control" name="serial" id="serial" placeholder="Codigo de Activo" required>
+            </div>
+            <div class="form-group">
                 <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" required>
             </div>
             <div class="form-group">

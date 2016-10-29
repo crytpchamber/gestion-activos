@@ -268,11 +268,18 @@ if (isset($_POST['reg_act'])) {
         $sucursal = trim($_POST['ubic']);
         $categ  = trim($_POST['categ']);
         $scateg = trim($_POST['scateg']);
+        $serial = trim($_POST['serial']);
 
 
-        if ($nombre == '' || $adquisicion == '' || $tdepre == '' || $valor == '' || $inicio == '' || $sucursal == '' || $categ == '' || $scateg == '') {
+        if ($nombre == '' || $adquisicion == '' || $tdepre == '' || $valor == '' || $inicio == '' || $sucursal == '' || $categ == '' ||
+            $scateg == '' || $serial == '') {
             $registrar = 0;
             echo "error registrando Activo. 1";
+        }
+
+        if ($adquisicion > $inicio) {
+            $registrar = 0;
+            echo "La fecha de inicio de depreciación no puede ser menor a la de adquisición.";
         }
 
         if ($_SESSION['guardar']==0) {
@@ -294,21 +301,21 @@ if (isset($_POST['reg_act'])) {
 
 
                     $stmt = $dbh->prepare("select idActivos from Activos " .
-                        "where (Descripcion = :uid ) ");
-                    $stmt->execute(array(":uid" => $nombre));
+                        "where (Descripcion = :uid or serial = :uid2 ) ");
+                    $stmt->execute(array(":uid" => $nombre,":uid2" => $serial));
                     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($data as $row) {
                         $existe++;
                     }
 
                     if ($existe > 0) {
-                        echo "Ya existe un registo con ese nombre.";
+                        echo "Ya existe un registo con ese Nombre o Código.";
                     } else {
 
                         $stmt = $dbh->prepare("insert into Activos (idActivos, Descripcion, fecha_adquisicion, " .
                             " tiempo_depre, valor_adquisicion, fecha_registro, fecha_ini_deprec, ubicacion_idUbicacion, ".
-                            " categorias_idCategoria, idSubCategoria) " .
-                            "values ($max,?,?,?,?,NOW(),?,?,?,?)");
+                            " categorias_idCategoria, idSubCategoria, serial) " .
+                            "values ($max,?,?,?,?,NOW(),?,?,?,?,?)");
                         $stmt->bindParam(1, $nombre);
                         $stmt->bindParam(2, $adquisicion);
                         $stmt->bindParam(3, $tdepre);
@@ -317,6 +324,7 @@ if (isset($_POST['reg_act'])) {
                         $stmt->bindParam(6, $sucursal);
                         $stmt->bindParam(7, $categ);
                         $stmt->bindParam(8, $scateg);
+                        $stmt->bindParam(9, $serial);
 
                         $stmt->execute();
                         echo "ok";
