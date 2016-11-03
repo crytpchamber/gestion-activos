@@ -33,7 +33,7 @@ include_once 'conf/dbconn.php';
                 <th>Codigo</th>
                 <th>Sub-Categoria</th>
                 <th>Categoria</th>
-                <th>Eliminar</th> 
+                <th>Opciones</th> 
             </tr>
             </thead>
             <tbody>";

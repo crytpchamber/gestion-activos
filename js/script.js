@@ -1967,6 +1967,59 @@ $('document').ready(function()
     });
 
 
+    $("#opciones").on("click",".editongo", function(){
+        console.log('entro cambio');
+        var id = $(this).attr("id");
+        var newpass = $('#newpass').val();
+
+        $.ajax({
+            url:'./conf/ejecutor.php',
+            type:'GET',
+            data:{
+                newpass:newpass,
+                modpass:'modificarpass',
+                id:id
+            },
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(response){
+                //alert('entro');
+                if(response.trim()=="ok"){
+
+                    $.ajax({
+                        url:'crearUsuario.php',
+                        type:'GET',
+                        error: function(xhr, error){
+                            console.log(xhr); console.log(error);
+                        },
+                        success: function(data){
+
+                            $('#opciones').html(data);
+                        }
+                    });
+                    alert('Contraseña modificada con Exito.');
+                    // $('#cambiodepass').show();
+                    // $('#cambiodepass2').show();
+                    //setTimeout(' window.location.href = "Home.php"; ',2500);
+                }
+                else{
+
+                    $("#error2").fadeIn(1000, function(){
+                        $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+
+                    });
+                }
+            }
+
+
+        });
+
+    });
+
+
+
+
 
 });
 

@@ -62,7 +62,7 @@ $data4=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Responsable</th>
             <th>Sucursal</th>
             <th>Ubicación</th>
-            <th>Eliminar</th>
+            <th>Opciones</th>
         </tr>
         </thead>
         <tbody>

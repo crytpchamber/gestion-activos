@@ -27,7 +27,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
             <th>Tipo de Usuario</th>
             <th>Modulo</th>
-            <th>Eliminar</th>
+            <th>Opciones</th>
         </tr>
         </thead>
         <tbody>

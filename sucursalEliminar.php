@@ -26,7 +26,7 @@ if ($_SESSION['eliminar']=='0') {
             <tr>
                 <th>Codigo</th>
                 <th>Sucursal</th>
-                <th>Eliminar</th>
+                <th>Opciones</th>
             </tr>
             </thead>
             <tbody> ";

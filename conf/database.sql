@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2016 a las 23:10:37
+-- Tiempo de generación: 03-11-2016 a las 14:31:18
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -49,9 +49,8 @@ CREATE TABLE `activos` (
 --
 
 INSERT INTO `activos` (`idActivos`, `Descripcion`, `fecha_adquisicion`, `tiempo_depre`, `valor_adquisicion`, `fecha_registro`, `fecha_ini_deprec`, `serial`, `ubicacion_idUbicacion`, `categorias_idCategoria`, `idSubCategoria`) VALUES
-(1, 'Laptop Dell E6510', '2011-03-14', 5, '250000.000', '2016-10-07', '2011-04-14', '', 1, 1, 1),
-(2, 'Boligrafo Azul', '2016-10-07', 3, '1050.000', '2016-10-07', '2016-10-07', '', 2, 3, 2),
-(3, 'dwedcew', '2016-10-20', 6, '20000.000', '2016-10-20', '2016-10-20', '', 1, 3, 2);
+(1, 'Laptop Dell E6510', '2016-03-15', 6, '250001.000', '2016-10-07', '2011-04-14', '', 2, 1, 1),
+(2, 'Boligrafo Azul', '2016-10-07', 3, '1050.000', '2016-10-07', '2016-10-07', '', 2, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -111,16 +110,17 @@ CREATE TABLE `modulos` (
   `ubicacion` tinyint(4) DEFAULT '0',
   `sucursal` tinyint(4) DEFAULT '0',
   `activos` tinyint(4) DEFAULT '0',
-  `responsable` tinyint(4) DEFAULT '0'
+  `responsable` tinyint(4) DEFAULT '0',
+  `categorias` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `modulos`
 --
 
-INSERT INTO `modulos` (`idmodulos`, `descModulo`, `mapas_acceso_idmapas_acceso`, `ubicacion`, `sucursal`, `activos`, `responsable`) VALUES
-(1, 'SuperUsuario', 0, 1, 1, 1, 1),
-(2, 'Auditor', 1, 1, 1, 1, 1);
+INSERT INTO `modulos` (`idmodulos`, `descModulo`, `mapas_acceso_idmapas_acceso`, `ubicacion`, `sucursal`, `activos`, `responsable`, `categorias`) VALUES
+(1, 'SuperUsuario', 0, 1, 1, 1, 1, 1),
+(2, 'Auditor', 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -134,9 +134,30 @@ CREATE TABLE `pistasauditoria` (
   `fechaPista` date DEFAULT NULL,
   `tipo_operacion` char(1) DEFAULT NULL,
   `modulo` varchar(45) DEFAULT NULL,
-  `observacion` text,
+  `observacion` varchar(255) DEFAULT NULL,
   `usuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `pistasauditoria`
+--
+
+INSERT INTO `pistasauditoria` (`idpistasAuditoria`, `fechaPista`, `tipo_operacion`, `modulo`, `observacion`, `usuario`) VALUES
+(18, '2016-10-29', 'I', 'Categorias', 'Se registro la categoria: 4. ', 41),
+(19, '2016-10-29', 'E', 'Categorias', 'Se elimino la categoria: 4. ', 41),
+(20, '2016-10-29', 'I', 'Sub-Categorias', 'Se registro la Sub-Categoria: 3. ', 41),
+(21, '2016-10-29', 'E', 'Sub-Categoria', 'Se elimino la Sub-Categoria: 3. ', 41),
+(22, '2016-10-29', 'I', 'Ubicaciones', 'se registro la Sucursal: 3', 41),
+(23, '2016-10-29', 'E', 'Ubicaciones', 'se elimino la Ubicacion: 3', 41),
+(24, '2016-10-29', 'I', 'Sucursales', 'se registro la Sucursal: 4', 41),
+(25, '2016-10-29', 'E', 'Sucursales', 'se elimino la Sucursal: 4', 41),
+(26, '2016-10-29', 'I', 'Responsables', 'se registro el Responsable: 2', 41),
+(27, '2016-10-29', 'E', 'Responsables', 'se elimino el Responsable: 2', 41),
+(28, '2016-10-29', 'I', 'Activos', 'se registro el activo: 124', 41),
+(29, '2016-10-29', 'M', 'Activos', 'Se modifico la fecha de adquisicion de 2016-10-26 -> 2016-10-25. ', 41),
+(30, '2016-10-29', 'I', 'Gestion de Activos', 'se registro la Asignacion de Activo: 2', 41),
+(31, '2016-10-29', 'E', 'Gestion de Activos', 'se elimino la Asignacion de Activo: 2', 41),
+(32, '2016-10-29', 'E', 'Activos', 'se elimino el Activo: 3', 41);
 
 -- --------------------------------------------------------
 

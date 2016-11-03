@@ -1087,8 +1087,32 @@ if (isset($_GET['bCate'])) {
 
     }
     comboSubCategoria();
+}
 
 
+if (isset($_GET['newpass']) && $_GET['modpass']=="modificarpass" && isset($_GET['id']) ) {
+    function modificarpass()
+    {
+        //echo 'entro en la bd';
+        require_once './dbconn.php';
+        $id = trim($_GET['id']);
+        $newpass = trim($_GET['newpass']);
+
+        if ($id=='' or $newpass == '') {
+            echo "Debe ingresar una contraseña nueva.";
+        } else {
+            try {
+
+                $stmt = $dbh->prepare("update usuarios set clave = '". $newpass ."'  where usuario=:uid");
+                $stmt->execute(array(":uid" => $id));
+
+                echo 'ok';
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+    }
+    modificarpass();
 }
 
 

@@ -31,7 +31,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Sucursal</th>
             <th>Activos</th>
             <th>Responsable</th>
-            <th>Eliminar</th>
+            <th>Opciones</th>
         </tr>
         </thead>
         <tbody>

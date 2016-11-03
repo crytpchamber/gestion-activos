@@ -28,7 +28,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Puede Modificar</th>
             <th>Puede Eliminar</th>
             <th>Puede Guardar</th>
-            <th>Eliminar</th>
+            <th>Opciones</th>
         </tr>
         </thead>
         <tbody>

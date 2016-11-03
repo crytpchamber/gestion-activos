@@ -24,7 +24,7 @@ include_once 'conf/dbconn.php';
             <tr>
                 <th>Codigo</th>
                 <th>Categoria</th>
-                <th>Eliminar</th> 
+                <th>Opciones</th> 
             </tr>
             </thead>
             <tbody>";

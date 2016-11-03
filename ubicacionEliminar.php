@@ -31,7 +31,7 @@ if ($_SESSION['eliminar']=='0') {
             <tr>
                 <th>Ubicacion</th>
                 <th>Sucursal</th>
-                <th>Eliminar</th>
+                <th>Opciones</th>
             </tr>
             </thead>
             <tbody> ";

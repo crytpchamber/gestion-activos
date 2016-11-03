@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" name="password" id="password" />
+                        <input type="password" class="form-control" placeholder="Contraseña" name="password" id="password" />
                     </div>
 
                     <hr />

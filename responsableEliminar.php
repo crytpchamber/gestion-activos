@@ -30,7 +30,7 @@ if ($_SESSION['eliminar']=='0') {
             <th>Responsable</th>
             <th>Cedula</th>
             <th>Ubicación</th>
-            <th>Eliminar</th>
+            <th>Opciones</th>
         </tr>
         </thead>
         <tbody> ";

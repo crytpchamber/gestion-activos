@@ -78,8 +78,9 @@ $data3=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
                  //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
-                "<button id='" .$row['idActivos']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarAct'></button>
-                <button id='" .$row['idActivos']. "' type='button' class='btn btn-default btn-sm glyphicon glyphicon-edit modifActivo'></button>
+                "<button id='" .$row['idActivos']. "' type='button' class='btn btn-default btn-sm glyphicon glyphicon-edit modifActivo'></button>
+                <button id='" .$row['idActivos']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarAct'></button>
+                
                 </td>";
             echo "</tr>";
             //echo $row['tiempo_depre'];

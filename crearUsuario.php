@@ -46,7 +46,8 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Nombre Completo</th>
             <th>Cedula</th>
             <th>Tipo de Usuario</th>
-            <th>Eliminar Usuario</th>
+            <th>Contraseña</th>
+            <th>Opciones</th>
         </tr>
         </thead>
         <tbody>
@@ -55,12 +56,14 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($data as $row ) {
                     echo "<tr>";
                     echo "<td>" . $row['usuario'] . "</td><td>" . $row['Nombre']." ".$row['Apellido'] . "</td><td>" .
-                        $row['Cedula'] . "</td><td>" . $row['tipoUsuario'] . "</td><td>" ;
+                        $row['Cedula'] . "</td><td>" . $row['tipoUsuario'] . "</td>" ;
+                    echo "<td> <input type='password' class='form-control' name='newpass' id='newpass' placeholder='Nueva Contraseña'> </td><td>";
                        //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
                     if ($row['usuario']=="admin") {
-                        echo "</td>";
+                        echo "<button id='".$row['usuario']."' type='button' class='btn btn-default btn-sm glyphicon glyphicon-edit editongo'></button></td>";
                     } else {
-                        echo "<button id='" .$row['usuario']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrar'></button></td>";
+                        echo "<button id='".$row['usuario']."' type='button' class='btn btn-default btn-sm glyphicon glyphicon-edit editongo'></button>".
+                            " <button id='" .$row['usuario']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrar'></button></td>";
                     }
 
                     echo "</tr>";
@@ -74,6 +77,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <hr />
 
+
 <?php
     $stmt = $dbh->prepare("SELECT t.idTipo_Usuario, t.descripcion " .
                           " FROM tipo_usuario t ");
@@ -82,6 +86,9 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
     $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
+
+
+
 
 
 <div class="row">
