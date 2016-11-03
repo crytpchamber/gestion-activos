@@ -7,7 +7,19 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
     <link rel="shortcut icon" href="imgs/favicon.ico">
-
+    <style>
+        body {
+            background-color: #e9e9e9;
+        }
+        hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid #ccc;
+            margin: 1em 0;
+            padding: 0;
+        }
+    </style>
 
 </head>
 <body>

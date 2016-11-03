@@ -10,7 +10,7 @@ body {
 /* Profile sidebar */
 .profile-sidebar {
     padding: 20px 0 10px 0;
-    background: #fff;
+    background: #e9e9e9;
     border-radius: 15px;
 }
 
@@ -87,7 +87,7 @@ body {
 
 .profile-usermenu ul li a:hover {
     background-color: #fafcfd;
-    color: #5b9bd1;
+    color: #6f1010;
 }
 
 .profile-usermenu ul li.active {
@@ -95,16 +95,35 @@ body {
 }
 
 .profile-usermenu ul li.active a {
-    color: #5b9bd1;
+    color: #6f1010;
     background-color: #f6f9fb;
-    border-left: 2px solid #5b9bd1;
+    border-left: 2px solid #6f1010;
     margin-left: -2px;
 }
 
 /* Profile Content */
 .profile-content {
     padding: 20px;
-    background: #fff;
+    background: #e9e9e9;
     min-height: 618px;
     border-radius: 15px;
+}
+
+.table {
+    border: 1px solid #a8a8a8;
+}
+.table thead > tr > th {
+    border-bottom: none;
+}
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+    border: 1px solid #a8a8a8;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
 }
