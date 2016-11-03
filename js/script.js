@@ -2018,7 +2018,21 @@ $('document').ready(function()
     });
 
 
+    /* Al precionar el boton de Reportes llamar el menu de Reportes */
+    $(".profile-usermenu #Reportes").click(function() {
+        $.ajax({
+            url:'reportesMenu.php',
+            type:'GET',
+            success: function(data){
+                //alert(data);
+                $('.profile-content #menuAdmin').hide().html(data).fadeIn('slow');
+                $('.profile-content #opciones').fadeOut('slow');
 
+
+            }
+        });
+
+    });
 
 
 });
