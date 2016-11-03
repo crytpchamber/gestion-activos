@@ -6,7 +6,7 @@
     <li  style="text-align: center; "><a  id="AsignacionesR" href="javascript:void(0);">Asignaciones</a></li>
     <li  style="text-align: center; "><a  id="auditoriaR" href="javascript:void(0);">Auditoria</a></li>
 
-    <li  style=" text-align: center; margin-left: 5%; "><a  id="d" href="exportador.php">Descargar Reporte</a></li>
+    <li  style=" text-align: center; margin-left: 5%; "><a  id="d" href="conf/exportador.php">Descargar Reporte</a></li>
 
    <!-- <li style="width: 25%; text-align: center"><a id="modificarGestion" href="javascript:void(0);">Modificar Asignacion</a></li>
     <li style="width: 33%; text-align: center"><a id="eliminarGestion" href="javascript:void(0);">Eliminar Asignacion</a></li> -->
