@@ -2019,7 +2019,7 @@ $('document').ready(function()
 
 
     /* Al precionar el boton de Reportes llamar el menu de Reportes */
-    $(".profile-usermenu #Reportes").click(function() {
+    /*$(".profile-usermenu #Reportes").click(function() {
         $.ajax({
             url:'reportesMenu.php',
             type:'GET',
@@ -2032,11 +2032,283 @@ $('document').ready(function()
             }
         });
 
+    });*/
+
+
+
+    //AGREGARDO
+
+/*agregado */
+
+ /* Acceder a reportes */
+    $(".profile-usermenu #Reportes").click(function() {
+        $.ajax({
+            url:'reportesMenu.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+                //$('#menuAdmin').hide().html("<H1>Ubicacion</H1>").fadeIn('slow');
+                $('#menuAdmin').hide().html(data).fadeIn('slow');
+                $('#opciones').fadeOut('slow');
+
+ $.ajax({
+            url:'reportes.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+                //$('#menuAdmin').hide().html("<H1>Ubicacion</H1>").fadeIn('slow');
+                $('#opciones').hide().html(data).fadeIn('slow');
+               // $('#opciones').fadeOut('slow');
+                
+
+            }
+        });
+
+            }
+        });
+    });
+
+/* Mostrar Pantalla para reportes de activos */
+    $("#menuAdmin").on("click","#ActivosR", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'activosR.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+                $('#d').attr("href","exportadora.php");
+            }
+        });
+
+    });
+
+    /* Mostrar Pantalla para reportes de activos */
+    $("#menuAdmin").on("click","#ResponsablesR", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'responsablesR.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+                 $('#d').attr("href","exportadorr.php");
+            }
+        });
+
+    });
+/* Mostrar Pantalla para reportes de activos */
+    $("#menuAdmin").on("click","#UbicacionR", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'ubicacionR.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+                 $('#d').attr("href","exportadoru.php");
+            }
+        });
+
+    });
+    /* Mostrar Pantalla para reportes de activos */
+    $("#menuAdmin").on("click","#SucursalesR", function(){
+
+        console.log('entro');
+        $.ajax({
+            url:'sucursalesR.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+                 $('#d').attr("href","exportadors.php");
+            }
+        });
+
+    });
+     /* Mostrar Pantalla para reportes de activos */
+    $("#menuAdmin").on("click","#AsignacionesR", function(){
+
+
+        console.log('entro');
+        $.ajax({
+            url:'asignacionesR.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+            }
+        });
+
+    });
+
+    
+
+    
+    /* Mostrar Pantalla para reportes de Auditor */
+    $("#menuAdmin").on("click","#AuditorR", function(){
+
+
+        console.log('entro');
+        $.ajax({
+            url:'AuditorR.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+                 $('#d').attr("href","exportadoraud.php");
+            }
+        });
+
+    });
+
+    /* Mostrar Pantalla para reportes de InventarioR */
+    $("#menuAdmin").on("click","#InventarioR", function(){
+
+
+        console.log('entro');
+        $.ajax({
+            url:'inventarioR.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+                 $('#d').attr("href","exportadorinvg.php");
+            }
+        });
+
     });
 
 
-});
 
 
+
+
+    $(".form-group #btn-opbuscador2").click(function(){
+
+        //alert("sirvedddd"+document.getElementsByName('string')[0].value);
+        var type=document.getElementsByName('string')[0].value;
+        var filter=document.getElementsByName('opbusqueda')[0].value;
+
+        $.ajax({
+            url:'reportesinventario.php',
+            type:'GET',
+            data:{
+                tipo:type,
+                filtro:filter
+            },
+
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#tablaResponsable').hide().html(data).fadeIn('slow');
+
+                if (filter=="Pcategoria") {
+                    $('#d').attr("href","exportadorinvc.php");
+                }else{if (filter=="Psubcategoria") {
+                    $('#d').attr("href","exportadorinvsc.php");
+                }else{if (filter=="Pubicacion") {
+                    $('#d').attr("href","exportadorinvu.php");
+                }else{if (filter=="Psucursal") {
+                    $('#d').attr("href","exportadorinvs.php");
+                }else{
+
+                }
+
+                }
+
+                }
+
+                }
+
+            }
+        });
+    });
+
+    $(".form-group #btn-opbuscador").click(function(){
+
+        //alert("sirvedddd"+document.getElementsByName('string')[0].value);
+        var type=document.getElementsByName('string')[0].value;
+        var filter=document.getElementsByName('opbusqueda')[0].value;
+
+        $.ajax({
+            url:'reportestablas.php',
+            type:'GET',
+            data:{
+                tipo:type,
+                filtro:filter
+            },
+
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#tablaResponsable').hide().html(data).fadeIn('slow');
+
+                if (filter=="Pactivo") {
+                    $('#d').attr("href","exportadorsa.php");
+                }else{if (filter=="Presponsable") {
+                    $('#d').attr("href","exportadorsr.php");
+                }else{if (filter=="Pubicacion") {
+                    $('#d').attr("href","exportadorsu.php");
+                }else{if (filter=="Psucursal") {
+                    $('#d').attr("href","exportadorss.php");
+                }else{
+
+                }
+
+                }
+
+                }
+
+                }
+
+            }
+        });
+    });
+
+
+    /*fin agregado*/
+
+    //FIN AGREGADO
+
+
+
+
+
+
+
+});// llave cerrada del document ready function AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 
 

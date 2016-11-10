@@ -4,9 +4,10 @@
     <li  style="text-align: center; "><a  id="UbicacionR" href="javascript:void(0);">Ubicacion</a></li>
     <li  style="text-align: center; "><a  id="SucursalesR" href="javascript:void(0);">Sucursales</a></li>
     <li  style="text-align: center; "><a  id="AsignacionesR" href="javascript:void(0);">Asignaciones</a></li>
-    <li  style="text-align: center; "><a  id="auditoriaR" href="javascript:void(0);">Auditoria</a></li>
+    <li  style="text-align: center; "><a  id="AuditorR" href="javascript:void(0);">Auditor</a></li>
+    <li  style="text-align: center; "><a  id="InventarioR" href="javascript:void(0);">Inventario</a></li>
 
-    <li  style=" text-align: center; margin-left: 5%; "><a  id="d" href="conf/exportador.php">Descargar Reporte</a></li>
+    <li  style=" text-align: center; margin-left: 4px; background-color: #333;"><a  id="d" href="exportador.php">Descargar</a></li>
 
    <!-- <li style="width: 25%; text-align: center"><a id="modificarGestion" href="javascript:void(0);">Modificar Asignacion</a></li>
     <li style="width: 33%; text-align: center"><a id="eliminarGestion" href="javascript:void(0);">Eliminar Asignacion</a></li> -->

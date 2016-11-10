@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * @package dompdf
  * @link    http://dompdf.github.com/
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
