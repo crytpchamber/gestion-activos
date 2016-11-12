@@ -9,9 +9,9 @@ if(!isset($_SESSION['user_session']))
 include_once 'conf/dbconn.php';
 
 
-$stmt = $dbh->prepare("SELECT m.idmodulos, m.descModulo, ma.Descripcion, m.ubicacion, m.sucursal, m.activos, m.responsable 
-                           FROM  modulos m inner join mapas_acceso ma  
-                           on ma.idmapas_acceso = m.mapas_acceso_idmapas_acceso ");
+$stmt = $dbh->prepare("SELECT m.idmodulos, m.descModulo, ma.Descripcion, m.ubicacion, m.sucursal, m.activos, m.responsable ".
+                      " FROM  modulos m inner join mapas_acceso ma ".
+                      " on ma.idmapas_acceso = m.mapas_acceso_idmapas_acceso ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -75,8 +75,8 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <hr />
 
 <?php
-$stmt = $dbh->prepare("SELECT m.idmapas_acceso, m.Descripcion 
-                           FROM  mapas_acceso m  ");
+$stmt = $dbh->prepare("SELECT m.idmapas_acceso, m.Descripcion ".
+                      " FROM  mapas_acceso m  ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -103,6 +103,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="form-group">
                 <label>Mapa de Acceso</label>
                 <select class="form-control" id="mapa" name="mapa" required>
+                    <option value="" selected disabled>Seleccionar</option>
                     <?php
                     foreach ($data as $row) {
                         ?>
@@ -120,28 +121,32 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="form-group">
                 <label>Accesar Activos</label>
                 <select class="form-control" id="checkAct" name="checkAct">
-                    <option value="0" selected>No</option>
+                    <option value="" selected disabled>Seleccionar</option>
+                    <option value="0" >No</option>
                     <option value="1">Si</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Accesar Responsables</label>
                 <select class="form-control" id="checkResp" name="checkResp">
-                    <option value="0" selected>No</option>
+                    <option value="" selected disabled>Seleccionar</option>
+                    <option value="0" >No</option>
                     <option value="1">Si</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Accesar Ubicaciones</label>
                 <select class="form-control" id="checkUbic" name="checkUbic">
-                    <option value="0" selected>No</option>
+                    <option value="" selected disabled>Seleccionar</option>
+                    <option value="0" >No</option>
                     <option value="1">Si</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Accesar Sucursales</label>
                 <select class="form-control" id="checkSucu" name="checkSucu">
-                    <option value="0" selected>No</option>
+                    <option value="" selected disabled>Seleccionar</option>
+                    <option value="0" >No</option>
                     <option value="1">Si</option>
                 </select>
             </div>
@@ -156,6 +161,9 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                     <span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar
                 </button>
 
+                <button type="reset" class="btn btn-default" name="btn-loginReset" id="btn-loginReset"  >
+                    <span class="glyphicon glyphicon-erase"></span> &nbsp; Borrar
+                </button>
             </div>
         </form>
     </div>

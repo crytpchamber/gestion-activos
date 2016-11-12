@@ -21,9 +21,10 @@
         }
     </style>
 
+
 </head>
 <body>
-<div class="container">
+<div style="margin-top: 5%;" class="container">
     <div class="row">
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-2"></div>
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-8" >
@@ -54,12 +55,13 @@
 
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Usuario" name="user" id="user" />
+                        <input type="text" class="form-control" pattern="[\d]{9}" placeholder="Usuario"  name="user" id="user" maxlength="20" />
                         <span id="check-e"></span>
                     </div>
 
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Contraseña" name="password" id="password" />
+                        <input type="password" class="form-control" placeholder="Contraseña" name="password" id="password" maxlength="100" title="Seis o mas Caracteres"/>
+
                     </div>
 
                     <hr />

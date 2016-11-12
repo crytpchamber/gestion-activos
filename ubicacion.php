@@ -72,7 +72,7 @@ if ($_SESSION['guardar']=='0') {
     
                 <div class='form-group'>
                     <select class='form-control' id='sucursal' name='sucursal' required> ";
-
+                echo "<option value='' selected disabled>Seleccionar Sucursal</option>";
     foreach ($data as $row) {
 
 
@@ -91,6 +91,9 @@ if ($_SESSION['guardar']=='0') {
                 <div class='form-group'>
                     <button type='submit' class='btn btn-default' name='btn-loginUbic' id='btn-loginUbic' value='' >
                         <span class='glyphicon glyphicon-log-in'></span> &nbsp; Registrar
+                    </button>
+                    <button type='reset' class='btn btn-default' name='btn-loginReset' id='btn-loginReset' value='' >
+                        <span class='glyphicon glyphicon-erase'></span> &nbsp; Borrar
                     </button>
     
                 </div>

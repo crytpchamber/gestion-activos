@@ -81,21 +81,24 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="form-group">
                 <label>Puede Eliminar</label>
                 <select class="form-control" id="eliminar" name="eliminar">
-                    <option value="0" selected>No</option>
+                    <option value="" selected disabled>Seleccionar</option>
+                    <option value="0">No</option>
                     <option value="1">Si</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Puede Modificar</label>
                 <select class="form-control" id="modificar" name="modificar">
-                    <option value="0" selected>No</option>
+                    <option value="" selected disabled>Seleccionar</option>
+                    <option value="0">No</option>
                     <option value="1">Si</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Puede Guardar</label>
                 <select class="form-control" id="guardar" name="guardar">
-                    <option value="0" selected>No</option>
+                    <option value="" selected disabled>Seleccionar</option>
+                    <option value="0">No</option>
                     <option value="1">Si</option>
                 </select>
             </div>
@@ -109,6 +112,9 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                     <span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar
                 </button>
 
+                <button type="reset" class="btn btn-default" name="btn-loginReset" id="btn-loginReset"  >
+                    <span class="glyphicon glyphicon-erase"></span> &nbsp; Borrar
+                </button>
             </div>
         </form>
     </div>

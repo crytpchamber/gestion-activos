@@ -68,7 +68,9 @@ include_once 'conf/dbconn.php';
                     <button type='submit' class='btn btn-default' name='btn-loginCate' id='btn-loginCate' value='' >
                         <span class='glyphicon glyphicon-log-in'></span> &nbsp; Registrar
                     </button>
-    
+                    <button type='reset' class='btn btn-default' name='btn-loginReset' id='btn-loginReset' value='' >
+                        <span class='glyphicon glyphicon-erase'></span> &nbsp; Borrar
+                    </button>   
                 </div>
             </form>
         </div>

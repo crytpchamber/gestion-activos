@@ -109,8 +109,13 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="form-group">
                 <input type="text" class="form-control" name="Apellido" id="Apellido" placeholder="Apellido" required>
             </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="cedula" id="cedula" placeholder="Cedula" required>
+            <div class='form-group form-inline' >
+                <select id='nacionalidad' name='nacionalidad' class='form-control' style='min-width: 15%'>
+                    <option value='' selected disabled> </option>
+                    <option value='V-'>V-</option>
+                    <option value='E-'>E-</option>
+                </select>
+                <input type='text' class='form-control' name='cedula' id='cedula' style='min-width: 83%' placeholder='Cedula' required>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Contraseña" required>
@@ -119,6 +124,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <input type="hidden" class="form-control" name="register" id="register">
             <div class="form-group">
                 <select class="form-control" id="tipo" name="tipo" title="tipo" >
+                    <option value="" selected disabled>Seleccionar Tipo de Usuario</option>
                     <?php
                         foreach ($data as $row) {
                     ?>
@@ -145,6 +151,10 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="form-group">
                 <button type="submit" class="btn btn-default" name="btn-loginUsuario" id="btn-loginUsuario" value="Submit" >
                     <span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar
+                </button>
+
+                <button type="reset" class="btn btn-default" name="btn-loginReset" id="btn-loginReset" value="Submit" >
+                    <span class="glyphicon glyphicon-erase"></span> &nbsp; Borrar
                 </button>
 
             </div>

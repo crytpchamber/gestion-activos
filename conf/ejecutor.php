@@ -14,13 +14,17 @@ if (isset($_POST['reg_respons'])) {
 
         $nombre = trim($_POST['nombre']);
         $apellido = trim($_POST['apellido']);
+        $nacionalidad = trim($_POST['nacionalidad']);
         $cedula = trim($_POST['cedula']);
         $ubicacion = trim($_POST['ubic']);
+        
 
-        if ($nombre == '' || $apellido == '' || $cedula == '' || $ubicacion == '') {
+        if ($nombre == '' || $apellido == '' || $cedula == '' || $ubicacion == '' || $nacionalidad == '') {
             $registrar = 0;
         }
 
+
+        $cedulaCompleta = $nacionalidad . $cedula;
         $existe = 0;
         try {
             if ($registrar == 1) {
@@ -36,7 +40,7 @@ if (isset($_POST['reg_respons'])) {
 
                 $stmt = $dbh->prepare("select idResposable, Nombre as numero from resposable ".
                     "where (Nombre = :uid and Apellido = :uid2) or Cedula = :uid3 ");
-                $stmt->execute(array(":uid" => $nombre,":uid2" => $apellido, ":uid3" => $cedula));
+                $stmt->execute(array(":uid" => $nombre,":uid2" => $apellido, ":uid3" => $cedulaCompleta));
                 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($data as $row) {
                     $existe++;
@@ -50,7 +54,7 @@ if (isset($_POST['reg_respons'])) {
                         "values ($max,?,?,?,?)");
                     $stmt->bindParam(1, $nombre);
                     $stmt->bindParam(2, $apellido);
-                    $stmt->bindParam(3, $cedula);
+                    $stmt->bindParam(3, $cedulaCompleta);
                     $stmt->bindParam(4, $ubicacion);
 
                     $stmt->execute();
@@ -410,6 +414,12 @@ if (isset($_POST['reg_act'])) {
         $categ  = trim($_POST['categ']);
         $scateg = trim($_POST['scateg']);
         $serial = trim($_POST['serial']);
+        if (isset($_POST['codigo'])) {
+            $codigo = trim($_POST['codigo']);
+        } else {
+            $codigo = '';
+        }
+
 
 
         if ($nombre == '' || $adquisicion == '' || $tdepre == '' || $valor == '' || $inicio == '' || $sucursal == '' || $categ == '' ||
@@ -442,8 +452,8 @@ if (isset($_POST['reg_act'])) {
 
 
                     $stmt = $dbh->prepare("select idActivos from Activos " .
-                        "where (Descripcion = :uid or serial = :uid2 ) ");
-                    $stmt->execute(array(":uid" => $nombre,":uid2" => $serial));
+                        "where (Descripcion = :uid or codActivo = :uid2 ) ");
+                    $stmt->execute(array(":uid" => $nombre,":uid2" => $codigo));
                     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($data as $row) {
                         $existe++;
@@ -455,17 +465,18 @@ if (isset($_POST['reg_act'])) {
 
                         $stmt = $dbh->prepare("insert into Activos (idActivos, Descripcion, fecha_adquisicion, " .
                             " tiempo_depre, valor_adquisicion, fecha_registro, fecha_ini_deprec, ubicacion_idUbicacion, ".
-                            " categorias_idCategoria, idSubCategoria, serial) " .
-                            "values ($max,?,?,?,?,NOW(),?,?,?,?,?)");
-                        $stmt->bindParam(1, $nombre);
-                        $stmt->bindParam(2, $adquisicion);
-                        $stmt->bindParam(3, $tdepre);
-                        $stmt->bindParam(4, $valor);
-                        $stmt->bindParam(5, $inicio);
-                        $stmt->bindParam(6, $sucursal);
-                        $stmt->bindParam(7, $categ);
-                        $stmt->bindParam(8, $scateg);
-                        $stmt->bindParam(9, $serial);
+                            " categorias_idCategoria, idSubCategoria, serial, codActivo) " .
+                            "values ($max,?,?,?,?,NOW(),?,?,?,?,?,?)");
+                        $stmt->bindParam(1,  $nombre);
+                        $stmt->bindParam(2,  $adquisicion);
+                        $stmt->bindParam(3,  $tdepre);
+                        $stmt->bindParam(4,  $valor);
+                        $stmt->bindParam(5,  $inicio);
+                        $stmt->bindParam(6,  $sucursal);
+                        $stmt->bindParam(7,  $categ);
+                        $stmt->bindParam(8,  $scateg);
+                        $stmt->bindParam(9,  $serial);
+                        $stmt->bindParam(10, $codigo);
 
                         $stmt->execute();
 
@@ -479,7 +490,7 @@ if (isset($_POST['reg_act'])) {
 
                         $max++;
                         // observacion de la pista y usuario que esta registrando.
-                        $observacion = "se registro el activo: $serial";
+                        $observacion = "se registro el activo: $codigo";
                         $usuario = trim($_SESSION['user_session']);
 
                         //pistas de auditoria al ingresar registro
@@ -1071,6 +1082,7 @@ if (isset($_GET['bCate'])) {
 
                 echo "<label >Sub-Categoria</label> 
                      <select class='form-control' id='scateg' name='scateg' title='scateg' > ";
+                echo "<option value='' selected disabled>Seleccione Sub-Categoria</option>";
                 foreach ($data4 as $row) {
                     echo "<option value='" .$row['idSubCategoria']."'> ";
                     echo $row['Descripcion'];

@@ -91,6 +91,7 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="form-group">
                 <label >Activo</label>
                 <select class="form-control" id="activo" name="activo" title="activo" >
+                    <option value="" selected disabled>Seleccionar Activo</option>
                     <?php
                     foreach ($data as $row) {
                         ?>
@@ -109,6 +110,7 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="form-group">
                 <label >Responsable</label>
                 <select class="form-control" id="responsable" name="responsable" title="responsable" >
+                    <option value="" selected disabled>Seleccionar Responsable</option>
                     <?php
                     foreach ($data2 as $row) {
                         ?>

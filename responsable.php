@@ -79,14 +79,20 @@ if ($_SESSION['guardar']=='0') {
                 <div class='form-group'>
                     <input type='text' class='form-control' name='apellido' id='apellido' placeholder='Apellido' required>
                 </div>
-                <div class='form-group'>
-                    <input type='text' class='form-control' name='cedula' id='cedula' placeholder='Cedula' required>
+                <div class='form-group form-inline' >
+                    <select id='nacionalidad' name='nacionalidad' class='form-control' style='min-width: 15%'>
+                        <option value='' selected disabled> </option>
+                        <option value='V-'>V-</option>
+                        <option value='E-'>E-</option>
+                    </select>
+                    <input type='text' class='form-control' name='cedula' id='cedula' style='min-width: 83%' placeholder='Cedula'  required>
                 </div>
     
                 <div class='form-group'>
                     <label >Ubicación</label>
                     <select class='form-control' id='ubic' name='ubic' title='ubic' > ";
 
+                echo "<option value='' selected disabled> Selecccionar Ubicación</option>";
                         foreach ($data as $row) {
                             ?>
 
@@ -109,7 +115,10 @@ if ($_SESSION['guardar']=='0') {
                     <button type='submit' class='btn btn-default' name='btn-loginResp' id='btn-loginResp' value='' >
                         <span class='glyphicon glyphicon-log-in'></span> &nbsp; Registrar
                     </button>
-    
+
+                    <button type='reset' class='btn btn-default' name='btn-loginReset' id='btn-loginReset' value='' >
+                        <span class='glyphicon glyphicon-erase'></span> &nbsp; Borrar
+                    </button>
                 </div>
             </form>
         </div>

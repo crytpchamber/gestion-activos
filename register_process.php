@@ -19,9 +19,10 @@ if(isset($_POST['register']))
     $apellido = trim($_POST['Apellido']);
     $cedula = trim($_POST['cedula']);
     $tipo = trim($_POST['tipo']);
+    $nacionalidad = trim($_POST['nacionalidad']);
     //$imagen =
 
-    if ($user == '' || $user_password == '' || $nombre == '' || $apellido == '' || $cedula == '' || $tipo == '') {
+    if ($user == '' || $user_password == '' || $nombre == '' || $apellido == '' || $cedula == '' || $tipo == '' || $nacionalidad == '') {
         $registrar = 0;
     }
 
@@ -29,6 +30,8 @@ if(isset($_POST['register']))
     try
     {
         if ($registrar == 1) {
+
+            $cedulaCompleta = $nacionalidad . $cedula;
 
             $stmt = $dbh->prepare("select usuario from usuarios where usuario = :uid ");
             $stmt->execute(array(":uid" => $user));
@@ -98,7 +101,7 @@ if(isset($_POST['register']))
                 $stmt->bindParam(2, $user_password);
                 $stmt->bindParam(3, $nombre);
                 $stmt->bindParam(4, $apellido);
-                $stmt->bindParam(5, $cedula);
+                $stmt->bindParam(5, $cedulaCompleta);
                 $stmt->bindParam(6, $tipo);
                 $stmt->bindParam(7, $nombreImg);
 

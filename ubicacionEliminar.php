@@ -80,7 +80,7 @@ if ($_SESSION['eliminar']=='0') {
     
             <label >Filtrar por Ubicación</label>
             <select class='form-control filtrosUbic2' id='responsable' name='responsable' title='responsable' > ";
-
+    echo "<option value='' selected disabled>Seleccionar Ubicación</option>";
 
                 foreach ($data2 as $row) {
 
@@ -89,12 +89,12 @@ if ($_SESSION['eliminar']=='0') {
 
                 }
 
-     echo "       </select>
+    echo "       </select>
     
     
             <label >Filtrar por Sucursal</label>
             <select class='form-control filtrosUbic' id='responsable' name='responsable' title='responsable' > ";
-
+    echo "<option value='' selected disabled>Seleccionar Sucursal</option>";
                 foreach ($data as $row) {
 
 

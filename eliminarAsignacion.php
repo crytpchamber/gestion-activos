@@ -96,6 +96,7 @@ $data4=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <label >Filtrar por Responsable</label>
         <select class="form-control filtros" id="responsable" name="responsable" title="responsable" >
+            <option value="" selected disabled>Seleccione Responsable</option>
             <?php
             foreach ($data2 as $row) {
                 ?>
@@ -111,6 +112,7 @@ $data4=$stmt->fetchAll(PDO::FETCH_ASSOC);
         </select>
         <label >Filtrar por Sucursal</label>
         <select class="form-control filtros2" id="responsable" name="responsable" title="responsable" >
+            <option value="" selected disabled>Seleccione Sucursal</option>
             <?php
             foreach ($data3 as $row) {
                 ?>
@@ -127,6 +129,7 @@ $data4=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <label >Filtrar por Ubicación</label>
         <select class="form-control filtros3" id="responsable" name="responsable" title="responsable" >
+            <option value="" selected disabled>Seleccione Ubicación</option>
             <?php
             foreach ($data4 as $row) {
                 ?>

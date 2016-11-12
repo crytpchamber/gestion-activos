@@ -70,7 +70,9 @@ if ($_SESSION['guardar']=='0') {
                     <button type='submit' class='btn btn-default' name='btn-loginSucu' id='btn-loginSucu' value='' >
                         <span class='glyphicon glyphicon-log-in'></span> &nbsp; Registrar
                     </button>
-    
+                    <button type='reset' class='btn btn-default' name='btn-loginReset' id='btn-loginReset' value='' >
+                        <span class='glyphicon glyphicon-erase'></span> &nbsp; Borrar
+                    </button>    
                 </div>
             </form>
         </div>

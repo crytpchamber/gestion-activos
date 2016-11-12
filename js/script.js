@@ -3,6 +3,7 @@
  */
 $('document').ready(function()
 {
+
     /* Validar Formulario de Login */
     $("#login-form").validate({
         rules:
@@ -234,27 +235,30 @@ $('document').ready(function()
         var id = $(this).attr("id");
         var $element = $(this);
 
-        $.ajax({
-            url:'eliminarMapa.php?id='+id,
-            type: "POST",
-            data: "id="+id,
-            success: function(response){
-                //alert('Hola');
-                //$element.parent().parent().remove();
-                if(response.trim()=="ok") {
-                    $element.parent().parent().remove();
-                } else {
+        if (confirm('¿Desea eliminar el Mapa seleccionado?')) {
+            $.ajax({
+                url: 'eliminarMapa.php?id=' + id,
+                type: "POST",
+                data: "id=" + id,
+                success: function (response) {
+                    //alert('Hola');
+                    //$element.parent().parent().remove();
+                    if (response.trim() == "ok") {
+                        $element.parent().parent().remove();
+                    } else {
 
-                    $("#error4").fadeIn(1000, function(){
-                        $("#error4").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-login4").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
+                        $("#error4").fadeIn(1000, function () {
+                            $("#error4").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#btn-login4").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log(xhr);
+                    console.log(error);
                 }
-            },
-            error: function(xhr, error){
-                console.log(xhr); console.log(error);
-            }
-        });
+            });
+        }
     });
     /* Fin Eliminar mapa del sistema */
 
@@ -264,28 +268,30 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        if (confirm('¿Desea eliminar el Usuario seleccionado?')) {
+            $.ajax({
+                url: 'eliminarUsuario.php?id=' + id,
+                type: "POST",
+                data: "id=" + id,
+                success: function (response) {
+                    //alert('Hola');
+                    //$element.parent().parent().remove();
+                    if (response.trim() == "ok") {
+                        $element.parent().parent().remove();
+                    } else {
 
-        $.ajax({
-            url:'eliminarUsuario.php?id='+id,
-            type: "POST",
-            data: "id="+id,
-            success: function(response){
-                //alert('Hola');
-                //$element.parent().parent().remove();
-                if(response.trim()=="ok") {
-                    $element.parent().parent().remove();
-                } else {
-
-                    $("#error2").fadeIn(1000, function(){
-                        $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-loginUsuario").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
+                        $("#error2").fadeIn(1000, function () {
+                            $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#btn-loginUsuario").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log(xhr);
+                    console.log(error);
                 }
-            },
-            error: function(xhr, error){
-                console.log(xhr); console.log(error);
-            }
-        });
+            });
+        }
     });
 
     /* Borrar Tipos de Usuario */
@@ -293,27 +299,29 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        if (confirm('¿Desea eliminar el Tipo de Usuario seleccionado?')) {
+            $.ajax({
+                url: 'eliminarTipo.php?id=' + id,
+                type: "POST",
+                data: "id=" + id,
+                success: function (response) {
+                    //alert('Hola');
+                    if (response == "ok") {
+                        $element.parent().parent().remove();
+                    } else {
 
-        $.ajax({
-            url:'eliminarTipo.php?id='+id,
-            type: "POST",
-            data: "id="+id,
-            success: function(response){
-                //alert('Hola');
-                if(response=="ok") {
-                    $element.parent().parent().remove();
-                } else {
-
-                    $("#error2").fadeIn(1000, function(){
-                        $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-login").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
+                        $("#error2").fadeIn(1000, function () {
+                            $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#btn-login").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log(xhr);
+                    console.log(error);
                 }
-            },
-            error: function(xhr, error){
-                console.log(xhr); console.log(error);
-            }
-        });
+            });
+        }
     });
 
     /* Borrar Modulos */
@@ -322,26 +330,29 @@ $('document').ready(function()
         var id = $(this).attr("id");
         var $element = $(this);
 
-        $.ajax({
-            url:'eliminarModulo.php?id='+id,
-            type: "POST",
-            data: "id="+id,
-            success: function(response){
-                //alert('Hola');
-                if(response=="ok") {
-                    $element.parent().parent().remove();
-                } else {
+        if (confirm('¿Desea eliminar el Modulo seleccionado?')) {
+            $.ajax({
+                url: 'eliminarModulo.php?id=' + id,
+                type: "POST",
+                data: "id=" + id,
+                success: function (response) {
+                    //alert('Hola');
+                    if (response == "ok") {
+                        $element.parent().parent().remove();
+                    } else {
 
-                    $("#error3").fadeIn(1000, function(){
-                        $("#error3").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-login3").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
+                        $("#error3").fadeIn(1000, function () {
+                            $("#error3").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#btn-login3").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log(xhr);
+                    console.log(error);
                 }
-            },
-            error: function(xhr, error){
-                console.log(xhr); console.log(error);
-            }
-        });
+            });
+        }
     });
 
     /* Registrar usuario nuevo en sistema */
@@ -560,6 +571,7 @@ $('document').ready(function()
     /* Acceder a registrar responsables */
     $("#menuAdmin").on("click","#crearRespons", function(){
 
+       // $("#cedula").mask("999.999.999");
         console.log('entro');
         $.ajax({
             url:'responsable.php',
@@ -672,31 +684,34 @@ $('document').ready(function()
         var id = $(this).attr("id");
         var $element = $(this);
 
-        $.ajax({
-            url:'./conf/ejecutor.php?eliminarResp='+id,
-            type: "POST",
-            data: "eliminarResp="+id,
-            success: function(response){
-                //alert('Hola');
-                if (response.trim()=='error') {
-                    alert('No tiene permiso para eliminar registros.');
+        if (confirm('¿Desea eliminar el Responsable seleccionado?')) {
+            $.ajax({
+                url: './conf/ejecutor.php?eliminarResp=' + id,
+                type: "POST",
+                data: "eliminarResp=" + id,
+                success: function (response) {
+                    //alert('Hola');
+                    if (response.trim() == 'error') {
+                        alert('No tiene permiso para eliminar registros.');
 
-                }else {
-                    if (response.trim() == "ok") {
-                        $element.parent().parent().remove();
                     } else {
+                        if (response.trim() == "ok") {
+                            $element.parent().parent().remove();
+                        } else {
 
-                        $("#errorResp").fadeIn(1000, function () {
-                            $("#errorResp").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
-                            $("#btn-loginResp").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                        });
+                            $("#errorResp").fadeIn(1000, function () {
+                                $("#errorResp").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                                $("#btn-loginResp").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                            });
+                        }
                     }
+                },
+                error: function (xhr, error) {
+                    console.log(xhr);
+                    console.log(error);
                 }
-            },
-            error: function(xhr, error){
-                console.log(xhr); console.log(error);
-            }
-        });
+            });
+        }
     });
 
 
@@ -832,26 +847,29 @@ $('document').ready(function()
         var id = $(this).attr("id");
         var $element = $(this);
 
-        $.ajax({
-            url:'./conf/ejecutor.php?eliminarSucu='+id,
-            type: "POST",
-            data: "eliminarSucu="+id,
-            success: function(response){
-                //alert('Hola');
-                if(response.trim()=="ok") {
-                    $element.parent().parent().remove();
-                } else {
+        if (confirm('¿Desea eliminar la Sucursal seleccionada?')) {
+            $.ajax({
+                url: './conf/ejecutor.php?eliminarSucu=' + id,
+                type: "POST",
+                data: "eliminarSucu=" + id,
+                success: function (response) {
+                    //alert('Hola');
+                    if (response.trim() == "ok") {
+                        $element.parent().parent().remove();
+                    } else {
 
-                    $("#errorSucu").fadeIn(1000, function(){
-                        $("#errorSucu").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-loginSucu").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
+                        $("#errorSucu").fadeIn(1000, function () {
+                            $("#errorSucu").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#btn-loginSucu").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log(xhr);
+                    console.log(error);
                 }
-            },
-            error: function(xhr, error){
-                console.log(xhr); console.log(error);
-            }
-        });
+            });
+        }
     });
 
 
@@ -986,26 +1004,29 @@ $('document').ready(function()
         var id = $(this).attr("id");
         var $element = $(this);
 
-        $.ajax({
-            url:'./conf/ejecutor.php?eliminarUbic='+id,
-            type: "POST",
-            data: "eliminarUbic="+id,
-            success: function(response){
-                //alert('Hola');
-                if(response.trim()=="ok") {
-                    $element.parent().parent().remove();
-                } else {
+        if (confirm('¿Desea eliminar la Ubicación seleccionada?')) {
+            $.ajax({
+                url: './conf/ejecutor.php?eliminarUbic=' + id,
+                type: "POST",
+                data: "eliminarUbic=" + id,
+                success: function (response) {
+                    //alert('Hola');
+                    if (response.trim() == "ok") {
+                        $element.parent().parent().remove();
+                    } else {
 
-                    $("#errorUbic").fadeIn(1000, function(){
-                        $("#errorUbic").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                        $("#btn-loginUbic").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                    });
+                        $("#errorUbic").fadeIn(1000, function () {
+                            $("#errorUbic").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#btn-loginUbic").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                        });
+                    }
+                },
+                error: function (xhr, error) {
+                    console.log(xhr);
+                    console.log(error);
                 }
-            },
-            error: function(xhr, error){
-                console.log(xhr); console.log(error);
-            }
-        });
+            });
+        }
     });
 
     /* Al precionar el boton de Gestion de Activos llamar el menu de Activos */
@@ -1138,17 +1159,17 @@ $('document').ready(function()
         var id = $(this).attr("id");
         var $element = $(this);
 
-
+        if (confirm('¿Desea eliminar el Activo seleccionado?')) {
             $.ajax({
                 url: './conf/ejecutor.php?eliminarAct=' + id,
                 type: "POST",
                 data: "eliminarAct=" + id,
                 success: function (response) {
                     //alert('Hola');
-                    if (response.trim()=='error') {
+                    if (response.trim() == 'error') {
                         alert('No tiene permiso para eliminar activos.');
 
-                    }else {
+                    } else {
                         if (response.trim() == "ok") {
                             $element.parent().parent().remove();
                         } else {
@@ -1165,7 +1186,7 @@ $('document').ready(function()
                     console.log(error);
                 }
             });
-
+        }
     });
 
 
@@ -1191,16 +1212,16 @@ $('document').ready(function()
 
         //alert($data);
 
-
+        if (confirm('¿Desea modificar el Activo seleccionado?')) {
             $.ajax({
                 url: './conf/ejecutor.php?modificarAct=' + id,
                 type: "POST",
                 data: data2,
                 success: function (response) {
-                    if (response.trim()=='error') {
+                    if (response.trim() == 'error') {
                         alert('No tiene permiso para modificar activos.');
 
-                    }else {
+                    } else {
                         //alert('Hola');
                         if (response.trim() == "ok") {
                             //$element.parent().parent().remove();
@@ -1221,7 +1242,7 @@ $('document').ready(function()
                     console.log(error);
                 }
             });
-
+        }
     });
 /*
     $("#opciones").on("click",".fechaadq", function() {
@@ -1465,31 +1486,34 @@ $('document').ready(function()
         var id = $(this).attr("id");
         var $element = $(this);
 
-        $.ajax({
-            url:'./conf/ejecutor.php?eliminarAsig='+id,
-            type: "POST",
-            data: "eliminarAsig="+id,
-            success: function(response){
-                //alert('Hola');
-                if (response.trim()=='error'){
-                    alert('No esta autorizado para eliminar relaciones.');
-                } else {
-
-                    if (response.trim() == "ok") {
-                        $element.parent().parent().remove();
+        if (confirm('¿Desea eliminar la Asignación seleccionada?')) {
+            $.ajax({
+                url: './conf/ejecutor.php?eliminarAsig=' + id,
+                type: "POST",
+                data: "eliminarAsig=" + id,
+                success: function (response) {
+                    //alert('Hola');
+                    if (response.trim() == 'error') {
+                        alert('No esta autorizado para eliminar relaciones.');
                     } else {
 
-                        $("#errorEliminarAsig").fadeIn(1000, function () {
-                            $("#errorEliminarAsig").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
-                            // $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                        });
+                        if (response.trim() == "ok") {
+                            $element.parent().parent().remove();
+                        } else {
+
+                            $("#errorEliminarAsig").fadeIn(1000, function () {
+                                $("#errorEliminarAsig").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                                // $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                            });
+                        }
                     }
+                },
+                error: function (xhr, error) {
+                    console.log(xhr);
+                    console.log(error);
                 }
-            },
-            error: function(xhr, error){
-                console.log(xhr); console.log(error);
-            }
-        });
+            });
+        }
     });
 
 
@@ -1780,33 +1804,34 @@ $('document').ready(function()
         var id = $(this).attr("id");
         var $element = $(this);
 
+        if (confirm('¿Desea eliminar la Categoría seleccionada?')) {
+            $.ajax({
+                url: './conf/ejecutor.php?eliminarCate=' + id,
+                type: "POST",
+                data: "eliminarCate=" + id,
+                success: function (response) {
+                    //alert('Hola');
+                    if (response.trim() == 'error') {
+                        alert('No tiene permiso para eliminar Categorias.');
 
-        $.ajax({
-            url: './conf/ejecutor.php?eliminarCate=' + id,
-            type: "POST",
-            data: "eliminarCate=" + id,
-            success: function (response) {
-                //alert('Hola');
-                if (response.trim()=='error') {
-                    alert('No tiene permiso para eliminar Categorias.');
-
-                }else {
-                    if (response.trim() == "ok") {
-                        $element.parent().parent().remove();
                     } else {
+                        if (response.trim() == "ok") {
+                            $element.parent().parent().remove();
+                        } else {
 
-                        $("#errorCate").fadeIn(1000, function () {
-                            $("#errorCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
-                            $("#btn-loginCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                        });
+                            $("#errorCate").fadeIn(1000, function () {
+                                $("#errorCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                                $("#btn-loginCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                            });
+                        }
                     }
+                },
+                error: function (xhr, error) {
+                    console.log(xhr);
+                    console.log(error);
                 }
-            },
-            error: function (xhr, error) {
-                console.log(xhr);
-                console.log(error);
-            }
-        });
+            });
+        }
 
     });
 
@@ -1899,33 +1924,34 @@ $('document').ready(function()
         var id = $(this).attr("id");
         var $element = $(this);
 
+        if (confirm('¿Desea eliminar la Sub-Categoría seleccionada?')) {
+            $.ajax({
+                url: './conf/ejecutor.php?eliminarsCate=' + id,
+                type: "POST",
+                data: "eliminarsCate=" + id,
+                success: function (response) {
+                    //alert('Hola');
+                    if (response.trim() == 'error') {
+                        alert('No tiene permiso para eliminar Sub-Categorias.');
 
-        $.ajax({
-            url: './conf/ejecutor.php?eliminarsCate=' + id,
-            type: "POST",
-            data: "eliminarsCate=" + id,
-            success: function (response) {
-                //alert('Hola');
-                if (response.trim()=='error') {
-                    alert('No tiene permiso para eliminar Sub-Categorias.');
-
-                }else {
-                    if (response.trim() == "ok") {
-                        $element.parent().parent().remove();
                     } else {
+                        if (response.trim() == "ok") {
+                            $element.parent().parent().remove();
+                        } else {
 
-                        $("#errorSubCate").fadeIn(1000, function () {
-                            $("#errorSubCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
-                            $("#btn-loginsCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
-                        });
+                            $("#errorSubCate").fadeIn(1000, function () {
+                                $("#errorSubCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                                $("#btn-loginsCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
+                            });
+                        }
                     }
+                },
+                error: function (xhr, error) {
+                    console.log(xhr);
+                    console.log(error);
                 }
-            },
-            error: function (xhr, error) {
-                console.log(xhr);
-                console.log(error);
-            }
-        });
+            });
+        }
 
     });
 
@@ -2302,9 +2328,6 @@ $('document').ready(function()
     /*fin agregado*/
 
     //FIN AGREGADO
-
-
-
 
 
 

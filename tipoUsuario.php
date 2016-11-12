@@ -50,8 +50,8 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <hr />
 
 <?php
-$stmt = $dbh->prepare("SELECT m.idmodulos, m.descModulo 
-                           FROM  modulos m  ");
+$stmt = $dbh->prepare("SELECT m.idmodulos, m.descModulo ".
+                      " FROM  modulos m  ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -77,6 +77,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <div class="form-group">
                 <select class="form-control" id="modulo" name="modulo" required>
+                    <option value="" selected disabled>Seleccione Módulo</option>
                     <?php
                     foreach ($data as $row) {
                         ?>
@@ -98,7 +99,9 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 <button type="submit" class="btn btn-default" name="btn-login2" id="btn-login2"  >
                     <span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar
                 </button>
-
+                <button type="reset" class="btn btn-default" name="btn-loginReset" id="btn-loginReset"  >
+                    <span class="glyphicon glyphicon-erase"></span> &nbsp; Borrar
+                </button>
             </div>
         </form>
     </div>

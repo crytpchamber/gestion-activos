@@ -33,10 +33,7 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
 <body>
 
 <div class="container">
-    <div id="bienvenido" class='alert alert-success'>
-        <button id="close" class='close' data-dismiss='alert'>&times;</button>
-        Hola, <strong><?php echo $row['Nombre'] . " " . $row['Apellido']; ?>.  Bienvenido</strong>.
-    </div>
+
 </div>
 
 <div class="container">
@@ -125,7 +122,12 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
 
                 
 
-                <div id="opciones"> </div>
+                <div id="opciones">
+                    <div id="bienvenido" class='alert alert-success' >
+                        <button id="close" class='close' data-dismiss='alert'>&times;</button>
+                        Hola, <strong><?php echo $row['Nombre'] . " " . $row['Apellido']; ?>.  Bienvenido</strong>.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -133,10 +135,12 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
 
 
 <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="js/jquery.mask.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
+
 <!-- <script type="text/javascript" src="js/jquery.form.min.js"></script> -->
 
 </body>

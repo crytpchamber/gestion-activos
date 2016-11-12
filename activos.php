@@ -109,10 +109,13 @@ $data3=$stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="serial" id="serial" placeholder="Codigo de Activo" required>
+                <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Codigo de Activo" required>
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="serial" id="serial" placeholder="Serial de Activo" required>
             </div>
             <div class="form-group">
                 <label >Fecha de Adquisición</label>
@@ -132,6 +135,7 @@ $data3=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="form-group">
                 <label >Ubicación</label>
                 <select class="form-control" id="ubic" name="ubic" title="ubic" >
+                    <option value="" selected disabled>Seleccione Ubicación</option>
                     <?php
                     foreach ($data2 as $row) {
                         ?>
@@ -150,6 +154,7 @@ $data3=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="form-group">
                 <label >Categoria</label>
                 <select class="form-control" id="categ" name="categ" title="categ" >
+                    <option value="" selected disabled>Seleccione Categoría</option>
                     <?php
                     foreach ($data3 as $row) {
                         ?>
@@ -168,7 +173,7 @@ $data3=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="form-group" id="subcateg">
                 <label >Sub-Categoria</label>
                 <select class="form-control" id="scateg" name="scateg" title="scateg" >
-                    <option value=" ">
+                    <option value=" " selected disabled>
                         Seleccione una Categoria.
                     </option>
                 </select>

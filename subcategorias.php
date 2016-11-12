@@ -72,8 +72,9 @@ include_once 'conf/dbconn.php';
                 </div>";
 
             echo "<div class='form-group'>
-                                <select class='form-control' id='categoria' name='categoria' required> ";
-
+                  <label>Categoría</label>
+                  <select class='form-control' id='categoria' name='categoria' required> ";
+            echo "<option value='' selected disabled>Seleccionar Categoría</option>";
                 foreach ($data2 as $row2) {
 
 
@@ -94,7 +95,9 @@ include_once 'conf/dbconn.php';
                     <button type='submit' class='btn btn-default' name='btn-loginsCate' id='btn-loginsCate' value='' >
                         <span class='glyphicon glyphicon-log-in'></span> &nbsp; Registrar
                     </button>
-    
+                    <button type='reset' class='btn btn-default' name='btn-loginReset' id='btn-loginReset' value='' >
+                        <span class='glyphicon glyphicon-erase'></span> &nbsp; Borrar
+                    </button>  
                 </div>
             </form>
         </div>

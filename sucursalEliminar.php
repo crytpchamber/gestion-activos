@@ -59,7 +59,7 @@ if ($_SESSION['eliminar']=='0') {
     
             <label >Filtrar por Sucursal</label>
             <select class='form-control filtrosSucu' id='sucursal' name='sucursal' title='sucursal' > ";
-
+            echo "<option value='' selected disabled>Seleccionar Sucursal</option>";
 
     foreach ($data as $row) {
 
