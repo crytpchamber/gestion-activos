@@ -696,7 +696,21 @@ $('document').ready(function()
 
                     } else {
                         if (response.trim() == "ok") {
-                            $element.parent().parent().remove();
+                            //$element.parent().parent().remove();
+
+                            $.ajax({
+                                url: './responsableEliminar.php',
+                                type: "GET",
+                                success: function (data) {
+                                    $('#opciones').html(data);
+                                }, error: function (xhr, error) {
+                                    console.log(xhr);
+                                    console.log(error);
+                                }
+                            });
+
+
+
                         } else {
 
                             $("#errorResp").fadeIn(1000, function () {
@@ -855,7 +869,20 @@ $('document').ready(function()
                 success: function (response) {
                     //alert('Hola');
                     if (response.trim() == "ok") {
-                        $element.parent().parent().remove();
+                        //$element.parent().parent().remove();
+
+                        $.ajax({
+                            url: './sucursalEliminar.php',
+                            type: "GET",
+                            success: function (data) {
+                                $('#opciones').html(data);
+                            }, error: function (xhr, error) {
+                                console.log(xhr);
+                                console.log(error);
+                            }
+                        });
+
+
                     } else {
 
                         $("#errorSucu").fadeIn(1000, function () {
@@ -1012,7 +1039,20 @@ $('document').ready(function()
                 success: function (response) {
                     //alert('Hola');
                     if (response.trim() == "ok") {
-                        $element.parent().parent().remove();
+                        //$element.parent().parent().remove();
+
+                        $.ajax({
+                            url: './ubicacionEliminar.php',
+                            type: "GET",
+                            success: function (data) {
+                                $('#opciones').html(data);
+                            }, error: function (xhr, error) {
+                                console.log(xhr);
+                                console.log(error);
+                            }
+                        });
+
+
                     } else {
 
                         $("#errorUbic").fadeIn(1000, function () {
@@ -1171,7 +1211,20 @@ $('document').ready(function()
 
                     } else {
                         if (response.trim() == "ok") {
-                            $element.parent().parent().remove();
+                            //$element.parent().parent().remove();
+
+                            $.ajax({
+                                url: './activos.php',
+                                type: "GET",
+                                success: function (data) {
+                                    $('#opciones').html(data);
+                                }, error: function (xhr, error) {
+                                    console.log(xhr);
+                                    console.log(error);
+                                }
+                            });
+
+
                         } else {
 
                             $("#errorAct").fadeIn(1000, function () {
@@ -1816,7 +1869,19 @@ $('document').ready(function()
 
                     } else {
                         if (response.trim() == "ok") {
-                            $element.parent().parent().remove();
+                            //$element.parent().parent().remove();
+
+                            $.ajax({
+                                url: './categorias.php',
+                                type: "GET",
+                                success: function (data) {
+                                    $('#opciones').html(data);
+                                }, error: function (xhr, error) {
+                                    console.log(xhr);
+                                    console.log(error);
+                                }
+                            });
+
                         } else {
 
                             $("#errorCate").fadeIn(1000, function () {
@@ -1936,7 +2001,19 @@ $('document').ready(function()
 
                     } else {
                         if (response.trim() == "ok") {
-                            $element.parent().parent().remove();
+                            //$element.parent().parent().remove();
+
+                            $.ajax({
+                                url: './subcategorias.php',
+                                type: "GET",
+                                success: function (data) {
+                                    $('#opciones').html(data);
+                                }, error: function (xhr, error) {
+                                    console.log(xhr);
+                                    console.log(error);
+                                }
+                            });
+
                         } else {
 
                             $("#errorSubCate").fadeIn(1000, function () {
@@ -2234,104 +2311,99 @@ $('document').ready(function()
     });
 
 
-
-
-
-
-    $(".form-group #btn-opbuscador2").click(function(){
-
-        //alert("sirvedddd"+document.getElementsByName('string')[0].value);
-        var type=document.getElementsByName('string')[0].value;
-        var filter=document.getElementsByName('opbusqueda')[0].value;
-
-        $.ajax({
-            url:'reportesinventario.php',
-            type:'GET',
-            data:{
-                tipo:type,
-                filtro:filter
-            },
-
-            error: function(xhr, error){
-                console.log(xhr); console.log(error);
-            },
-            success: function(data){
-
-                $('#tablaResponsable').hide().html(data).fadeIn('slow');
-
-                if (filter=="Pcategoria") {
-                    $('#d').attr("href","exportadorinvc.php");
-                }else{if (filter=="Psubcategoria") {
-                    $('#d').attr("href","exportadorinvsc.php");
-                }else{if (filter=="Pubicacion") {
-                    $('#d').attr("href","exportadorinvu.php");
-                }else{if (filter=="Psucursal") {
-                    $('#d').attr("href","exportadorinvs.php");
-                }else{
-
-                }
-
-                }
-
-                }
-
-                }
-
-            }
-        });
-    });
-
-    $(".form-group #btn-opbuscador").click(function(){
-
-        //alert("sirvedddd"+document.getElementsByName('string')[0].value);
-        var type=document.getElementsByName('string')[0].value;
-        var filter=document.getElementsByName('opbusqueda')[0].value;
-
-        $.ajax({
-            url:'reportestablas.php',
-            type:'GET',
-            data:{
-                tipo:type,
-                filtro:filter
-            },
-
-            error: function(xhr, error){
-                console.log(xhr); console.log(error);
-            },
-            success: function(data){
-
-                $('#tablaResponsable').hide().html(data).fadeIn('slow');
-
-                if (filter=="Pactivo") {
-                    $('#d').attr("href","exportadorsa.php");
-                }else{if (filter=="Presponsable") {
-                    $('#d').attr("href","exportadorsr.php");
-                }else{if (filter=="Pubicacion") {
-                    $('#d').attr("href","exportadorsu.php");
-                }else{if (filter=="Psucursal") {
-                    $('#d').attr("href","exportadorss.php");
-                }else{
-
-                }
-
-                }
-
-                }
-
-                }
-
-            }
-        });
-    });
-
-
-    /*fin agregado*/
-
-    //FIN AGREGADO
-
-
-
-
 });// llave cerrada del document ready function AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 
 
+
+
+
+
+$(".form-group #btn-opbuscador2").click(function(){
+
+    //alert("sirvedddd"+document.getElementsByName('string')[0].value);
+    var type=document.getElementsByName('string')[0].value;
+    var filter=document.getElementsByName('opbusqueda')[0].value;
+
+    $.ajax({
+        url:'reportesinventario.php',
+        type:'GET',
+        data:{
+            tipo:type,
+            filtro:filter
+        },
+
+        error: function(xhr, error){
+            console.log(xhr); console.log(error);
+        },
+        success: function(data){
+
+            $('#tablaResponsable').hide().html(data).fadeIn('slow');
+
+            if (filter=="Pcategoria") {
+                $('#d').attr("href","exportadorinvc.php");
+            }else{if (filter=="Psubcategoria") {
+                $('#d').attr("href","exportadorinvsc.php");
+            }else{if (filter=="Pubicacion") {
+                $('#d').attr("href","exportadorinvu.php");
+            }else{if (filter=="Psucursal") {
+                $('#d').attr("href","exportadorinvs.php");
+            }else{
+
+            }
+
+            }
+
+            }
+
+            }
+
+        }
+    });
+});
+
+$(".form-group #btn-opbuscador").click(function(){
+
+    //alert("sirvedddd"+document.getElementsByName('string')[0].value);
+    var type=document.getElementsByName('string')[0].value;
+    var filter=document.getElementsByName('opbusqueda')[0].value;
+
+    $.ajax({
+        url:'reportestablas.php',
+        type:'GET',
+        data:{
+            tipo:type,
+            filtro:filter
+        },
+
+        error: function(xhr, error){
+            console.log(xhr); console.log(error);
+        },
+        success: function(data){
+
+            $('#tablaResponsable').hide().html(data).fadeIn('slow');
+
+            if (filter=="Pactivo") {
+                $('#d').attr("href","exportadorsa.php");
+            }else{if (filter=="Presponsable") {
+                $('#d').attr("href","exportadorsr.php");
+            }else{if (filter=="Pubicacion") {
+                $('#d').attr("href","exportadorsu.php");
+            }else{if (filter=="Psucursal") {
+                $('#d').attr("href","exportadorss.php");
+            }else{
+
+            }
+
+            }
+
+            }
+
+            }
+
+        }
+    });
+});
+
+/*fin agregado*/
+
+//FIN AGREGADO
