@@ -8,7 +8,11 @@ use Dompdf\Options;
 
  ob_start(); 
 require_once 'pdfss.php';//'pdf.php';
-  $dompdf = new DOMPDF();
+  $options = new Options();
+$options->set('isPhpEnabled', TRUE);
+$options->set('isJavascriptEnabled', TRUE);
+
+ $dompdf = new DOMPDF($options);
 $dompdf->load_html(ob_get_clean());
 $dompdf->render();
 $pdf = $dompdf->output();

@@ -6,12 +6,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
 	<title>Asignaciones por activo</title>
-    <style>
-      @media print { .footer { page-break-after: always !important; }}
-      
-      .footer { position: absolute; bottom: 0px; }
-      .pagenum:before { content: counter(page); }
-    </style>
+    
 </head>
 <body style="background-color:#F1F3FA;  border-radius: 25px;">
 
@@ -27,8 +22,20 @@ include_once 'conf/dbconn.php';
 
 $opcion=$_SESSION['opcion'];
 $referencia=$_SESSION['referencia'];
+ 
+    
+    if (isset($_SESSION['Vfecha2']) && isset($_SESSION['Vfecha1']) && $_SESSION['Vfecha2']!="" && $_SESSION['Vfecha1']!="") {
+    $Vfecha1=$_SESSION['Vfecha1'];
+    $Vfecha2=$_SESSION['Vfecha2'];
+
+$stmt = $dbh->prepare("select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal  from relacionactivos,activos,resposable ,ubicacion ,sucursal  where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' and activos.Descripcion='$referencia'; ");
+}else{
 
 $stmt = $dbh->prepare("select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal  from relacionactivos,activos,resposable ,ubicacion ,sucursal  where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.Descripcion='$referencia'; ");
+}
+
+
+
 
 $stmt->execute();
 //$data = $stmt->fetchALL();
@@ -53,7 +60,7 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <span ><img align="left" style="
     width: 25%;
 " src="imgs/catemar.png" ></span><div style="margin-left:22%;" class="container col-lg-4 col-md-4"><table style="margin-left:100px;" class=" ">
-        <tr><th style="text-align:right;" >Fecha :</th><td style="text-align:center;"><?=date("d-m-y");?>&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;">Hora :</span>&nbsp;    <?=date("H:m:s");?>  </td></tr>
+        
         <?php foreach ($data2 as $ro2 ) {
             echo "<tr class='borderless '><th style=' text-align:right;' >Emitido Por:</th><td style='text-align:center;'> &nbsp;".$ro2['Nombre']." ".$ro2['Apellido']." (".$ro2['cargo'].") </td></tr>";
             echo "<tr class='borderless '><th style=' text-align:right;' >Cedula: </th><td style='text-align:center;'>".$ro2['Cedula']."</td></tr>";
@@ -95,8 +102,24 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
     </table>
 </div><!--end of .table-responsive-->
-</div>
-<div class="footer" >Page:<span  class="pagenum"></span></div>
+</div> 
+
+ <script type="text/php">
+
+
+        if ( isset($pdf) ) {
+
+
+          
+          $pdf->page_text(550, 770, "Pagina: {PAGE_NUM} de {PAGE_COUNT}", "bold", 6, array(0,0,0));
+          $pdf->page_text(50, 760, "     Fecha :        ".date("d-m-y") , "bold", 6, array(0,0,0));   
+          $pdf->page_text(50, 770, "      Hora  :        ".date("H:m:s") , "bold", 6, array(0,0,0)); 
+          
+          $pdf->page_text(45, 780, "Emitido Por:   ".$_SESSION['NR']." ".$_SESSION['AR'] , "bold", 6, array(0,0,0)); 
+          
+
+        }
+        </script> 
 
 </body>
 </html>

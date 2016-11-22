@@ -702,6 +702,7 @@ if (isset($_POST['btnmodAct'])) {
         $tiempodepre = trim($_POST['tiempodepre']);
         $valor = trim($_POST['valor']);
         $ubic = trim($_POST['ubic']);
+        $estado = trim($_POST['estado']);
         $date = 0;
         //echo date_format((string)$tiempoadq,"dd-MM-YYYY");
         //echo $tiempoadq;
@@ -733,12 +734,17 @@ if (isset($_POST['btnmodAct'])) {
                         $ubicAnt = $row['ubicacion_idUbicacion'];
                         $observacion = $observacion . "'Se modifico la fecha de adquisicion de $ubicAnt -> $ubic. ' ";
                     }
+                    if ($row['estado'] != $estado) {
+                        $estadoAnt = $row['estado'];
+                        $observacion = $observacion . "'Se modifico la fecha de adquisicion de $estadoAnt -> $estado. ' ";
+                    }
                 }
 
 
                 $stmt = $dbh->prepare("update activos set fecha_adquisicion = '". $tiempoadq ."', ".
                                       "tiempo_depre = ".$tiempodepre .", " .
                                       " valor_adquisicion = ".$valor.", " .
+                                      " estado = '".$estado."', " .
                                       "ubicacion_idUbicacion = '".$ubic ."' " .
                                       " where idActivos=:uid");
                 //$stmt->bindParam(':fecha_adq', trim($tiempoadq), PDO::PARAM_STR, 10);

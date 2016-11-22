@@ -17,7 +17,7 @@ if ($_SESSION['categorias']=='0') {
     
    
         <li class='icon'>
-            <a href='javascript:void(0);' onclick='myFunction()'</a>
+            <a href='javascript:void(0);' onclick='myFunction()'>&#9776;</a>
         </li>
     </ul>
     <script type='text/javascript' src='js/jquery-3.1.1.js'></script>

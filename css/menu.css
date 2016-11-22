@@ -5,7 +5,7 @@ ul.topnav {
     padding: 0;
     overflow: hidden;
     background-color: #6f1010;
-    border-radius: 15px;
+    border-radius: 0px;
 }
 
 /* Float the list items side by side */

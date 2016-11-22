@@ -9,7 +9,7 @@ if(!isset($_SESSION['user_session']))
 include_once 'conf/dbconn.php';
 
 
-$stmt = $dbh->prepare("select categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria; ");
+$stmt = $dbh->prepare("select activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria; ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -62,6 +62,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Activo</th>
             <th>Fecha de adquisicion</th>
             <th>Serial</th>
+            <th>Estado</th>
             <th>Valor</th>
             <th>Ubicacion</th>
             <th>Sucursal</th>
@@ -75,7 +76,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($data as $row ) {
             echo "<tr>";
             echo "<td>" . $row['categoria']."</td><td>".$row['subcategoria'] . "</td><td>" . $row['activo'] . "</td>" .
-                "<td>" . $row['fecha_adquisicion'] . "</td>"."<td>" . $row['serial']." </td><td>".$row['valor_adquisicion'] . "</td><td>" . $row['ubicacion'] . "</td>"  ;
+                "<td>" . $row['fecha_adquisicion'] . "</td>"."<td>" . $row['serial']." </td>"."<td>" . $row['estado']." </td><td>".$row['valor_adquisicion'] . "</td><td>" . $row['ubicacion'] . "</td>"  ;
               echo "<td>" . $row['sucursal']."</td>";  
             echo "</tr>";
         }

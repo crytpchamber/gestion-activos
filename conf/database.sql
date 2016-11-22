@@ -41,16 +41,17 @@ CREATE TABLE `activos` (
   `serial` varchar(45) NOT NULL,
   `ubicacion_idUbicacion` int(11) NOT NULL,
   `categorias_idCategoria` int(11) NOT NULL,
-  `idSubCategoria` int(11) NOT NULL
+  `idSubCategoria` int(11) NOT NULL,
+  `estado` varchar(2) NOT NULL DEFAULT 'D'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `activos`
 --
 
-INSERT INTO `activos` (`idActivos`, `Descripcion`, `fecha_adquisicion`, `tiempo_depre`, `valor_adquisicion`, `fecha_registro`, `fecha_ini_deprec`, `serial`, `ubicacion_idUbicacion`, `categorias_idCategoria`, `idSubCategoria`) VALUES
-(1, 'Laptop Dell E6510', '2016-03-15', 6, '250001.000', '2016-10-07', '2011-04-14', '', 2, 1, 1),
-(2, 'Boligrafo Azul', '2016-10-07', 3, '1050.000', '2016-10-07', '2016-10-07', '', 2, 3, 2);
+INSERT INTO `activos` (`idActivos`, `Descripcion`, `fecha_adquisicion`, `tiempo_depre`, `valor_adquisicion`, `fecha_registro`, `fecha_ini_deprec`, `serial`, `ubicacion_idUbicacion`, `categorias_idCategoria`, `idSubCategoria`,`estado`) VALUES
+(1, 'Laptop Dell E6510', '2016-03-15', 6, '250001.000', '2016-10-07', '2011-04-14', '', 2, 1, 1,'D'),
+(2, 'Boligrafo Azul', '2016-10-07', 3, '1050.000', '2016-10-07', '2016-10-07', '', 2, 3, 2,'D');
 
 -- --------------------------------------------------------
 

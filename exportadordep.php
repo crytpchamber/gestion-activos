@@ -2,32 +2,21 @@
 // reference the Dompdf namespace
 
 require_once 'dompdf/autoload.inc.php';
-
-
-
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-/**
-* 
-*/
-
 
  ob_start(); 
-require_once 'pdfa.php';//'pdf.php';
-//$fpdf= new PDF(); 
-//$fpdf->AliasNbPages();
-
+require_once 'pdfdep.php';//'pdf.php';
 $options = new Options();
 $options->set('isPhpEnabled', TRUE);
 $options->set('isJavascriptEnabled', TRUE);
 
  $dompdf = new DOMPDF($options);
 $dompdf->load_html(ob_get_clean());
-//$fpdf->Output();
 $dompdf->render();
 $pdf = $dompdf->output();
-$filename = "Reporte de activos.pdf";
+$filename = "Reporte de Responsables.pdf";
 file_put_contents($filename, $pdf);
 $dompdf->stream($filename);
 /*

@@ -70,7 +70,7 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
                 <div class="profile-usermenu">
-                    <ul class="nav">
+                    <ul class="nav navi" id="usernav">
                         <li>
                             <a id="Inicio" href="javascript:void(0);">
                                 <i class="glyphicon glyphicon-home"></i>
@@ -110,6 +110,9 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
                             <a id="Salir" href="javascript:void(0);">
                                 <i  class="glyphicon glyphicon-log-out"></i>
                                 Salir </a>
+                        </li>
+                        <li class='icon2'>
+                            <a href='javascript:void(0);' onclick='myFunction2()'>&#9776;</a>
                         </li>
                     </ul>
                 </div>

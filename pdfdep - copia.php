@@ -1,18 +1,17 @@
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
-	<title>Reporte general de activos</title>
-    
+    <title>Reporte de activos</title>
+   
 </head>
 <body style="background-color:#F1F3FA;  border-radius: 25px;">
-	<?php
-include "pdf1.php";
-
-
+    <?php
+session_start();
+error_reporting(E_ALL ^ E_NOTICE);
 
 if(!isset($_SESSION['user_session']))
 {
@@ -20,6 +19,12 @@ if(!isset($_SESSION['user_session']))
 }
 
 include_once 'conf/dbconn.php';
+
+
+$stmt = $dbh->prepare("SELECT * from activos ;");
+$stmt->execute();
+//$data = $stmt->fetchALL();
+$data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 //datos del emisor
 
@@ -31,17 +36,14 @@ $stmt->execute();
 //$data = $stmt->fetchALL();
 $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
 //fin de datos del emisor
+
 ?>
    <br><br>
 <div class="container">
 <div id="tablaResponsable" class="table-responsive table-condensed ">
-
-
-
-
 <span ><img align="left" style="
     width: 25%;
-" src="imgs/catemar.png" > </span><div style="margin-left:22%;" class="container col-lg-4 col-md-4"><table style="margin-left:100px;" class=" ">
+" src="imgs/catemar.png" ></span><div style="margin-left:22%;" class="container col-lg-4 col-md-4"><table style="margin-left:100px;" class=" ">
         
         <?php foreach ($data2 as $ro2 ) {
             echo "<tr class='borderless '><th style=' text-align:right;' >Emitido Por:</th><td style='text-align:center;'> &nbsp;".$ro2['Nombre']." ".$ro2['Apellido']." (".$ro2['cargo'].") </td></tr>";
@@ -52,18 +54,40 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
         
     </table></div> 
 <h1 align="center" >  Reporte de activos </h1>
-    
+
 <hr/>
-    <table  class="table table-striped table-bordered"  style=" font-size: smaller;">
+    <table  class="table table-striped table-bordered"  style=" font-size: 50%;">
         
         <tr>
-            <th align="center">Activo</th>
-            <th align="center">Fecha de adquisicion</th>
-            <th align="center">Nombre</th>
-            <th align="center">Apellido</th>
-            <th align="center">Cedula</th>
-            <th align="center">Ubicacion</th>
-            <th align="center">Sucursal</th>
+            <th align="center">ID</th>
+            <th align="center">Descripcion</th>
+            <th align="center">Inicio de depreciacion</th>
+            <th align="center">Ene</th>
+            <th align="center">Feb</th>
+            <th align="center">Mar</th>
+            <th align="center">Abr</th>
+            <th align="center">May</th>
+            <th align="center">Jun</th>
+            <th align="center">Jul</th>
+            <th align="center">Ago</th>
+            <th align="center">Sep</th>
+            <th align="center">Oct</th>
+            <th align="center">Nov</th>
+            <th align="center">Dic</th>
+             <?php
+        foreach ($data as $row ) {
+        $fechainidada=explode("-",$row['fecha_ini_deprec']);
+        $meses=$row['tiempo_depre']*12;
+        $LocalM=date("m");
+        $LocalY=date("Y");
+        $acum=$LocalY-$fechainidada[0];
+        $acummes=$acum*12;
+           /* for ($i=1;$i<=$LocalM;$i++){
+                echo "<th>".$i."-".$LocalY."</th>";
+
+            }*/
+        }
+        ?>
             <!-- <th>Eliminar</th> -->
         </tr>
         
@@ -71,12 +95,36 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <?php
         foreach ($data as $row ) {
-            echo "<tr>";
+
+
+            $fechainidada=explode("-",$row['fecha_ini_deprec']);
+        $meses=$row['tiempo_depre']*12;
+        $LocalM=date("m");
+        $LocalY=date("Y");
+        $acum=$LocalY-$fechainidada[0];
+        $acummes=$acum*12;
         
-            echo "<td style=' vertical-align: middle ;' >" . $row['activo']."</td><td align='center' style=' vertical-align: middle ;'>".$row['fecha_adquisicion'] . "</td><td align='center' style=' vertical-align: middle ;'>" . $row['Nombre'] . "</td>" .
-                "<td align='center' style=' vertical-align: middle ;'>" . $row['Apellido'] . "</td>"."<td align='center' style=' vertical-align: middle ;'>" . $row['Cedula']." </td><td align='center' style=' vertical-align: middle ;' >".$row['ubicacion'] . "</td><td style=' vertical-align: middle ;' >" . $row['sucursal'] . "</td>"  ;
-                //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
-               // "<button id='" .$row['idResposable']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarResp'></button></td>";
+        $Vdepreciable=$row['valor_adquisicion'];
+        $meses=$row['tiempo_depre']*12;
+        $VPM=$Vdepreciable/$meses;
+        $VPMF=number_format($VPM,2,'.',',');
+        $negativo=$acummes*$VPMF;
+        $primervalor=$row['valor_adquisicion']-$negativo;
+        $rest=0;
+            echo "<tr>";
+            echo "<td>" . $row['idActivos']."</td><td>".$row['Descripcion'] ."</td><td>".$row['fecha_ini_deprec'] ."</td>";
+            for ($i=1;$i<=$LocalM;$i++){
+                echo "<td align='center'>";
+                if ($fechainidada[0]==$LocalY && $fechainidada[1]>$i) {
+                    echo "Null";
+                }else{
+
+                echo ($primervalor-$rest);
+                echo "</td>";
+                $rest+=$VPMF;
+                }
+
+            }
             echo "</tr>";
         }
 
@@ -86,7 +134,6 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
     </table>
 </div><!--end of .table-responsive-->
 </div>
-
 
  <script type="text/php">
 
@@ -105,9 +152,5 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         </script> 
 
-
-
 </body>
-
-
 </html>

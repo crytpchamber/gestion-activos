@@ -11,7 +11,7 @@ body {
 .profile-sidebar {
     padding: 20px 0 10px 0;
     background: #e9e9e9;
-    border-radius: 15px;
+    border-radius: 0px;
 }
 
 .profile-userpic img {
@@ -64,7 +64,7 @@ body {
 
 .profile-usermenu {
     margin-top: 30px;
-    min-height: 400px;
+    /*min-height: 400px;*/
 }
 
 .profile-usermenu ul li {
@@ -103,13 +103,44 @@ body {
     margin-left: -2px;
 }
 
+
+@media screen and (max-width:680px) {
+    ul.nav li:not(:first-child) {display: none;}
+    ul.nav li.icon2 {
+        float: right;
+        display: inline-block;
+    }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon.
+This class makes the topnav look good on small screens */
+@media screen and (max-width:680px) {
+    ul.nav.responsive {position: relative;}
+    ul.nav.responsive li.icon2 {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    ul.nav.responsive li {
+        float: none;
+        display: inline;
+    }
+    ul.nav.responsive li a {
+        display: block;
+        text-align: left;
+    }
+}
+
+
+
+
 /* Profile Content */
 .profile-content {
     padding: 20px;
     background: #e9e9e9;
     /*min-height: 618px;*/
     min-height: 700px;
-    border-radius: 15px;
+    border-radius: 0px;
 }
 
 .table {

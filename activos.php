@@ -10,7 +10,7 @@ include_once 'conf/dbconn.php';
 
 
 $stmt = $dbh->prepare("SELECT t.idActivos, t.Descripcion, t.fecha_adquisicion, t.tiempo_depre, t.valor_adquisicion, " .
-                      " t.fecha_registro, t.fecha_ini_deprec, t.ubicacion_idUbicacion, u.Descripcion as DescUbicacion " .
+                      " t.fecha_registro, t.fecha_ini_deprec, t.ubicacion_idUbicacion, u.Descripcion as DescUbicacion ,t.estado " .
                       "     FROM activos t inner join ubicacion u " .
                       " on u.idUbicacion = t.ubicacion_idUbicacion ");
 $stmt->execute();
@@ -45,8 +45,9 @@ $data3=$stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
             <th>Descripcion</th>
             <th>Fecha Adquisicion</th>
+            <th width='15%'>  Estado  </th>
             <th>Tiempo de Depreciación</th>
-            <th>Valor de Adquisicion</th>
+            <th align="center">Valor de Adquisicion</th>
             <th>Ubicación</th>
             <th>Opciones</th>
         </tr>
@@ -55,12 +56,31 @@ $data3=$stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php
 
         foreach ($data as $row ) {
+            $estado=trim($row['estado']);
             echo "<tr>";
-            echo "<td width='25%'>" . $row['Descripcion'] . "</td>" .
-                " <td width='12%'><input class='form-control' type='date' class='fechaadq' id='tiempoadq".$row['idActivos']."' value='" . $row['fecha_adquisicion'] . "'></td>" .
+            echo "<td>" . $row['Descripcion'] ."</td> " .
+                " <td width='25%'><input class='form-control' type='date' class='fechaadq' id='tiempoadq".$row['idActivos']."' value='" . $row['fecha_adquisicion'] . "'></td>" .
+                " <td><select class='form-control' id='estado".$row['idActivos']."' name='estado' title='estado' >" ;
+                if ($row['estado']=="A") {
+                        echo "<option value='A' selected>A</option>";
+                    } else {
+                        echo "<option value='A' >A</option>";
+                    }
+if ($row['estado']=="M") {
+                        echo "<option value='M' selected>M</option>";
+                    } else {
+                        echo "<option value='M' >M</option>";
+                    }
+                    if ($row['estado']=='D') {
+                        echo "<option value='D' selected>D</option>";
+                    } else {
+                        echo "<option value='D' >D</option>";
+                    }
+echo "</select></td>".
+               // "<td width='10%'><input class='form-control' style='width:100%' type='' id='estado".$row['idActivos']."' value='"  . $row['estado'] . "'></td>".
                 " <td width='12%'><input class='form-control' style='width:70%' type='number' id='tiempodepre".$row['idActivos']."' value='" . $row['tiempo_depre']. "'></td>" .
                 " <td width='25%'><input class='form-control' style='width:100%' type='number' id='valor".$row['idActivos']."' value='"  . $row['valor_adquisicion'] . "'></td>".
-                " <td width='12%'><select class='form-control' id='ubic".$row['idActivos']."' name='ubic' title='ubic' >" ;
+                " <td><select class='form-control' id='ubic".$row['idActivos']."' name='ubic' title='ubic' >" ;
 
             foreach ($data2 as $row2) {
 
@@ -71,9 +91,10 @@ $data3=$stmt->fetchAll(PDO::FETCH_ASSOC);
                     }
             }
 
+ 
 
 
-            echo "</select></td><td width='14%'> ".
+            echo "</select></td><td width='50%'> ".
 
 
 
@@ -82,6 +103,10 @@ $data3=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 <button id='" .$row['idActivos']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarAct'></button>
                 
                 </td>";
+                /*foreach ($data as $row ) {
+
+                    echo "<td width='25%'><input class='form-control' style='width:100%' type='number' id='estado".$row['idActivos']."' value='"  . $row['estado'] . "'></td>";
+                }*/
             echo "</tr>";
             //echo $row['tiempo_depre'];
         }

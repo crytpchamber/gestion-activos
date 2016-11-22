@@ -1,13 +1,15 @@
-<ul class="topnav" id="myTopnav">
-    <li  style="text-align: center; "><a  id="ActivosR" href="javascript:void(0);">Activos</a></li>
-    <li  style="text-align: center; "><a  id="ResponsablesR" href="javascript:void(0);">Responsables</a></li>
-    <li  style="text-align: center; "><a  id="UbicacionR" href="javascript:void(0);">Ubicacion</a></li>
-    <li  style="text-align: center; "><a  id="SucursalesR" href="javascript:void(0);">Sucursales</a></li>
-    <li  style="text-align: center; "><a  id="AsignacionesR" href="javascript:void(0);">Asignaciones</a></li>
-    <li  style="text-align: center; "><a  id="AuditorR" href="javascript:void(0);">Auditor</a></li>
-    <li  style="text-align: center; "><a  id="InventarioR" href="javascript:void(0);">Inventario</a></li>
+<ul class="topnav" id="myTopnav" >
+    <li  style="text-align: center;  "><a  style="padding-right: 9px ; padding-left: 9px ; " id="ActivosR" href="javascript:void(0);">Activos</a></li>
+    <li  style="text-align: center;  "><a  style="padding-right: 9px ; padding-left: 9px ;"  id="ResponsablesR" href="javascript:void(0);">Responsables</a></li>
+    <li  style="text-align: center;  "><a  style="padding-right: 9px ; padding-left: 9px ;"  id="UbicacionR" href="javascript:void(0);">Ubicacion</a></li>
+    <li  style="text-align: center;  "><a  style="padding-right: 9px ; padding-left: 9px ; " id="SucursalesR" href="javascript:void(0);">Sucursales</a></li>
+    <li  style="text-align: center;  "><a  style="padding-right: 9px ; padding-left: 9px ; " id="AsignacionesR" href="javascript:void(0);">Asignaciones</a></li>
+    <li  style="text-align: center;  "><a  style="padding-right: 9px ; padding-left: 9px ;"  id="AuditorR" href="javascript:void(0);">Auditor</a></li>
+    <li  style="text-align: center;  "><a  style="padding-right: 9px ; padding-left: 9px ;"  id="InventarioR" href="javascript:void(0);">Inventario</a></li>
+    <li  style="text-align: center;  "><a  style="padding-right: 9px ; padding-left: 9px ; " id="depreciacion" href="javascript:void(0);">Depreciación</a></li>
 
-    <li  style=" text-align: center; margin-left: 4px; background-color: #333;"><a  id="d" href="exportador.php">Descargar</a></li>
+
+    <li  style=" text-align: center; margin-left: 15px; background-color: #333; "><a  style="padding-right: 9px ; padding-left: 9px ; " id="d" href="exportador.php">Descargar</a></li>
 
    <!-- <li style="width: 25%; text-align: center"><a id="modificarGestion" href="javascript:void(0);">Modificar Asignacion</a></li>
     <li style="width: 33%; text-align: center"><a id="eliminarGestion" href="javascript:void(0);">Eliminar Asignacion</a></li> -->

@@ -8,17 +8,65 @@ $opcion=$_GET['filtro'];
 $referencia=$_GET['tipo'];
 if ($opcion=="Pactivo") {
     # code...
-    $sql="select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal  from relacionactivos,activos,resposable ,ubicacion ,sucursal  where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.Descripcion='$referencia';";
+    if (isset($_GET['fecha1']) && isset($_GET['fecha2'])  && $_GET['fecha2']!="" && $_GET['fecha1']!="") {
+    $Vfecha1=$_GET['fecha1'];
+    $Vfecha2=$_GET['fecha2'];
+     $_SESSION['Vfecha2']=$Vfecha2;
+    $_SESSION['Vfecha1']=$Vfecha1;
+
+$sql="select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal  from relacionactivos,activos,resposable ,ubicacion ,sucursal  where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal  and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' and activos.Descripcion='$referencia';";
+}else{
+
+$sql="select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal  from relacionactivos,activos,resposable ,ubicacion ,sucursal  where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal  and activos.Descripcion='$referencia';";
+}
+
+    
 
 }elseif ($opcion=="Presponsable") {
-    $sql="select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal from relacionactivos,activos,resposable ,ubicacion ,sucursal where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and resposable.Cedula='$referencia';";
+    if (isset($_GET['fecha1']) && isset($_GET['fecha2']) && $_GET['fecha2']!="" && $_GET['fecha1']!="") {
+    $Vfecha1=$_GET['fecha1'];
+    $Vfecha2=$_GET['fecha2'];
+     $_SESSION['Vfecha2']=$Vfecha2;
+    $_SESSION['Vfecha1']=$Vfecha1;
+
+$sql="select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal from relacionactivos,activos,resposable ,ubicacion ,sucursal where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' and resposable.Cedula='$referencia';";
+}else{
+
+$sql="select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal from relacionactivos,activos,resposable ,ubicacion ,sucursal where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and resposable.Cedula='$referencia';";
+}
+
+   
     # code...
 }elseif ($opcion=="Pubicacion") {
+    if (isset($_GET['fecha1']) && isset($_GET['fecha2'])  && $_GET['fecha2']!="" && $_GET['fecha1']!="") {
+    $Vfecha1=$_GET['fecha1'];
+    $Vfecha2=$_GET['fecha2'];
+    $_SESSION['Vfecha2']=$Vfecha2;
+    $_SESSION['Vfecha1']=$Vfecha1;
+
+ $sql="select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal from relacionactivos,activos,resposable ,ubicacion ,sucursal where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' and ubicacion.Descripcion='$referencia' ;";
+}else{
+
+ $sql="select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal from relacionactivos,activos,resposable ,ubicacion ,sucursal where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and ubicacion.Descripcion='$referencia' ;";
+}
+
     # code...
-    $sql="select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal from relacionactivos,activos,resposable ,ubicacion ,sucursal where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and ubicacion.Descripcion='$referencia' ;";
+   
 }elseif ($opcion=="Psucursal") {
+    if (isset($_GET['fecha1']) && isset($_GET['fecha2'])  && $_GET['fecha2']!="" && $_GET['fecha1']!="") {
+    $Vfecha1=$_GET['fecha1'];
+    $Vfecha2=$_GET['fecha2'];
+     $_SESSION['Vfecha2']=$Vfecha2;
+    $_SESSION['Vfecha1']=$Vfecha1;
+
+ $sql="select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal from relacionactivos,activos,resposable ,ubicacion ,sucursal where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' and sucursal.Descripcion='$referencia';";
+}else{
+
+ $sql="select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal from relacionactivos,activos,resposable ,ubicacion ,sucursal where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal  and sucursal.Descripcion='$referencia';";
+}
+
     # code...
-    $sql="select activos.Descripcion as activo ,activos.fecha_adquisicion ,resposable.Nombre ,resposable.Apellido,resposable.Cedula,ubicacion.Descripcion as ubicacion ,sucursal.Descripcion as sucursal from relacionactivos,activos,resposable ,ubicacion ,sucursal where relacionactivos.Activos_idActivos=activos.idActivos and relacionactivos.Resposable_idResposable=resposable.idResposable and resposable.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and sucursal.Descripcion='$referencia';";
+   
 }
 $stmt2 = $dbh->prepare($sql);
 $stmt2->execute();

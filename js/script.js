@@ -1252,12 +1252,14 @@ $('document').ready(function()
         var tiempodepre = "tiempodepre"+id;
         var valor = "valor"+id;
         var ubic = "ubic"+id;
+
+        var estado="estado"+id;
         
         //alert(tiempoadq);
 
 
         var data2 = {tiempoadq:$("#"+tiempoadq).val(),tiempodepre:$("#"+tiempodepre).val(),
-         valor:$("#"+valor).val(),ubic:$("#"+ubic).val(),btnmodAct:'1'};
+         valor:$("#"+valor).val(),ubic:$("#"+ubic).val(),estado:$("#"+estado).val(),btnmodAct:'1'};
 
         //var data = data2.serialize();
 
@@ -2309,10 +2311,29 @@ $('document').ready(function()
         });
 
     });
+    /* Mostrar Pantalla para reportes de depreciacion */
+    $("#menuAdmin").on("click","#depreciacion", function(){
+
+
+        console.log('entro');
+        $.ajax({
+            url:'depreciacionR.php',
+            type:'GET',
+            error: function(xhr, error){
+                console.log(xhr); console.log(error);
+            },
+            success: function(data){
+
+                $('#opciones').hide().html(data).fadeIn('slow');
+                 $('#d').attr("href","exportadordep.php");
+            }
+        });
+
+    });
+
 
 
 });// llave cerrada del document ready function AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-
 
 
 
@@ -2366,13 +2387,17 @@ $(".form-group #btn-opbuscador").click(function(){
     //alert("sirvedddd"+document.getElementsByName('string')[0].value);
     var type=document.getElementsByName('string')[0].value;
     var filter=document.getElementsByName('opbusqueda')[0].value;
-
+    var fecha1=document.getElementsByName('fecharango1')[0].value;
+     var fecha2=document.getElementsByName('fecharango2')[0].value;
+     
     $.ajax({
         url:'reportestablas.php',
         type:'GET',
         data:{
             tipo:type,
-            filtro:filter
+            filtro:filter,
+            fecha1:fecha1,
+            fecha2:fecha2
         },
 
         error: function(xhr, error){
@@ -2404,6 +2429,94 @@ $(".form-group #btn-opbuscador").click(function(){
     });
 });
 
+$(".form-group #btn-opbuscador9").click(function(){
+
+    //alert("sirvedddd"+document.getElementsByName('string')[0].value);
+    var fecha1=document.getElementsByName('fecharango1')[0].value;
+     var fecha2=document.getElementsByName('fecharango2')[0].value;
+  
+
+
+
+    $.ajax({
+        url:'activosR.php',
+        type:'GET',
+        data:{
+            fecha1:fecha1,
+            fecha2:fecha2
+        },
+
+        error: function(xhr, error){
+            console.log(xhr); console.log(error);
+        },
+        success: function(data){
+
+            $('#opciones').hide().html(data).fadeIn('slow');
+
+            /*if (filter=="Pactivo") {
+                $('#d').attr("href","exportadorsa.php");
+            }else{if (filter=="Presponsable") {
+                $('#d').attr("href","exportadorsr.php");
+            }else{if (filter=="Pubicacion") {
+                $('#d').attr("href","exportadorsu.php");
+            }else{if (filter=="Psucursal") {
+                $('#d').attr("href","exportadorss.php");
+            }else{
+
+            }
+
+            }
+
+            }
+
+            }*/
+
+       }
+   });
+});
+
+$(".form-group #btn-opbuscador3").click(function(){
+
+    //alert("sirvedddd"+document.getElementsByName('string')[0].value);
+    var type=document.getElementsByName('string')[0].value;
+   // var filter=document.getElementsByName('opbusqueda')[0].value;
+
+    $.ajax({
+        url:'depreciacionR.php',
+        type:'GET',
+        data:{
+            variableD:type,
+            //filtro:filter
+        },
+
+        error: function(xhr, error){
+            console.log(xhr); console.log(error);
+        },
+        success: function(data){
+
+            $('#opciones').hide().html(data).fadeIn('slow');
+
+           /* if (filter=="Pcategoria") {
+                $('#d').attr("href","exportadorinvc.php");
+            }else{if (filter=="Psubcategoria") {
+                $('#d').attr("href","exportadorinvsc.php");
+            }else{if (filter=="Pubicacion") {
+                $('#d').attr("href","exportadorinvu.php");
+            }else{if (filter=="Psucursal") {
+                $('#d').attr("href","exportadorinvs.php");
+            }else{
+
+            }
+
+            }
+
+            }
+
+            }*/
+
+        }
+    });
+});
 /*fin agregado*/
 
 //FIN AGREGADO

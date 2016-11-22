@@ -20,7 +20,7 @@ if ($_SESSION['ubicacion']=='0') {
     <li style='width: 33%; text-align: center'><a id='eliminarGestion' href='javascript:void(0);'>Eliminar Asignacion</a></li> -->
 
     <li class='icon'>
-        <a href='javascript:void(0);' onclick='myFunction();'</a>
+        <a href='javascript:void(0);' onclick='myFunction();'>&#9776;</a>
     </li>
     </ul>
     <script type='text/javascript' src='js/jquery-3.1.1.js'></script>
