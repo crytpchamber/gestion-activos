@@ -182,6 +182,7 @@ $('document').ready(function()
 
 
         var data = $elemento.serialize();
+        var respuesta;
 
         //console.log(JSON.stringify(data));
 
@@ -217,9 +218,9 @@ $('document').ready(function()
                     //setTimeout(' window.location.href = "Home.php"; ',2500);
                 }
                 else{
-
+                    respuesta = "Verificar que todos los campos esten llenos.";
                     $("#error4").fadeIn(1000, function(){
-                        $("#error4").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#error4").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                         $("#btn-login4").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                     });
                 }
@@ -234,6 +235,7 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        var respuesta;
 
         if (confirm('¿Desea eliminar el Mapa seleccionado?')) {
             $.ajax({
@@ -246,9 +248,9 @@ $('document').ready(function()
                     if (response.trim() == "ok") {
                         $element.parent().parent().remove();
                     } else {
-
+                        respuesta = "Imposible de eliminar, verifique no se encuentre asociado.";
                         $("#error4").fadeIn(1000, function () {
-                            $("#error4").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#error4").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                             $("#btn-login4").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                         });
                     }

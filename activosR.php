@@ -27,14 +27,31 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="form-group">
 
 
-
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3" style="text-align:center; padding:10px;  padding-right:0px !important;">
+            <span style="">Rango de fecha</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-1">
+            <input  style="" class='form-control' type='date'  class='fechaadq' name="fecharango1" id='fecharango1' >
+        </div>
+        <div class="col-sm-4">
+            <input style="" class='form-control' type='date'  class='fechaadq' name="fecharango2" id='fecharango2' >
+        </div>
+        <div class="col-xs-3">
+            <a style="" href="javascript:void(0);" class="btn btn-default"  id="btn-opbuscador9">
+                <span  class="glyphicon glyphicon-log-in"></span> &nbsp; Buscar
+            </a>
+        </div>
+    </div>
     
      
       
         
 
        
-              <table align="center">
+ <!--             <table align="center">
               <tr  >           <th colspan="2"  style="text-align:center; padding:10px;  padding-right:0px !important;"><span >Rango de Fecha</span></th>
 
 </tr>
@@ -47,10 +64,11 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                     <span  class="glyphicon glyphicon-log-in"></span> &nbsp; Buscar
                 </a></td>
                 </tr>
-                </table><br>
-                 
+                </table>
+    <br>
+     -->
            </div>
-           
+
 
 <hr />
 
