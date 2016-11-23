@@ -270,6 +270,8 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        var respuesta = "Imposible de eliminar, verifique no se encuentre asociado.";
+
         if (confirm('¿Desea eliminar el Usuario seleccionado?')) {
             $.ajax({
                 url: 'eliminarUsuario.php?id=' + id,
@@ -283,7 +285,7 @@ $('document').ready(function()
                     } else {
 
                         $("#error2").fadeIn(1000, function () {
-                            $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                             $("#btn-loginUsuario").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                         });
                     }
@@ -301,6 +303,8 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        var respuesta = "Imposible de eliminar, verifique no se encuentre asociado.";
+
         if (confirm('¿Desea eliminar el Tipo de Usuario seleccionado?')) {
             $.ajax({
                 url: 'eliminarTipo.php?id=' + id,
@@ -313,7 +317,7 @@ $('document').ready(function()
                     } else {
 
                         $("#error2").fadeIn(1000, function () {
-                            $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                             $("#btn-login").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                         });
                     }
@@ -331,6 +335,7 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        var respuesta = "Imposible de eliminar, verifique no se encuentre asociado.";
 
         if (confirm('¿Desea eliminar el Modulo seleccionado?')) {
             $.ajax({
@@ -344,7 +349,7 @@ $('document').ready(function()
                     } else {
 
                         $("#error3").fadeIn(1000, function () {
-                            $("#error3").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#error3").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                             $("#btn-login3").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                         });
                     }
@@ -365,6 +370,7 @@ $('document').ready(function()
         event.preventDefault();
 
         var formData = new FormData($(this)[0]);
+        var respuesta = "Debe llenar todos los campos.";
 
         console.log(formData);
 
@@ -408,7 +414,7 @@ $('document').ready(function()
                 else{
 
                     $("#error2").fadeIn(1000, function(){
-                        $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                         $("#btn-loginUsuario").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                     });
                 }
@@ -416,7 +422,7 @@ $('document').ready(function()
             error : function(response2) {
 
                 $("#error2").fadeIn(1000, function(){
-                    $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                     $("#btn-loginUsuario").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                 });
             }
@@ -433,6 +439,7 @@ $('document').ready(function()
         var $elemento = $(this).parent().parent();
         //alert($elemento.attr('id'));
         var data = $elemento.serialize();
+        var respuesta = "Debe llenar todos los campos.";
 
         $.ajax({
 
@@ -468,7 +475,7 @@ $('document').ready(function()
                 else{
 
                     $("#error2").fadeIn(1000, function(){
-                        $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                         $("#btn-login2").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                     });
                 }
@@ -484,7 +491,7 @@ $('document').ready(function()
 
         var $elemento = $(this).parent().parent();
         //alert($elemento.attr('id'));
-
+        var respuesta = "Debe llenar todos los campos.";
 
         var data = $elemento.serialize();
 
@@ -524,7 +531,7 @@ $('document').ready(function()
                 else{
 
                     $("#error3").fadeIn(1000, function(){
-                        $("#error3").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#error3").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                         $("#btn-login3").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                     });
                 }
@@ -623,6 +630,7 @@ $('document').ready(function()
         var $elemento = $(this).parent().parent();
         //alert($elemento.attr('id'));
         var data = $elemento.serialize();
+        var respuesta = "¡Debe llenar todos los campos.";
 
         $.ajax({
 
@@ -637,7 +645,7 @@ $('document').ready(function()
             error : function(response2) {
 
                 $("#errorResp").fadeIn(1000, function(){
-                    $("#errorResp").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#errorResp").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                     $("#btn-loginResp").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                 });
             },
@@ -670,7 +678,7 @@ $('document').ready(function()
                     else {
 
                         $("#errorResp").fadeIn(1000, function () {
-                            $("#errorResp").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#errorResp").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                             $("#btn-loginResp").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                         });
                     }
@@ -685,6 +693,7 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        var respuesta = "¡Verifique que no se encuentre asociado antes de eliminar";
 
         if (confirm('¿Desea eliminar el Responsable seleccionado?')) {
             $.ajax({
@@ -716,7 +725,7 @@ $('document').ready(function()
                         } else {
 
                             $("#errorResp").fadeIn(1000, function () {
-                                $("#errorResp").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                                $("#errorResp").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                                 $("#btn-loginResp").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                             });
                         }
@@ -806,6 +815,7 @@ $('document').ready(function()
         var $elemento = $(this).parent().parent();
         //alert($elemento.attr('id'));
         var data = $elemento.serialize();
+        var respuesta = "¡Debe llenar todos los campos.";
 
         $.ajax({
 
@@ -820,7 +830,7 @@ $('document').ready(function()
             error : function(response2) {
 
                 $("#errorSucu").fadeIn(1000, function(){
-                    $("#errorSucu").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#errorSucu").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                     $("#btn-loginSucu").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                 });
             },
@@ -848,7 +858,7 @@ $('document').ready(function()
                 else{
 
                     $("#errorSucu").fadeIn(1000, function(){
-                        $("#errorSucu").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#errorSucu").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                         $("#btn-loginSucu").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                     });
                 }
@@ -862,6 +872,7 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        var respuesta = "¡Verifique que no tiene registros asociados la sucursal antes de eliminar";
 
         if (confirm('¿Desea eliminar la Sucursal seleccionada?')) {
             $.ajax({
@@ -888,7 +899,7 @@ $('document').ready(function()
                     } else {
 
                         $("#errorSucu").fadeIn(1000, function () {
-                            $("#errorSucu").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#errorSucu").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                             $("#btn-loginSucu").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                         });
                     }
@@ -976,6 +987,7 @@ $('document').ready(function()
         var $elemento = $(this).parent().parent();
         //alert($elemento.attr('id'));
         var data = $elemento.serialize();
+        var respuesta = "¡Debe llenar todos los campos.";
 
         $.ajax({
 
@@ -990,7 +1002,7 @@ $('document').ready(function()
             error : function(response2) {
 
                 $("#errorUbic").fadeIn(1000, function(){
-                    $("#errorUbic").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#errorUbic").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                     $("#btn-loginUbic").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                 });
             },
@@ -1018,7 +1030,7 @@ $('document').ready(function()
                 else{
 
                     $("#errorUbic").fadeIn(1000, function(){
-                        $("#errorUbic").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#errorUbic").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                         $("#btn-loginUbic").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                     });
                 }
@@ -1032,6 +1044,7 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        var respuesta = "¡Verificar que no hay registros asociados a la ubicación antes de eliminar";
 
         if (confirm('¿Desea eliminar la Ubicación seleccionada?')) {
             $.ajax({
@@ -1058,7 +1071,7 @@ $('document').ready(function()
                     } else {
 
                         $("#errorUbic").fadeIn(1000, function () {
-                            $("#errorUbic").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                            $("#errorUbic").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                             $("#btn-loginUbic").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                         });
                     }
@@ -1135,6 +1148,7 @@ $('document').ready(function()
         var $elemento = $(this).parent().parent();
         //alert($elemento.attr('id'));
         var data = $elemento.serialize();
+        var respuesta = "¡Debe llenar todos los campos.";
 
         $.ajax({
 
@@ -1149,7 +1163,7 @@ $('document').ready(function()
             error : function(response2) {
 
                 $("#errorAct").fadeIn(1000, function(){
-                    $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                     $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                 });
             },
@@ -1183,7 +1197,7 @@ $('document').ready(function()
                         else{
 
                             $("#errorAct").fadeIn(1000, function(){
-                                $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                                $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                                 $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                             });
                         }
@@ -1200,6 +1214,7 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        var respuesta = "¡Verificar que el activo no se encuentra asociado a un responsable antes de eliminar";
 
         if (confirm('¿Desea eliminar el Activo seleccionado?')) {
             $.ajax({
@@ -1230,7 +1245,7 @@ $('document').ready(function()
                         } else {
 
                             $("#errorAct").fadeIn(1000, function () {
-                                $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                                $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                                 $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                             });
                         }
@@ -1256,6 +1271,7 @@ $('document').ready(function()
         var ubic = "ubic"+id;
 
         var estado="estado"+id;
+        var respuesta = "¡Imposible modificar activo, contacte al departamento de TI";
         
         //alert(tiempoadq);
 
@@ -1286,7 +1302,7 @@ $('document').ready(function()
                         } else {
                             //alert('entro1');
                             $("#errorAct").fadeIn(1000, function () {
-                                $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                                $("#errorAct").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                                 $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                             });
                         }
@@ -1343,6 +1359,7 @@ $('document').ready(function()
         var $elemento = $(this).parent().parent();
         //alert($elemento.attr('id'));
         var data = $elemento.serialize();
+        var respuesta = "¡Debe llenar todos los campos";
 
         $.ajax({
 
@@ -1357,7 +1374,7 @@ $('document').ready(function()
             error : function(response2) {
 
                 $("#errorRelacion").fadeIn(1000, function(){
-                    $("#errorRelacion").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#errorRelacion").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                     $("#btn-loginRela").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                 });
             },
@@ -1389,7 +1406,7 @@ $('document').ready(function()
                     else{
 
                         $("#errorRelacion").fadeIn(1000, function(){
-                            $("#errorRelacion").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                            $("#errorRelacion").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                             $("#btn-loginRela").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                         });
                     }
@@ -1542,6 +1559,7 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        var respuesta = "¡Imposible eliminar asignacion de activos, Contatar a departamento de TI";
 
         if (confirm('¿Desea eliminar la Asignación seleccionada?')) {
             $.ajax({
@@ -1559,7 +1577,7 @@ $('document').ready(function()
                         } else {
 
                             $("#errorEliminarAsig").fadeIn(1000, function () {
-                                $("#errorEliminarAsig").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                                $("#errorEliminarAsig").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                                 // $("#btn-loginAct").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                             });
                         }
@@ -1798,6 +1816,7 @@ $('document').ready(function()
         var $elemento = $(this).parent().parent();
         //alert($elemento.attr('id'));
         var data = $elemento.serialize();
+        var respuesta = "¡Debe llenar todos los campos";
 
         $.ajax({
 
@@ -1812,7 +1831,7 @@ $('document').ready(function()
             error : function(response2) {
 
                 $("#errorCate").fadeIn(1000, function(){
-                    $("#errorCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#errorCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                     $("#btn-loginCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                 });
             },
@@ -1844,7 +1863,7 @@ $('document').ready(function()
                     else{
 
                         $("#errorCate").fadeIn(1000, function(){
-                            $("#errorCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                            $("#errorCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                             $("#btn-loginCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                         });
                     }
@@ -1860,6 +1879,7 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        var respuesta = "¡Verifique que la categoria no esta asociada antes de eliminarla";
 
         if (confirm('¿Desea eliminar la Categoría seleccionada?')) {
             $.ajax({
@@ -1889,7 +1909,7 @@ $('document').ready(function()
                         } else {
 
                             $("#errorCate").fadeIn(1000, function () {
-                                $("#errorCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                                $("#errorCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                                 $("#btn-loginCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                             });
                         }
@@ -1929,6 +1949,7 @@ $('document').ready(function()
         var $elemento = $(this).parent().parent();
         //alert($elemento.attr('id'));
         var data = $elemento.serialize();
+        var respuesta = "¡Debe llenar todos los campos";
 
         $.ajax({
 
@@ -1943,7 +1964,7 @@ $('document').ready(function()
             error : function(response2) {
 
                 $("#errorSubCate").fadeIn(1000, function(){
-                    $("#errorSubCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response2+' !</div>');
+                    $("#errorSubCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                     $("#btn-loginsCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                 });
             },
@@ -1975,7 +1996,7 @@ $('document').ready(function()
                     else{
 
                         $("#errorSubCate").fadeIn(1000, function(){
-                            $("#errorSubCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                            $("#errorSubCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
                             $("#btn-loginsCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                         });
                     }
@@ -1992,6 +2013,7 @@ $('document').ready(function()
         console.log('entro2');
         var id = $(this).attr("id");
         var $element = $(this);
+        var respuesta = "¡Verifique que la Sub-Categoría no se encuentra asociada antes de eliminar";
 
         if (confirm('¿Desea eliminar la Sub-Categoría seleccionada?')) {
             $.ajax({
@@ -2001,7 +2023,7 @@ $('document').ready(function()
                 success: function (response) {
                     //alert('Hola');
                     if (response.trim() == 'error') {
-                        alert('No tiene permiso para eliminar Sub-Categorias.');
+                        alert('No tiene permiso para eliminar Sub-Categorías.');
 
                     } else {
                         if (response.trim() == "ok") {
@@ -2021,7 +2043,7 @@ $('document').ready(function()
                         } else {
 
                             $("#errorSubCate").fadeIn(1000, function () {
-                                $("#errorSubCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+                                $("#errorSubCate").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + respuesta + ' !</div>');
                                 $("#btn-loginsCate").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Registrar');
                             });
                         }
@@ -2078,6 +2100,8 @@ $('document').ready(function()
         console.log('entro cambio');
         var id = $(this).attr("id");
         var newpass = $('#newpass').val();
+        var respuesta = "¡Imposible modificar contraseña, contactar a departamento de TI";
+
 
         $.ajax({
             url:'./conf/ejecutor.php',
@@ -2113,7 +2137,7 @@ $('document').ready(function()
                 else{
 
                     $("#error2").fadeIn(1000, function(){
-                        $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                        $("#error2").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+respuesta+' !</div>');
 
                     });
                 }
