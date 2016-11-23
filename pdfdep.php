@@ -55,7 +55,7 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
         } ?>
         
     </table></div> 
-<h1 align="center" >  Reporte de activos </h1>
+<h1 align="center" >  Reporte de Activos </h1>
 
 <hr/>
 
@@ -63,7 +63,7 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr><?php
         foreach ($data as $row ) {
 
-            echo "<th align='center' colspan='13'>ID :".$row['idActivos']." . &nbsp;&nbsp; &nbsp;&nbsp;   Descripcion: ".$row['Descripcion']." . &nbsp;&nbsp;&nbsp;&nbsp; Inicio de depreciacion: ".$row['fecha_ini_deprec'].".         </th></tr>";
+            echo "<th align='center' colspan='13'>ID :".$row['idActivos']." . &nbsp;&nbsp; &nbsp;&nbsp;   Descripción: ".$row['Descripcion']." . &nbsp;&nbsp;&nbsp;&nbsp; Inicio de Depreciación: ".$row['fecha_ini_deprec'].".         </th></tr>";
 
             }?>
     </table>

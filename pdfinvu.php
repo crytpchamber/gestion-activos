@@ -81,13 +81,13 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
            foreach ($data as $row ) {
        echo "<tr>"; 
 
-        echo " <th align='center'>Categoria</th>"
-            ."<th align='center'>SubCategoria</th>";
+        echo " <th align='center'>Categoría</th>"
+            ."<th align='center'>Sub-Categoría</th>";
             
           echo   "<th align='center'>".$row['ubicacion']."</th>";
             
             ?>
-            <th align="center">Fecha de adquisicion</th>
+            <th align="center">Fecha de Adquisición</th>
             <th align="center">Serial</th>
             <th align="center">Estado</th>
             <th align="center">Valor</th>

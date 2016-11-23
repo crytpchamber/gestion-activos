@@ -76,14 +76,14 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
         
         <tr>
             
-            <th align="center">Categoria</th>
-            <th align="center">SubCategoria</th>
+            <th align="center">Categoría</th>
+            <th align="center">Sub-Categoría</th>
             <th align="center">Activo</th>
-            <th align="center">Fecha de adquisicion</th>
+            <th align="center">Fecha de Adquisicíon</th>
             <th align="center">Serial</th>
             <th align="center">Estado</th>
             <th align="center">Valor</th>
-            <th align="center">Ubicacion</th>
+            <th align="center">Ubicación</th>
             <th align="center">Sucursal</th>
             <th align="center">Estado</th>
             <!-- <th>Eliminar</th> -->

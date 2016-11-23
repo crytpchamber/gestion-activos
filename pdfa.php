@@ -60,12 +60,12 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
         
         <tr>
             <th align="center">ID</th>
-            <th align="center">Descripcion</th>
-            <th align="center">Fecha de adquisicion</th>
-            <th align="center">Tiempo de depreciacion</th>
-            <th align="center">Valor de adquisicion</th>
-            <th align="center">Fecha de registro </th>
-            <th align="center">Fecha de inicio de depreciacion</th>
+            <th align="center">Descripción</th>
+            <th align="center">Fecha de Adquisición</th>
+            <th align="center">Tiempo de Depreciación</th>
+            <th align="center">Valor de Adquisición</th>
+            <th align="center">Fecha de Registro </th>
+            <th align="center">Fecha de Inicio de Depreciación</th>
             <!-- <th>Eliminar</th> -->
         </tr>
         

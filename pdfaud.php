@@ -69,10 +69,10 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
             <th align="center">ID</th>
             <th align="center">Fecha</th>
-            <th align="center">tipo de operacion</th>
-            <th align="center">modulo</th>
-            <th align="center">observacion</th>
-            <th align="center">usuario</th>
+            <th align="center">Tipo de Operación</th>
+            <th align="center">Módulo</th>
+            <th align="center">Observación</th>
+            <th align="center">Usuario</th>
             
             <!-- <th>Eliminar</th> -->
         </tr>

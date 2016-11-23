@@ -86,11 +86,11 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
             
             ?>
             <th align="center">Activo</th>
-            <th align="center">Fecha de adquisicion</th>
+            <th align="center">Fecha de Adquisición</th>
             <th align="center">Serial</th>
             <th align="center">Estado</th>
             <th align="center">Valor</th>
-            <th align="center">Ubicacion</th>
+            <th align="center">Ubicación</th>
             <th align="center">Sucursal</th>
             <th align="center">Cantidad en <?=$row['categoria']?></th>
             <!-- <th>Eliminar</th> -->

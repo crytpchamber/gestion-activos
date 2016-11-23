@@ -60,7 +60,7 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
         
         <tr>
             <th align="center">ID</th>
-            <th align="center">Descripcion</th>
+            <th align="center">Descripción</th>
             
             <!-- <th>Eliminar</th> -->
         </tr>
