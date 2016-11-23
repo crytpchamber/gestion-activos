@@ -27,14 +27,14 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         
 
        
-                <label >Modo de busqueda</label>
+                <label >Modo de Busqueda</label>
                 <select class="form-control" id="opbusqueda" name="opbusqueda" title="Opcion de Buscqueda" >
                     
 
                      
-                <option value="Pcategoria">Por Categoria</option>
-                <option value="Psubcategoria">Por Subcategoria</option>
-                <option value="Pubicacion">Por La Ubicacion</option>
+                <option value="Pcategoria">Por Categoría</option>
+                <option value="Psubcategoria">Por Subcategoría</option>
+                <option value="Pubicacion">Por La Ubicación</option>
                 <option value="Psucursal">Por Sucursal</option>
 
 
@@ -44,9 +44,26 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <br>    
                   <input type="text" class="form-control"  name="string" list="lista3" onkeyup="consultaajax()" placeholder="Ingrese el dato a buscar  ">
+                  <table align="center">
+              <tr  >           <th colspan="2"  style="text-align:center; padding:10px;  padding-right:0px !important;"><span >Rango de fecha</span></th>   
+
+</tr>
+
+           <tr  >  
+           
+<td  ><input   class='form-control' type='date'  class='fechaadq' name="fecharango1" id='fecharango1' ></td>
+<td ><input  class='form-control' type='date'  class='fechaadq' name="fecharango2" id='fecharango2' ></td>
+
+                </tr>
+                </table>
                   <br>
                   <a href="javascript:void(0);" class="btn btn-default"  id="btn-opbuscador2" >
                     <span class="glyphicon glyphicon-log-in"></span> &nbsp; Buscar
+                </a>
+                <a href="exportadorlcinvg.php" class="btn btn-default"  style="
+    background-image: linear-gradient(to bottom,#b73339 0,#eee 100%);
+" id="bt" >
+                    <span class="glyphicon glyphicon-log-in"></span> &nbsp; Descargar Lista de cotejo
                 </a>
            </div>
            
@@ -57,14 +74,14 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
     <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
         
         <tr>
-            <th>Categoria</th>
-            <th>SubCategoria</th>
+            <th>Categoría</th>
+            <th>Sub-Categoría</th>
             <th>Activo</th>
-            <th>Fecha de adquisicion</th>
+            <th>Fecha de Adquisición</th>
             <th>Serial</th>
             <th>Estado</th>
             <th>Valor</th>
-            <th>Ubicacion</th>
+            <th>Ubicación</th>
             <th>Sucursal</th>
             <!-- <th>Eliminar</th> -->
         </tr>

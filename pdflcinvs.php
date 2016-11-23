@@ -30,15 +30,11 @@ if (isset($_SESSION['Vfecha2']) && isset($_SESSION['Vfecha1']) && $_SESSION['Vfe
 
 
 $stmt = $dbh->prepare("select activos.estado,categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' AND subcategoria.idCategoria=categorias.idCategoria and sucursal.Descripcion='$referencia';");
-$stmt2 = $dbh->prepare("select COUNT(*) from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' AND subcategoria.idCategoria=categorias.idCategoria and sucursal.Descripcion='$referencia';");
 }else{
 
 $stmt = $dbh->prepare("select activos.estado,categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and sucursal.Descripcion='$referencia';");
-$stmt2 = $dbh->prepare("select COUNT(*) from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and sucursal.Descripcion='$referencia';");
 }
 
-$stmt2->execute();
-$data3=$stmt2->fetchAll(PDO::FETCH_ASSOC);//contador de activos por sucursales
 
 $stmt->execute();
 //$data = $stmt->fetchALL();
@@ -72,43 +68,35 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
         } ?>
         
     </table></div> 
-<h1 align="center" >  Reporte de Inventario </h1>
+<h1 align="center" >  Cotejo de Inventario </h1>
 
 <hr/>
-    <table  class="table table-striped table-bordered"  style=" font-size: 65%; ">
+    <table  class="table table-striped table-bordered"  style=" font-size: 60%; ">
         
-        
+        <tr>
             
-             <?php
-           foreach ($data as $row ) {
-       echo "<tr>"; 
-
-        echo " <th align='center'>Categoria</th>."
-            ."<th align='center'>SubCategoria</th>";
-          echo   "<th align='center'>".$row['sucursal']."</th>";
-            
-            ?>
+            <th align="center">Categoria</th>
+            <th align="center">SubCategoria</th>
+            <th align="center">Activo</th>
             <th align="center">Fecha de adquisicion</th>
             <th align="center">Serial</th>
             <th align="center">Estado</th>
             <th align="center">Valor</th>
             <th align="center">Ubicacion</th>
-            
-            <th align="center">Cantidad en <?=$row['sucursal']?></th>
+            <th align="center">Sucursal</th>
+            <th align="center">Estado</th>
             <!-- <th>Eliminar</th> -->
         </tr>
-         <?php break;}?>
+        
         
 
         <?php
         foreach ($data as $row ) {
           echo "<tr>";
-            echo "<td>".$row['categoria'] . "</td><td>".$row['subcategoria'] . "</td><td>" . $row['activo'] . "</td>" .
+            echo "<td>" . $row['categoria']."</td><td>".$row['subcategoria'] . "</td><td>" . $row['activo'] . "</td>" .
                 "<td>" . $row['fecha_adquisicion'] . "</td>"."<td>" . $row['serial']." </td>"."<td>" . $row['estado']." </td><td>".$row['valor_adquisicion'] . "</td><td>" . $row['ubicacion'] . "</td>"  ;
-              
-               foreach ($data3 as $row3 ) {
- echo "<td>" . $row3['COUNT(*)']."</td>";  
-        }
+              echo "<td>" . $row['sucursal']."</td>";  
+               echo "<td>A<span ><img align='center' style='width: 100%;' src='imgs/check.png' ></span><br>D<span ><img align='center' style='width: 100%;' src='imgs/check.png' ></span><br>M<span ><img align='center' style='width: 100%;' src='imgs/check.png' ></span></td>";  
             echo "</tr>";
         }
 

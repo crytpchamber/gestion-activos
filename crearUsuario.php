@@ -44,7 +44,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
             <th>Usuario</th>
             <th>Nombre Completo</th>
-            <th>Cedula</th>
+            <th>Cédula</th>
             <th>Tipo de Usuario</th>
             <th>Contraseña</th>
             <th>Opciones</th>
@@ -115,7 +115,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                     <option value='V-'>V-</option>
                     <option value='E-'>E-</option>
                 </select>
-                <input type='text' class='form-control' name='cedula' id='cedula' style='min-width: 83%' placeholder='Cedula' required>
+                <input type='text' class='form-control' name='cedula' id='cedula' style='min-width: 83%' placeholder='Cédula' required>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Contraseña" required>

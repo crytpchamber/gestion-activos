@@ -41,14 +41,14 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         
 
        
-                <label >Modo de busqueda</label>
+                <label >Modo de Busqueda</label>
                 <select class="form-control" id="opbusqueda" name="opbusqueda" title="Opcion de Buscqueda" >
                     
 
                      
                 <option value="Pactivo">Por Nombre del Activo</option>
                 <option value="Presponsable">Por Nombre del Responsable</option>
-                <option value="Pubicacion">Por La Ubicacion</option>
+                <option value="Pubicacion">Por La Ubicación</option>
                 <option value="Psucursal">Por Sucursal</option>
 
 
@@ -59,14 +59,14 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 <br>    
                   <input type="text" class="form-control"  name="string" list="lista3" onkeyup="consultaajax()" placeholder="Ingrese el dato a buscar  ">
                   <table align="center">
-              <tr  >           <th colspan="2"  style="text-align:center; padding:10px;  padding-right:0px !important;"><span style="margin-left:5%;">Rango de fecha</span></th>   
+              <tr  >           <th colspan="2"  style="text-align:center; padding:10px;  padding-right:0px !important;"><span >Rango de fecha</span></th>   
 
 </tr>
 
            <tr  >  
            
-<td width='25%'  ><input  style="margin-left:5%;" class='form-control' type='date'  class='fechaadq' name="fecharango1" id='fecharango1' ></td>
-<td width='25%' ><input style="margin-left:5%;" class='form-control' type='date'  class='fechaadq' name="fecharango2" id='fecharango2' ></td>
+<td  ><input   class='form-control' type='date'  class='fechaadq' name="fecharango1" id='fecharango1' ></td>
+<td ><input  class='form-control' type='date'  class='fechaadq' name="fecharango2" id='fecharango2' ></td>
 
                 </tr>
                 </table>
@@ -88,11 +88,11 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         
         <tr>
             <th>Activo</th>
-            <th>Fecha de adquisicion</th>
+            <th>Fecha de Adquisición</th>
             <th>Nombre</th>
             <th>Apellido</th>
-            <th>Cedula</th>
-            <th>Ubicacion</th>
+            <th>Cédula</th>
+            <th>Ubicación</th>
             <th>Sucursal</th>
             <!-- <th>Eliminar</th> -->
         </tr>

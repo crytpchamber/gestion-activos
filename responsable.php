@@ -29,7 +29,7 @@ if ($_SESSION['guardar']=='0') {
             <thead>
             <tr>
                 <th>Responsable</th>
-                <th>Cedula</th>
+                <th>Cédula</th>
                 <th>Ubicación</th>
                 <!-- <th>Eliminar</th> -->
             </tr>
@@ -56,8 +56,8 @@ if ($_SESSION['guardar']=='0') {
 
 
 
-    $stmt = $dbh->prepare("SELECT t.idUbicacion, t.Descripcion 
-                               FROM ubicacion t ");
+    $stmt = $dbh->prepare("SELECT t.idUbicacion, t.Descripcion ".
+                          " FROM ubicacion t ");
     $stmt->execute();
     //$data = $stmt->fetchALL();
     $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -74,10 +74,10 @@ if ($_SESSION['guardar']=='0') {
                 </div>
     
                 <div class='form-group'>
-                    <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre' required>
+                    <input type='text' class='form-control' maxlength='40' name='nombre' id='nombre' placeholder='Nombre' pattern='[a-z]+@[a-z]+\.[a-z]{2,3}$\' required>
                 </div>
                 <div class='form-group'>
-                    <input type='text' class='form-control' name='apellido' id='apellido' placeholder='Apellido' required>
+                    <input type='text' class='form-control' maxlength='40' name='apellido' id='apellido' placeholder='Apellido' required>
                 </div>
                 <div class='form-group form-inline' >
                     <select id='nacionalidad' name='nacionalidad' class='form-control' style='min-width: 15%'>
@@ -85,7 +85,7 @@ if ($_SESSION['guardar']=='0') {
                         <option value='V-'>V-</option>
                         <option value='E-'>E-</option>
                     </select>
-                    <input type='text' class='form-control' name='cedula' id='cedula' style='min-width: 83%' placeholder='Cedula'  required>
+                    <input type='text' pattern='.*(\d{3}-\d{3}-\d{2}-\d{2}|\d{3}-\d{2}-\d{2}-\d{3}|\d{10}).*\' maxlength='10'  class='form-control' name='cedula' id='cedula' style='min-width: 83%' placeholder='Cédula'  required>
                 </div>
     
                 <div class='form-group'>

@@ -24,7 +24,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         
         <tr>
             <th>ID</th>
-            <th>Ubicacion</th>
+            <th>Ubicación</th>
             <th>Sucursal</th>
             
             <!-- <th>Eliminar</th> -->

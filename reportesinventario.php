@@ -1,4 +1,4 @@
-   
+    
 <?php include_once 'conf/dbconn.php';
 session_start();
 $_SESSION['opcion']=$_GET['filtro'];
@@ -8,17 +8,64 @@ $opcion=$_GET['filtro'];
 $referencia=$_GET['tipo'];
 if ($opcion=="Pcategoria") {
     # code...
-    $sql="select  activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and categorias.Descripcion='$referencia';";
+    if (isset($_GET['fecha1']) && isset($_GET['fecha2'])  && $_GET['fecha2']!="" && $_GET['fecha1']!="") {
+    $Vfecha1=$_GET['fecha1'];
+    $Vfecha2=$_GET['fecha2'];
+     $_SESSION['Vfecha2']=$Vfecha2;
+    $_SESSION['Vfecha1']=$Vfecha1;
+
+ $sql="select  activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria  and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' AND subcategoria.idCategoria=categorias.idCategoria and categorias.Descripcion='$referencia';";
+}else{
+
+ $sql="select  activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and categorias.Descripcion='$referencia';";
+}
+    
 
 }elseif ($opcion=="Psubcategoria") {
-    $sql="select activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and subcategoria.Descripcion='$referencia';";
+    if (isset($_GET['fecha1']) && isset($_GET['fecha2'])  && $_GET['fecha2']!="" && $_GET['fecha1']!="") {
+    $Vfecha1=$_GET['fecha1'];
+    $Vfecha2=$_GET['fecha2'];
+     $_SESSION['Vfecha2']=$Vfecha2;
+    $_SESSION['Vfecha1']=$Vfecha1;
+
+
+$sql="select activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria  and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' AND subcategoria.idCategoria=categorias.idCategoria and subcategoria.Descripcion='$referencia';";
+}else{
+
+$sql="select activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and subcategoria.Descripcion='$referencia';";
+}
+    
     # code...
 }elseif ($opcion=="Pubicacion") {
+    if (isset($_GET['fecha1']) && isset($_GET['fecha2'])  && $_GET['fecha2']!="" && $_GET['fecha1']!="") {
+    $Vfecha1=$_GET['fecha1'];
+    $Vfecha2=$_GET['fecha2'];
+     $_SESSION['Vfecha2']=$Vfecha2;
+    $_SESSION['Vfecha1']=$Vfecha1;
+
+
+$sql="select activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion  and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and ubicacion.Descripcion='$referencia' ;";
+}else{
+
+$sql="select activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and ubicacion.Descripcion='$referencia' ;";
+}
     # code...
-    $sql="select activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and ubicacion.Descripcion='$referencia' ;";
+    
 }elseif ($opcion=="Psucursal") {
+    if (isset($_GET['fecha1']) && isset($_GET['fecha2'])  && $_GET['fecha2']!="" && $_GET['fecha1']!="") {
+    $Vfecha1=$_GET['fecha1'];
+    $Vfecha2=$_GET['fecha2'];
+     $_SESSION['Vfecha2']=$Vfecha2;
+    $_SESSION['Vfecha1']=$Vfecha1;
+
+
+$sql="select activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and sucursal.Descripcion='$referencia';";
+}else{
+
+$sql="select activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and sucursal.Descripcion='$referencia';";
+}
     # code...
-    $sql="select activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and sucursal.Descripcion='$referencia';";
+    
 }
 $stmt2 = $dbh->prepare($sql);
 $stmt2->execute();

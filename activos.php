@@ -43,11 +43,11 @@ $data3=$stmt->fetchAll(PDO::FETCH_ASSOC);
     <table  class="table table-bordered table-hover">
         <thead>
         <tr>
-            <th>Descripcion</th>
-            <th>Fecha Adquisicion</th>
+            <th>Descripción</th>
+            <th>Fecha Adquisición</th>
             <th width='15%'>  Estado  </th>
             <th>Tiempo de Depreciación</th>
-            <th align="center">Valor de Adquisicion</th>
+            <th align="center">Valor de Adquisición</th>
             <th>Ubicación</th>
             <th>Opciones</th>
         </tr>
@@ -134,10 +134,10 @@ echo "</select></td>".
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Codigo de Activo" required>
+                <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Código de Activo" required>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" required>
+                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción" required>
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" name="serial" id="serial" placeholder="Serial de Activo" required>
@@ -150,7 +150,7 @@ echo "</select></td>".
                 <input type="number" min="0" class="form-control" name="tiempodepre" id="tiempodepre" placeholder="Tiempo a depreciar (años)" required>
             </div>
             <div class="form-group">
-                <input type="number" min="0" class="form-control" name="valorAdq" id="valorAdq" placeholder="Valor de Adquisicion" required>
+                <input type="number" min="0" class="form-control" name="valorAdq" id="valorAdq" placeholder="Valor de Adquisición" required>
             </div>
             <div class="form-group">
                 <label >Fecha Inicio de Depreciación</label>
@@ -177,7 +177,7 @@ echo "</select></td>".
             </div>
 
             <div class="form-group">
-                <label >Categoria</label>
+                <label >Categoría</label>
                 <select class="form-control" id="categ" name="categ" title="categ" >
                     <option value="" selected disabled>Seleccione Categoría</option>
                     <?php
@@ -196,10 +196,10 @@ echo "</select></td>".
             </div>
 
             <div class="form-group" id="subcateg">
-                <label >Sub-Categoria</label>
+                <label >Sub-Categoría</label>
                 <select class="form-control" id="scateg" name="scateg" title="scateg" >
                     <option value=" " selected disabled>
-                        Seleccione una Categoria.
+                        Seleccione una Categoría.
                     </option>
                 </select>
             </div>

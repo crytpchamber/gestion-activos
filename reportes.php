@@ -20,7 +20,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <hr />
-
+<!--
 <div id="tablaResponsable" class="table-responsive">
     <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
         
@@ -32,24 +32,24 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Cedula</th>
             <th>Ubicacion</th>
             <th>Sucursal</th>
-            <!-- <th>Eliminar</th> -->
+          <th>Eliminar</th>
         </tr>
         
-        
+    -->
         <?php
 
-        foreach ($data as $row ) {
+        /*foreach ($data as $row ) {
             echo "<tr>";
             echo "<td>" . $row['activo']."</td><td>".$row['fecha_adquisicion'] . "</td><td>" . $row['Nombre'] . "</td>" .
                 "<td>" . $row['Apellido'] . "</td>"."<td>" . $row['Cedula']." </td><td>".$row['ubicacion'] . "</td><td>" . $row['sucursal'] . "</td>"  ;
                 //"<span class='glyphicon glyphicon-remove' id = '".$row['usuario']."'></span></td>";
                // "<button id='" .$row['idResposable']. "' type='button' class='btn btn-danger btn-sm glyphicon glyphicon-remove borrarResp'></button></td>";
             echo "</tr>";
-        }
+        }*/
 
         ?>
         
 
-    </table>
+ <!--   </table>
 </div><!--end of .table-responsive-->
 

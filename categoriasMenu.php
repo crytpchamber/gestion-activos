@@ -12,8 +12,8 @@ if ($_SESSION['categorias']=='0') {
 } else {
 
     echo "<ul class='topnav' id='myTopnav'>
-        <li style='width: 50%; text-align: center'><a id='crearCategoria' href='javascript:void(0);'>Crear Categorias</a></li>
-        <li style='width: 50%; text-align: center'><a id='crearSubCategoria' href='javascript:void(0);'>Crear SubCategorias</a></li>
+        <li style='width: 50%; text-align: center'><a id='crearCategoria' href='javascript:void(0);'>Crear Categorías</a></li>
+        <li style='width: 50%; text-align: center'><a id='crearSubCategoria' href='javascript:void(0);'>Crear Sub-Categorías</a></li>
     
    
         <li class='icon'>

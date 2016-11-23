@@ -94,12 +94,12 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
                         <li>
                             <a id="Categorias" href="javascript:void(0);">
                                 <i class="glyphicon glyphicon-list-alt"></i>
-                                Categorias </a>
+                                Categorías </a>
                         </li>
                         <li>
                             <a id="Asignacion" href="javascript:void(0);">
                                 <i class="glyphicon glyphicon-check"></i>
-                                Gestion de Activos </a>
+                                Gestión de Activos </a>
                         </li>
                         <li>
                             <a id="Reportes" href="javascript:void(0);">
@@ -111,7 +111,7 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
                                 <i  class="glyphicon glyphicon-log-out"></i>
                                 Salir </a>
                         </li>
-                        <li class='icon2'>
+                        <li class='icon2 hidden-lg'>
                             <a href='javascript:void(0);' onclick='myFunction2()'>&#9776;</a>
                         </li>
                     </ul>

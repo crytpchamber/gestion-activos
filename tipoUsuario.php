@@ -9,9 +9,9 @@ if(!isset($_SESSION['user_session']))
 include_once 'conf/dbconn.php';
 
 
-$stmt = $dbh->prepare("SELECT t.idTipo_Usuario, t.descripcion, m.descModulo 
-                           FROM tipo_usuario t inner join modulos m 
-                           on m.idmodulos = t.modulos_idmodulos ");
+$stmt = $dbh->prepare("SELECT t.idTipo_Usuario, t.descripcion, m.descModulo ".
+                      " FROM tipo_usuario t inner join modulos m ".
+                      " on m.idmodulos = t.modulos_idmodulos ");
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -26,7 +26,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         <thead>
         <tr>
             <th>Tipo de Usuario</th>
-            <th>Modulo</th>
+            <th>Módulo</th>
             <th>Opciones</th>
         </tr>
         </thead>

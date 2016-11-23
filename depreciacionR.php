@@ -36,7 +36,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         
 
        
-                <label >Modo de busqueda</label>
+                <label >Modo de Busqueda</label>
                <!-- <select class="form-control" id="opbusqueda" name="opbusqueda" title="Opcion de Buscqueda" >
                     
 
@@ -67,8 +67,8 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         
         <tr>
             <th align="center">ID</th>
-            <th align="center">Descripcion</th>
-            <th align="center">Inicio de depreciacion</th>
+            <th align="center">Descripción</th>
+            <th align="center">Inicio de Depreciación</th>
             <th align="center">Ene</th>
             <th align="center">Feb</th>
             <th align="center">Mar</th>

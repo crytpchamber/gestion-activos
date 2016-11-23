@@ -25,7 +25,7 @@ if ($_SESSION['guardar']=='0') {
         <table class='table table-bordered table-hover'>
             <thead>
             <tr>
-                <th>Ubicacion</th>
+                <th>Ubicación</th>
                 <th>Sucursal</th>
                <!-- <th>Eliminar</th> -->
             </tr>
@@ -66,7 +66,7 @@ if ($_SESSION['guardar']=='0') {
                 </div>
     
                 <div class='form-group'>
-                    <input type='text' class='form-control' name='ubicacion' id='ubicacion' placeholder='Ubicacion' required>
+                    <input type='text' class='form-control' name='ubicacion' id='ubicacion' placeholder='Ubicación' required>
                 </div>
     
     

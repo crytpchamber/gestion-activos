@@ -28,7 +28,7 @@ if ($_SESSION['eliminar']=='0') {
         <thead>
         <tr>
             <th>Responsable</th>
-            <th>Cedula</th>
+            <th>Cédula</th>
             <th>Ubicación</th>
             <th>Opciones</th>
         </tr>

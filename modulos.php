@@ -25,7 +25,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
     <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
         <thead>
         <tr>
-            <th>Modulo</th>
+            <th>Módulo</th>
             <th>Mapa de Acceso</th>
             <th>Ubicación</th>
             <th>Sucursal</th>

@@ -2344,13 +2344,17 @@ $(".form-group #btn-opbuscador2").click(function(){
     //alert("sirvedddd"+document.getElementsByName('string')[0].value);
     var type=document.getElementsByName('string')[0].value;
     var filter=document.getElementsByName('opbusqueda')[0].value;
+     var fecha1=document.getElementsByName('fecharango1')[0].value;
+     var fecha2=document.getElementsByName('fecharango2')[0].value;
 
     $.ajax({
         url:'reportesinventario.php',
         type:'GET',
         data:{
             tipo:type,
-            filtro:filter
+            filtro:filter,
+            fecha1:fecha1,
+            fecha2:fecha2
         },
 
         error: function(xhr, error){
@@ -2362,12 +2366,16 @@ $(".form-group #btn-opbuscador2").click(function(){
 
             if (filter=="Pcategoria") {
                 $('#d').attr("href","exportadorinvc.php");
+                $('#bt').attr("href","exportadorlcinvc.php");
             }else{if (filter=="Psubcategoria") {
                 $('#d').attr("href","exportadorinvsc.php");
+                $('#bt').attr("href","exportadorlcinvsc.php");
             }else{if (filter=="Pubicacion") {
                 $('#d').attr("href","exportadorinvu.php");
+                $('#bt').attr("href","exportadorlcinvu.php");
             }else{if (filter=="Psucursal") {
                 $('#d').attr("href","exportadorinvs.php");
+                 $('#bt').attr("href","exportadorlcinvs.php");
             }else{
 
             }
@@ -2427,6 +2435,52 @@ $(".form-group #btn-opbuscador").click(function(){
 
         }
     });
+});
+
+$(".form-group #btn-opbuscador99").click(function(){
+
+    //alert("sirvedddd"+document.getElementsByName('string')[0].value);
+    var fecha1=document.getElementsByName('fecharango1')[0].value;
+     var fecha2=document.getElementsByName('fecharango2')[0].value;
+  
+
+
+
+    $.ajax({
+        url:'AuditorR.php',
+        type:'GET',
+        data:{
+            fecha1:fecha1,
+            fecha2:fecha2
+        },
+
+        error: function(xhr, error){
+            console.log(xhr); console.log(error);
+        },
+        success: function(data){
+
+            $('#opciones').hide().html(data).fadeIn('slow');
+
+            /*if (filter=="Pactivo") {
+                $('#d').attr("href","exportadorsa.php");
+            }else{if (filter=="Presponsable") {
+                $('#d').attr("href","exportadorsr.php");
+            }else{if (filter=="Pubicacion") {
+                $('#d').attr("href","exportadorsu.php");
+            }else{if (filter=="Psucursal") {
+                $('#d').attr("href","exportadorss.php");
+            }else{
+
+            }
+
+            }
+
+            }
+
+            }*/
+
+       }
+   });
 });
 
 $(".form-group #btn-opbuscador9").click(function(){

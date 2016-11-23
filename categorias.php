@@ -22,8 +22,8 @@ include_once 'conf/dbconn.php';
         <table class='table table-bordered table-hover'>
             <thead>
             <tr>
-                <th>Codigo</th>
-                <th>Categoria</th>
+                <th>Código</th>
+                <th>Categoría</th>
                 <th>Opciones</th> 
             </tr>
             </thead>
@@ -58,7 +58,7 @@ include_once 'conf/dbconn.php';
     
     
                 <div class='form-group'>
-                    <input type='text' class='form-control' name='descripcion' id='descripcion' placeholder='Descripcion' required>
+                    <input type='text' class='form-control' name='descripcion' id='descripcion' placeholder='Descripción' required>
                 </div>
     
                 <input type='hidden' class='form-control' name='reg_cate' id='reg_cate'>

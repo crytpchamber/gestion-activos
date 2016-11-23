@@ -35,14 +35,14 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
        
               <table align="center">
-              <tr  >           <th colspan="2"  style="text-align:center; padding:10px;  padding-right:0px !important;"><span style="margin-left:65%;">Rango de fecha</span></th>   
+              <tr  >           <th colspan="2"  style="text-align:center; padding:10px;  padding-right:0px !important;"><span >Rango de Fecha</span></th>
 
 </tr>
 
            <tr  >  
            
-<td width='25%' ><input  style="margin-left:80%;" class='form-control' type='date'  class='fechaadq' name="fecharango1" id='fecharango1' ></td>
-<td width='25%' ><input style="margin-left:80%;" class='form-control' type='date'  class='fechaadq' name="fecharango2" id='fecharango2' ></td>
+<td  ><input   class='form-control' type='date'  class='fechaadq' name="fecharango1" id='fecharango1' ></td>
+<td  ><input  class='form-control' type='date'  class='fechaadq' name="fecharango2" id='fecharango2' ></td>
 <td> <a style="margin-left:40%;" href="javascript:void(0);" class="btn btn-default"  id="btn-opbuscador9">
                     <span  class="glyphicon glyphicon-log-in"></span> &nbsp; Buscar
                 </a></td>
@@ -59,12 +59,12 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
         
         <tr>
             <th>ID</th>
-            <th>Descripcion</th>
-            <th>Fecha de adquisicion</th>
-            <th>Tiempo de depreciacion</th>
-            <th>Valor de adquisicion</th>
-            <th>Fecha de registro </th>
-            <th>Fecha de inicio de depreciacion</th>
+            <th>Descripción</th>
+            <th>Fecha de Adquisición</th>
+            <th>Tiempo de Depreciación</th>
+            <th>Valor de Adquisición</th>
+            <th>Fecha de Registro </th>
+            <th>Fecha de Inicio de Depreciación</th>
             <!-- <th>Eliminar</th> -->
         </tr>
         

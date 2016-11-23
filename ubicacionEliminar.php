@@ -29,7 +29,7 @@ if ($_SESSION['eliminar']=='0') {
         <table class='table table-bordered table-hover'>
             <thead>
             <tr>
-                <th>Ubicacion</th>
+                <th>Ubicación</th>
                 <th>Sucursal</th>
                 <th>Opciones</th>
             </tr>

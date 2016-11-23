@@ -22,8 +22,23 @@ include_once 'conf/dbconn.php';
 $opcion=$_SESSION['opcion'];
 $referencia=$_SESSION['referencia'];
 
+if (isset($_SESSION['Vfecha2']) && isset($_SESSION['Vfecha1']) && $_SESSION['Vfecha2']!="" && $_SESSION['Vfecha1']!="") {
+    $Vfecha1=$_SESSION['Vfecha1'];
+    $Vfecha2=$_SESSION['Vfecha2'];
+
+
+
+$stmt = $dbh->prepare("select activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and ubicacion.Descripcion='$referencia' ;");
+$stmt2 = $dbh->prepare("select COUNT(*) from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and activos.fecha_adquisicion BETWEEN '$Vfecha1' AND '$Vfecha2' and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and ubicacion.Descripcion='$referencia' ;");
+}else{
 
 $stmt = $dbh->prepare("select activos.estado, categorias.Descripcion as categoria,subcategoria.Descripcion as subcategoria ,activos.Descripcion as activo, activos.fecha_adquisicion ,activos.serial,activos.valor_adquisicion,ubicacion.Descripcion as ubicacion , sucursal.Descripcion as sucursal from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and ubicacion.Descripcion='$referencia' ;");
+$stmt2 = $dbh->prepare("select COUNT(*) from activos,ubicacion,sucursal,categorias,subcategoria WHERE activos.ubicacion_idUbicacion=ubicacion.idUbicacion and ubicacion.sucursal_idsucursal=sucursal.idsucursal and activos.idSubCategoria=subcategoria.idSubCategoria AND subcategoria.idCategoria=categorias.idCategoria and ubicacion.Descripcion='$referencia' ;");
+}
+
+$stmt2->execute();
+$data3=$stmt2->fetchAll(PDO::FETCH_ASSOC);//contador de activos por ubicacion
+
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -48,6 +63,7 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
 " src="imgs/catemar.png" ></span><div style="margin-left:22%;" class="container col-lg-4 col-md-4"><table style="margin-left:100px;" class=" ">
        
         <?php foreach ($data2 as $ro2 ) {
+             $_SESSION['NR']=$ro2['Nombre']." ".$ro2['Apellido'];
             echo "<tr class='borderless '><th style=' text-align:right;' >Emitido Por:</th><td style='text-align:center;'> &nbsp;".$ro2['Nombre']." ".$ro2['Apellido']." (".$ro2['cargo'].") </td></tr>";
             echo "<tr class='borderless '><th style=' text-align:right;' >Cedula: </th><td style='text-align:center;'>".$ro2['Cedula']."</td></tr>";
             echo "<tr class='borderless '><th style=' text-align:right;' >Ubicacion: </th><td style='text-align:center;'>".$ro2['ubicacion']."</td></tr>";
@@ -58,30 +74,40 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
 <h1 align="center" >  Reporte de Inventario </h1>
 
 <hr/>
-    <table  class="table table-striped table-bordered"  style=" font-size: 70%;  ">
+    <table  class="table table-striped table-bordered"  style=" font-size: 63%;  ">
         
-        <tr>
+        
+             <?php
+           foreach ($data as $row ) {
+       echo "<tr>"; 
+
+        echo " <th align='center'>Categoria</th>"
+            ."<th align='center'>SubCategoria</th>";
             
-            <th align="center">Categoria</th>
-            <th align="center">SubCategoria</th>
-            <th align="center">Activo</th>
+          echo   "<th align='center'>".$row['ubicacion']."</th>";
+            
+            ?>
             <th align="center">Fecha de adquisicion</th>
             <th align="center">Serial</th>
             <th align="center">Estado</th>
             <th align="center">Valor</th>
-            <th align="center">Ubicacion</th>
+            
             <th align="center">Sucursal</th>
+            <th align="center">Cantidad en <?=$row['ubicacion']?></th>
             <!-- <th>Eliminar</th> -->
         </tr>
-        
+         <?php break;}?>
         
 
         <?php
         foreach ($data as $row ) {
           echo "<tr>";
             echo "<td>" . $row['categoria']."</td><td>".$row['subcategoria'] . "</td><td>" . $row['activo'] . "</td>" .
-                "<td>" . $row['fecha_adquisicion'] . "</td>"."<td>" . $row['serial']." </td>"."<td>" . $row['estado']." </td><td>".$row['valor_adquisicion'] . "</td><td>" . $row['ubicacion'] . "</td>"  ;
+                "<td>" . $row['fecha_adquisicion'] . "</td>"."<td>" . $row['serial']." </td>"."<td>" . $row['estado']." </td><td>".$row['valor_adquisicion'] . "</td>"  ;
               echo "<td>" . $row['sucursal']."</td>";  
+              foreach ($data3 as $row3 ) {
+ echo "<td>" . $row3['COUNT(*)']."</td>";  
+        }
             echo "</tr>";
         }
 

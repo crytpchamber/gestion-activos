@@ -26,8 +26,8 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>ID</th>
             <th>Nombre</th>
             <th>Apellido</th>
-            <th>Cedula</th>
-             <th>Ubicacion</th>
+            <th>Cédula</th>
+             <th>Ubicación</th>
             <th>Sucursal</th>
             <!-- <th>Eliminar</th> -->
         </tr>

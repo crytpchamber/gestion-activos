@@ -19,8 +19,16 @@ if(!isset($_SESSION['user_session']))
 
 include_once 'conf/dbconn.php';
 
+if (isset($_SESSION['fecha1']) && isset($_SESSION['fecha2'])) {
+    $Vfecha1=$_SESSION['fecha1'];
+    $Vfecha2=$_SESSION['fecha2'];
+$stmt = $dbh->prepare("SELECT * from pistasauditoria WHERE fechaPista BETWEEN '$Vfecha1' AND '$Vfecha2' ;");
+}else{
 
 $stmt = $dbh->prepare("SELECT * from pistasauditoria ;");
+}
+
+
 $stmt->execute();
 //$data = $stmt->fetchALL();
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -45,6 +53,7 @@ $data2=$stmt->fetchAll(PDO::FETCH_ASSOC);
 " src="imgs/catemar.png" ></span><div style="margin-left:22%;" class="container col-lg-4 col-md-4"><table style="margin-left:100px;" class=" ">
         
         <?php foreach ($data2 as $ro2 ) {
+             $_SESSION['NR']=$ro2['Nombre']." ".$ro2['Apellido'];
             echo "<tr class='borderless '><th style=' text-align:right;' >Emitido Por:</th><td style='text-align:center;'> &nbsp;".$ro2['Nombre']." ".$ro2['Apellido']." (".$ro2['cargo'].") </td></tr>";
             echo "<tr class='borderless '><th style=' text-align:right;' >Cedula: </th><td style='text-align:center;'>".$ro2['Cedula']."</td></tr>";
             echo "<tr class='borderless '><th style=' text-align:right;' >Ubicacion: </th><td style='text-align:center;'>".$ro2['ubicacion']."</td></tr>";
