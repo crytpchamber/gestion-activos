@@ -101,13 +101,13 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario" required>
+                <input type="text" class="form-control" maxlength="20" name="usuario" id="usuario" placeholder="Usuario" required>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre" required>
+                <input type="text" class="form-control" maxlength="40" name="Nombre" id="Nombre" placeholder="Nombre" required>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="Apellido" id="Apellido" placeholder="Apellido" required>
+                <input type="text" class="form-control" maxlength="40" name="Apellido" id="Apellido" placeholder="Apellido" required>
             </div>
             <div class='form-group form-inline' >
                 <select id='nacionalidad' name='nacionalidad' class='form-control' style='min-width: 15%'>
@@ -115,7 +115,7 @@ $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
                     <option value='V-'>V-</option>
                     <option value='E-'>E-</option>
                 </select>
-                <input type='text' class='form-control' name='cedula' id='cedula' style='min-width: 83%' placeholder='Cédula' required>
+                <input type='text' class='form-control' maxlength="10" name='cedula' id='cedula' style='min-width: 83%' placeholder='Cédula' required>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Contraseña" required>

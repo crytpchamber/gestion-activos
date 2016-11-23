@@ -688,6 +688,21 @@ $('document').ready(function()
         return false;
     });
 
+
+    $("#opciones").on("keypress","#cedula", function(e) {
+        var a = [46];
+        var k = e.which;
+        console.log( k );
+
+        for (i = 48; i < 58; i++)
+            a.push(i);
+
+        if (!($.inArray(k,a)>=0))
+            e.preventDefault();
+    });
+
+
+
     /* Borrar Responsable */
     $("#opciones").on("click",".borrarResp", function() {
         console.log('entro2');

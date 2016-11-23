@@ -85,7 +85,7 @@ if ($_SESSION['guardar']=='0') {
                         <option value='V-'>V-</option>
                         <option value='E-'>E-</option>
                     </select>
-                    <input type='text' pattern='.*(\d{3}-\d{3}-\d{2}-\d{2}|\d{3}-\d{2}-\d{2}-\d{3}|\d{10}).*\' maxlength='10'  class='form-control' name='cedula' id='cedula' style='min-width: 83%' placeholder='Cédula'  required>
+                    <input type='text' maxlength='10'  class='form-control' name='cedula' id='cedula' style='min-width: 83%' placeholder='Cédula'  required>
                 </div>
     
                 <div class='form-group'>
